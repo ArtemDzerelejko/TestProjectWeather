@@ -1,0 +1,32 @@
+
+// MARK: - MainViewController
+"currentWeather" = "Current weather";
+"forecastWeather" = "Forecast weather";
+
+// MARK: - CurrentWeatherViewController
+"country" = "Country";
+"city" = "City";
+"dateAndTime" = "Date and time";
+"cloud" = "Cloud";
+"tempCelsius" = "Temperature in Celsius";
+"tempFahrenheit" = "Temperature in Fahrenheit";
+"feelsLike" = "Feels like";
+
+"recommendationToMinusThirty" = "Dress warmer, wear a warm jacket and scarf!";
+"recommendationToMinusNine" = "I recommend wearing a winter jacket and don't forget a hat.";
+"recommendationToPlusOne" = "Dress in comfortable autumn clothes, take an umbrella just in case.";
+"recommendationToPlusEleven" = "Great weather! Dress in layers so you can take off extra if it gets hot.";
+"recommendationToPlusTwentyOne" = "Wear comfortable summer clothes and don't forget to drink water to stay hydrated.";
+"recommendationToPlusThirtyOne" = "It's very hot! Avoid prolonged exposure to the sun and wear light, breathable clothing.";
+"standardWeatherTips" = "It can be harmful to your health";
+
+// MARK: - ForecastWeatherViewController
+"date" = "Date";
+"maxTemperature" = "Max temperature";
+"minTemperature" = "Min temperature";
+"chanceOfRain" = "Chance of rain";
+"fetchingWeatherData" = "Fetching Weather Data";
+
+// MARK: - Error
+"error" = "Error";
+"ok" = "OK";

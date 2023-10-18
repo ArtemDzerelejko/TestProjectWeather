@@ -1,0 +1,32 @@
+
+// MARK: - MainViewController
+"currentWeather" = "Поточна погода";
+"forecastWeather" = "Прогноз погоди";
+
+// MARK: - CurrentWeatherViewController
+"country" = "Країна";
+"city" = "Місто";
+"dateAndTime" = "Дата і час";
+"cloud" = "Хмарність";
+"tempCelsius" = "Температура в Цельсіях";
+"tempFahrenheit" = "Температура в Фаренгейтах";
+"feelsLike" = "Відчувається, як";
+
+"recommendationToMinusThirty" = "Одягайтесь тепліше, носіть теплу куртку і шарф!.";
+"recommendationToMinusNine" = "Рекомендую надіти зимову куртку і не забути шапку.";
+"recommendationToPlusOne" = "Одягайтесь у зручний осінній одяг, візьміть парасольку на всякий випадок.";
+"recommendationToPlusEleven" = "Чудова погода! Одягайтесь в шари, щоб можна було зняти зайве, якщо стане спекотно.";
+"recommendationToPlusTwentyOne" = "Зручна літня одягайте та не забудьте пити воду, щоб залишатися гідратованими.";
+"recommendationToPlusThirtyOne" = "Дуже спекотно! Уникайте тривалого перебування на сонці та носіть легку, дихаючу одяг.";
+"standardWeatherTips" = "Це може бути шкідливим для вашого здоров'я";
+
+// MARK: - ForecastWeatherViewController
+"date" = "Дата";
+"maxTemperature" = "Максимальна температура";
+"minTemperature" = "Мінімальні температура";
+"chanceOfRain" = "Можливий дощ";
+"fetchingWeatherData" = "Отримання даних про погоду";
+
+// MARK: - Error
+"error" = "Помилка";
+"ok" = "OK";
