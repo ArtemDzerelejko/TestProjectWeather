@@ -70,7 +70,7 @@ final class WeatherRepository: WeatherRepositoryProtocol {
         }
     }
     
-    private func saveLastSessionWeatherData<T: Codable>(_ weatherData: T, forKey: String){
+    private func saveLastSessionWeatherData<T: Codable>(_ weatherData: T, forKey: String) {
         do {
             let encoder = JSONEncoder()
             let encodedData = try encoder.encode(weatherData)
