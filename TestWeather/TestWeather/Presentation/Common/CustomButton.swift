@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CustomButton: UIButton {
+final class CustomButton: UIButton {
     
     private let label = UILabel()
     

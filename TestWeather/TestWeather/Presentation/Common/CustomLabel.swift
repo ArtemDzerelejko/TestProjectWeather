@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CustomLabel: UILabel {
+final class CustomLabel: UILabel {
     init(textColor: UIColor = .white, fontSize: CGFloat = 20) {
         super.init(frame: .zero)
         commonInit(textColor: textColor, fontSize: fontSize)

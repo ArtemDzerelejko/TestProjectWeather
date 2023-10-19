@@ -41,8 +41,8 @@ final class CurrentWeatherViewController: UIViewController {
 
 // MARK: - updateUI
 
-extension CurrentWeatherViewController {
-    private func updateUI(with weatherData: ModelForCurrentWeather) {
+private extension CurrentWeatherViewController {
+    func updateUI(with weatherData: ModelForCurrentWeather) {
         // MARK: - setting country
         if let country = weatherData.location?.country {
             countryLabel.text = Strings.country + ": \(country)"
@@ -89,8 +89,8 @@ extension CurrentWeatherViewController {
 
 // MARK: - verification and installation of pictures
 
-extension CurrentWeatherViewController {
-    private func checkClound(for cloud: Int) {
+private extension CurrentWeatherViewController {
+    func checkClound(for cloud: Int) {
         switch cloud {
         case 0...30:
             cloudImageView.image = UIImage(systemName: Strings.sunMaxFill)
@@ -125,8 +125,8 @@ extension CurrentWeatherViewController {
 
 // MARK: - current weather Update
 
-extension CurrentWeatherViewController {
-    private func onWeatherUpdate(viewModel: CurrentWeatherViewModel) {
+private extension CurrentWeatherViewController {
+    func onWeatherUpdate(viewModel: CurrentWeatherViewModel) {
         viewModel.onWeatherUpdate = { [weak self] weatherData in
             self?.loader.stopAnimating()
             self?.backButton.isHidden = false
@@ -140,14 +140,14 @@ extension CurrentWeatherViewController {
 
 // MARK: - error handler
 
-extension CurrentWeatherViewController {
-    private func errorHandler(viewModel: CurrentWeatherViewModel) {
+private extension CurrentWeatherViewController {
+    func errorHandler(viewModel: CurrentWeatherViewModel) {
         viewModel.onError = { [weak self] error in
             self?.showErrorAlert(error)
         }
     }
     
-    private func showErrorAlert(_ error: Error) {
+    func showErrorAlert(_ error: Error) {
         let alert = UIAlertController(title: Strings.error, message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Strings.ok, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -156,8 +156,8 @@ extension CurrentWeatherViewController {
 
 // MARK: - UI
 
-extension CurrentWeatherViewController {
-    private func configureUI() {
+private extension CurrentWeatherViewController {
+    func configureUI() {
         setupBackground()
         setupLoader()
         setupBackButton()
@@ -174,18 +174,18 @@ extension CurrentWeatherViewController {
         setupWeatherTipsLabel()
     }
     
-    private func setupBackground() {
+    func setupBackground() {
         let gradientView = GradientBackgroundView(frame: view.bounds)
         gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(gradientView)
     }
     
-    private func setupLoader() {
+    func setupLoader() {
         view.addSubview(loader)
         loader.center = view.center
     }
     
-    private func setupBackButton() {
+    func setupBackButton() {
         view.addSubview(backButton)
         backButton.isHidden = true
         backButton.tintColor = .white
@@ -199,7 +199,7 @@ extension CurrentWeatherViewController {
         backButton.addTarget(self, action: #selector(moveToMainViewController), for: .touchUpInside)
     }
     
-    private func setupCurrentWeather() {
+    func setupCurrentWeather() {
         currentWeatherLabel.isHidden = true
         currentWeatherLabel.text = Strings.currentWeather
         view.addSubview(currentWeatherLabel)
@@ -210,7 +210,7 @@ extension CurrentWeatherViewController {
         ])
     }
     
-    private func setupRefrechButton() {
+    func setupRefrechButton() {
         view.addSubview(refrechButton)
         refrechButton.isHidden = true
         refrechButton.tintColor = .white
@@ -224,7 +224,7 @@ extension CurrentWeatherViewController {
         refrechButton.addTarget(self, action: #selector(refrechData), for: .touchUpInside)
     }
     
-    private func setupCountryLabel() {
+    func setupCountryLabel() {
         view.addSubview(countryLabel)
         countryLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -234,7 +234,7 @@ extension CurrentWeatherViewController {
         
     }
     
-    private func setupCityLabel() {
+    func setupCityLabel() {
         view.addSubview(cityLabel)
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -243,7 +243,7 @@ extension CurrentWeatherViewController {
         ])
     }
     
-    private func setupLocalTimeLabel() {
+    func setupLocalTimeLabel() {
         view.addSubview(dateAndTimeLabel)
         dateAndTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -252,7 +252,7 @@ extension CurrentWeatherViewController {
         ])
     }
     
-    private func setupCloudLabel() {
+    func setupCloudLabel() {
         view.addSubview(cloudLabel)
         cloudLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -261,7 +261,7 @@ extension CurrentWeatherViewController {
         ])
     }
     
-    private func setupCloudImageView() {
+    func setupCloudImageView() {
         view.addSubview(cloudImageView)
         cloudImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -272,7 +272,7 @@ extension CurrentWeatherViewController {
         ])
     }
     
-    private func setupTemperatureSegmentedControl() {
+    func setupTemperatureSegmentedControl() {
         view.addSubview(temperatureSegmentedControl)
         temperatureSegmentedControl.isHidden = true
         temperatureSegmentedControl.selectedSegmentIndex = 0
@@ -286,7 +286,7 @@ extension CurrentWeatherViewController {
         temperatureSegmentedControl.addTarget(self, action: #selector(temperatureUnitChanged), for: .valueChanged)
     }
     
-    private func setupTempCelsius() {
+    func setupTempCelsius() {
         view.addSubview(tempCelsiusLabel)
         tempCelsiusLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -296,7 +296,7 @@ extension CurrentWeatherViewController {
         
     }
     
-    private func setupTempFahrenheit() {
+    func setupTempFahrenheit() {
         view.addSubview(tempFahrenheitLabel)
         tempFahrenheitLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -305,7 +305,7 @@ extension CurrentWeatherViewController {
         ])
     }
     
-    private func setupFeelslikeLabelCelsius() {
+    func setupFeelslikeLabelCelsius() {
         view.addSubview(feelslikeCelsiusLabel)
         feelslikeCelsiusLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -314,7 +314,7 @@ extension CurrentWeatherViewController {
         ])
     }
     
-    private func setupFeelslikeLabelFahrenheit() {
+    func setupFeelslikeLabelFahrenheit() {
         view.addSubview(feelslikeFahrenheitLabel)
         feelslikeFahrenheitLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -323,7 +323,7 @@ extension CurrentWeatherViewController {
         ])
     }
     
-    private func setupWeatherTipsLabel() {
+    func setupWeatherTipsLabel() {
         weatherTipsLabel.numberOfLines = 0
         weatherTipsLabel.textAlignment = .center
         view.addSubview(weatherTipsLabel)

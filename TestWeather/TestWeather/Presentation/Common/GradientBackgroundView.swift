@@ -26,8 +26,8 @@ final class GradientBackgroundView: UIView {
 
 // MARK: - configure gradient
 
-extension GradientBackgroundView {
-    private func configureGradientLayer() {
+private extension GradientBackgroundView {
+    func configureGradientLayer() {
         guard let gradientLayer = layer as? CAGradientLayer else {return}
         gradientLayer.colors = [UIColor.systemBlue.cgColor, UIColor.systemYellow.cgColor]
         gradientLayer.locations = [0.0, 1.0]

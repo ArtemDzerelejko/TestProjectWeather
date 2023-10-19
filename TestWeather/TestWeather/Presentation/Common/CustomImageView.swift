@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CustomImageView: UIImageView {
+final class CustomImageView: UIImageView {
     var customSize: CGSize = CGSize(width: 20, height: 20)
     
     init() {

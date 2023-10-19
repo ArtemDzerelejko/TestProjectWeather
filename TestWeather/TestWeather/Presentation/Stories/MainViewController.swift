@@ -23,20 +23,20 @@ final class MainViewController: UIViewController {
 
 // MARK: - UI
 
-extension MainViewController {
-    private func configureUI() {
+private extension MainViewController {
+    func configureUI() {
         setupBackground()
         setupCurrentWeatherButton()
         setupForecastWeatherButton()
     }
     
-    private func setupBackground() {
+    func setupBackground() {
         let gradientView = GradientBackgroundView(frame: view.bounds)
         gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(gradientView)
     }
     
-    private func setupCurrentWeatherButton() {
+    func setupCurrentWeatherButton() {
         view.addSubview(currentWeatherButton)
         currentWeatherButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -48,7 +48,7 @@ extension MainViewController {
         currentWeatherButton.addTarget(self, action: #selector(goToCurrentWeatherViewController), for: .touchUpInside)
     }
     
-    private func setupForecastWeatherButton() {
+    func setupForecastWeatherButton() {
         view.addSubview(forecastWeatherButton)
         forecastWeatherButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

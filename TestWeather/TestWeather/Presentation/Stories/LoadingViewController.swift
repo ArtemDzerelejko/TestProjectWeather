@@ -26,19 +26,19 @@ final class LoadingViewController: UIViewController {
 
 // MARK: - UI
 
-extension LoadingViewController {
-    private func configureUI() {
+private extension LoadingViewController {
+    func configureUI() {
         setupBackground()
         setupIconView()
     }
     
-    private func setupBackground() {
+    func setupBackground() {
         let gradientView = GradientBackgroundView(frame: view.bounds)
         gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(gradientView)
     }
     
-    private func setupIconView() {
+    func setupIconView() {
         iconView.image = UIImage(systemName: Strings.cloudSunRainFill)
         iconView.tintColor = .white
         view.addSubview(iconView)
@@ -54,12 +54,12 @@ extension LoadingViewController {
 
 // MARK: - creating transition
 
-extension LoadingViewController {
-    private func transition() {
+private extension LoadingViewController {
+    func transition() {
         creatingTransition()
     }
     
-    private func creatingTransition() {
+    func creatingTransition() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.transitionToMainViewController()
         }
@@ -68,8 +68,8 @@ extension LoadingViewController {
 
 // MARK: - create next VC
 
-extension LoadingViewController {
-    private func transitionToMainViewController() {
+private extension LoadingViewController {
+    func transitionToMainViewController() {
         let mainViewController = MainViewController()
         navigationController?.pushViewController(mainViewController, animated: true)
     }

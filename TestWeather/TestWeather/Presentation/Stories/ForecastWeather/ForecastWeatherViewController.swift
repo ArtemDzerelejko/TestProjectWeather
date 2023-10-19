@@ -55,8 +55,8 @@ final class ForecastWeatherViewController: UIViewController {
 
 //MARK: - forecasr weather Update
 
-extension ForecastWeatherViewController {
-    private func onWeatherUpdate(viewModel: ForecastWeatherViewModel) {
+private extension ForecastWeatherViewController {
+    func onWeatherUpdate(viewModel: ForecastWeatherViewModel) {
         viewModel.onWeatherUpdate = { [weak self] weatherData in
             self?.loader.stopAnimating()
             self?.backButton.isHidden = false
@@ -68,14 +68,14 @@ extension ForecastWeatherViewController {
 
 // MARK: - error handler
 
-extension ForecastWeatherViewController {
-    private func errorHandler(viewModel: ForecastWeatherViewModel) {
+private extension ForecastWeatherViewController {
+    func errorHandler(viewModel: ForecastWeatherViewModel) {
         viewModel.onError = { [weak self] error in
             self?.showErrorAlert(error)
         }
     }
     
-    private func showErrorAlert(_ error: Error) {
+    func showErrorAlert(_ error: Error) {
         let alert = UIAlertController(title: Strings.error, message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Strings.ok, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -86,8 +86,8 @@ extension ForecastWeatherViewController {
 
 // MARK: - UI
 
-extension ForecastWeatherViewController {
-    private func configureUI() {
+private extension ForecastWeatherViewController {
+    func configureUI() {
         setupBackground()
         setupLoader()
         setupBackButton()
@@ -98,18 +98,18 @@ extension ForecastWeatherViewController {
         setupRefreshControl()
     }
     
-    private func setupBackground() {
+    func setupBackground() {
         let gradientView = GradientBackgroundView(frame: view.bounds)
         gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(gradientView)
     }
     
-    private func setupLoader() {
+    func setupLoader() {
         view.addSubview(loader)
         loader.center = view.center
     }
     
-    private func setupBackButton() {
+    func setupBackButton() {
         view.addSubview(backButton)
         backButton.isHidden = true
         backButton.tintColor = .white
@@ -123,7 +123,7 @@ extension ForecastWeatherViewController {
         backButton.addTarget(self, action: #selector(moveToMainViewController), for: .touchUpInside)
     }
     
-    private func setupForecastWeatherLabel() {
+    func setupForecastWeatherLabel() {
         forecastWeatherLabel.isHidden = true
         forecastWeatherLabel.text = Strings.forecastWeather
         view.addSubview(forecastWeatherLabel)
@@ -134,7 +134,7 @@ extension ForecastWeatherViewController {
         ])
     }
     
-    private func setupCountryLabel() {
+    func setupCountryLabel() {
         view.addSubview(countryLabel)
         countryLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -143,7 +143,7 @@ extension ForecastWeatherViewController {
         ])
     }
     
-    private func setupCityLabel() {
+    func setupCityLabel() {
         view.addSubview(cityLabel)
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -152,7 +152,7 @@ extension ForecastWeatherViewController {
         ])
     }
     
-    private func setupTableView() {
+    func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constans.cell)
@@ -167,7 +167,7 @@ extension ForecastWeatherViewController {
         ])
     }
     
-    private func setupRefreshControl() {
+    func setupRefreshControl() {
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         refreshControl.bounds = CGRect(x: 0, y: 0, width: refreshControl.bounds.width, height: 60)

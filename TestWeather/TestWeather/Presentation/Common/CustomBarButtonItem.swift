@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CustomBackButton: UIButton {
+final class CustomBackButton: UIButton {
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         

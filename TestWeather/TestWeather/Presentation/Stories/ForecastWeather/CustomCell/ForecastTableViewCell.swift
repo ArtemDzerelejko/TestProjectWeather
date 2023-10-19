@@ -27,8 +27,8 @@ class ForecastTableViewCell: UITableViewCell {
 
 // MARK: - UI
 
-extension ForecastTableViewCell {
-    private func configureUI() {
+private extension ForecastTableViewCell {
+    func configureUI() {
         setupContainerView()
         setupDateLabel()
         setupMaxTempLabel()
@@ -36,7 +36,7 @@ extension ForecastTableViewCell {
         setupChanceOfRainLabel()
     }
     
-    private func setupContainerView() {
+    func setupContainerView() {
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 20
         containerView.layer.masksToBounds = true
@@ -50,7 +50,7 @@ extension ForecastTableViewCell {
         ])
     }
     
-    private func setupDateLabel() {
+    func setupDateLabel() {
         containerView.addSubview(dateLabel)
         dateLabel.textColor = .black
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +60,7 @@ extension ForecastTableViewCell {
         ])
     }
     
-    private func setupMaxTempLabel() {
+    func setupMaxTempLabel() {
         containerView.addSubview(maxTempLabel)
         maxTempLabel.textColor = .black
         maxTempLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +70,7 @@ extension ForecastTableViewCell {
         ])
     }
     
-    private func setupMixTempLabel() {
+    func setupMixTempLabel() {
         containerView.addSubview(minTempLabel)
         minTempLabel.textColor = .black
         minTempLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +80,7 @@ extension ForecastTableViewCell {
         ])
     }
     
-    private func setupChanceOfRainLabel() {
+    func setupChanceOfRainLabel() {
         containerView.addSubview(chanceOfRainLabel)
         chanceOfRainLabel.textColor = .black
         chanceOfRainLabel.translatesAutoresizingMaskIntoConstraints = false
