@@ -70,15 +70,13 @@ final class WeatherRepository: WeatherRepositoryProtocol {
         }
     }
     
-    private func saveLastSessionWeatherData<T: Codable>(_ weatherData: T, forKey: String) -> T? {
+    private func saveLastSessionWeatherData<T: Codable>(_ weatherData: T, forKey: String){
         do {
             let encoder = JSONEncoder()
             let encodedData = try encoder.encode(weatherData)
             userDefaults.set(encodedData, forKey: forKey)
-            return weatherData
         } catch {
             logger.error("Error encoding weather data: \(error.localizedDescription)")
-            return nil
         }
     }
 
