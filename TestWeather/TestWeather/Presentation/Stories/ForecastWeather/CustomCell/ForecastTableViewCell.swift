@@ -20,6 +20,7 @@ class ForecastTableViewCell: UITableViewCell {
         configureUI()
     }
     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -38,7 +39,7 @@ private extension ForecastTableViewCell {
     
     func setupContainerView() {
         containerView.backgroundColor = .white
-        containerView.layer.cornerRadius = 20
+        containerView.layer.cornerRadius = 30
         containerView.layer.masksToBounds = true
         contentView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false

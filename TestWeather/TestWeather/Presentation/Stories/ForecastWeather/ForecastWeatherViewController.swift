@@ -39,7 +39,7 @@ final class ForecastWeatherViewController: UIViewController {
     }
     
     private func updateUI(with forecastWeatherData: ModelForForecastWeather) {
-        self.forecastWeatherData = forecastWeatherData // Update forecastWeatherData
+        self.forecastWeatherData = forecastWeatherData
         
         if let country = forecastWeatherData.location?.country {
             countryLabel.text = Strings.country + ": \(country)"
@@ -92,10 +92,10 @@ private extension ForecastWeatherViewController {
         setupLoader()
         setupBackButton()
         setupForecastWeatherLabel()
-        setupCountryLabel()
-        setupCityLabel()
-        setupTableView()
-        setupRefreshControl()
+//        setupCountryLabel()
+//        setupCityLabel()
+//        setupTableView()
+//        setupRefreshControl()
     }
     
     func setupBackground() {
