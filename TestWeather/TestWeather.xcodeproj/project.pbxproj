@@ -43,6 +43,7 @@
 		ACAF69372AEF9BFB005C3C23 /* ForecastWeathersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF69362AEF9BFB005C3C23 /* ForecastWeathersViewController.swift */; };
 		ACAF693B2AEFF218005C3C23 /* HourlyForecastViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF693A2AEFF218005C3C23 /* HourlyForecastViewCell.swift */; };
 		ACAF69402AF00938005C3C23 /* PrecipitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF693F2AF00938005C3C23 /* PrecipitationView.swift */; };
+		ACAF69422AF12E92005C3C23 /* SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF69412AF12E92005C3C23 /* SmallView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -97,6 +98,7 @@
 		ACAF69362AEF9BFB005C3C23 /* ForecastWeathersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeathersViewController.swift; sourceTree = "<group>"; };
 		ACAF693A2AEFF218005C3C23 /* HourlyForecastViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewCell.swift; sourceTree = "<group>"; };
 		ACAF693F2AF00938005C3C23 /* PrecipitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecipitationView.swift; sourceTree = "<group>"; };
+		ACAF69412AF12E92005C3C23 /* SmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 				AC8B89BE2AE022FB008E69F7 /* CustomLabel.swift */,
 				AC4F80322AE061C8005E0C78 /* RefrechButton.swift */,
 				AC4F80362AE088BD005E0C78 /* CustomImageView.swift */,
+				ACAF69412AF12E92005C3C23 /* SmallView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				AC8B89272ADF2AC3008E69F7 /* Localizable+Extensions.swift in Sources */,
 				AC8B88FF2ADF19E5008E69F7 /* CustomBarButtonItem.swift in Sources */,
 				ACAF69402AF00938005C3C23 /* PrecipitationView.swift in Sources */,
+				ACAF69422AF12E92005C3C23 /* SmallView.swift in Sources */,
 				AC4F80372AE088BD005E0C78 /* CustomImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

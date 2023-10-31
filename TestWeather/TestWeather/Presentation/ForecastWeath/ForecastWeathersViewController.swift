@@ -16,6 +16,8 @@ class ForecastWeathersViewController: UIViewController, UITableViewDelegate, UIT
     private let tableView = UITableView()
     private let views = UIView()
     private let precipitationView = PrecipitationView()
+    private let averageIndicatorsView = SmallView()
+    private let indexUfView = SmallView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,14 +55,17 @@ extension ForecastWeathersViewController {
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 2)
+            contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+//            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 2)
         ])
         
         setupHourlyForecastView()
         setupViews()
         setupTableView()
         setupPrecipitationView()
+        setupAverageIndicatorsView()
+        setupIndexUfView()
+//        setupStackView()
     }
     
     private func setupHourlyForecastView() {
@@ -69,8 +74,6 @@ extension ForecastWeathersViewController {
         
         NSLayoutConstraint.activate([
             hourlyForecastView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            hourlyForecastView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            hourlyForecastView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             hourlyForecastView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             hourlyForecastView.heightAnchor.constraint(equalToConstant: 120)
         ])
@@ -95,9 +98,41 @@ extension ForecastWeathersViewController {
             precipitationView.centerXAnchor.constraint(equalTo: views.centerXAnchor),
         ])
     }
-}
+    
+//    private func setupStackView() {
+//        let stackView = UIStackView(arrangedSubviews: [averageIndicatorsView, indexUfView])
+//        stackView.axis = .horizontal
+//        stackView.spacing = 20
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        contentView.addSubview(stackView)
+//        
+//        NSLayoutConstraint.activate([
+//            stackView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 20),
+//            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+//            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
+//        ])
+//    }
 
-   
+    
+    private func setupAverageIndicatorsView() {
+        contentView.addSubview(averageIndicatorsView)
+        averageIndicatorsView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            averageIndicatorsView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 20),
+            averageIndicatorsView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor)
+        ])
+    }
+    
+    private func setupIndexUfView() {
+        contentView.addSubview(indexUfView)
+        indexUfView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            indexUfView.topAnchor.constraint(equalTo: averageIndicatorsView.topAnchor),
+            indexUfView.trailingAnchor.constraint(equalTo: precipitationView.trailingAnchor)
+        ])
+    }
+}
 
 // MARK: - setting tableView
 extension ForecastWeathersViewController {
