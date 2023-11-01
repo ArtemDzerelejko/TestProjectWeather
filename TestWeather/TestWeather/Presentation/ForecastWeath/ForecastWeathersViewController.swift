@@ -13,15 +13,25 @@ class ForecastWeathersViewController: UIViewController, UITableViewDelegate, UIT
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let hourlyForecastView = HourlyForecastView()
+    private let stackView = UIStackView()
     private let tableView = UITableView()
     private let views = UIView()
     private let precipitationView = PrecipitationView()
-    private let averageIndicatorsView = SmallView()
-    private let indexUfView = SmallView()
+    private let averageIndicatorsView = SmallView(titleImage: Strings.arrowUpRight,
+                                                  title: Strings.averageIndicators,
+                                                  numeric: Strings.plusEight,
+                                                  descriptionText: Strings.peakDailyAverageValue)
+    private let indexUfView = SmallView(titleImage: Strings.sunMaxFill,
+                                        title: Strings.indexUf,
+                                        numeric: Strings.one,
+                                        descriptionText: Strings.low)
+    
+    private let forecastCellIdentifier = "forecastWeatherCell"
+    //    let compasView = CompassView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBlue
+        self.view.backgroundColor = .lightGray
         configureUI()
     }
 }
@@ -30,12 +40,18 @@ class ForecastWeathersViewController: UIViewController, UITableViewDelegate, UIT
 extension ForecastWeathersViewController {
     private func configureUI() {
         setupScrollView()
-        setupContentView()
+        setupStackView()
+        setupHourlyForecastView()
+        setupViews()
+        setupTableView()
+        setupPrecipitationView()
+        setupHorizontalIndicatorsStack()
+        //        setupCompassView()
     }
-
+    
     private func setupScrollView() {
-        scrollView.backgroundColor = .systemRed
         view.addSubview(scrollView)
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -46,92 +62,76 @@ extension ForecastWeathersViewController {
         ])
     }
     
-    private func setupContentView() {
-        contentView.backgroundColor = .systemPurple
-        scrollView.addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-//            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 2)
-        ])
+    private func setupStackView() {
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(stackView)
         
-        setupHourlyForecastView()
-        setupViews()
-        setupTableView()
-        setupPrecipitationView()
-        setupAverageIndicatorsView()
-        setupIndexUfView()
-//        setupStackView()
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        ])
     }
     
     private func setupHourlyForecastView() {
         hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(hourlyForecastView)
+        stackView.addArrangedSubview(hourlyForecastView)
         
         NSLayoutConstraint.activate([
-            hourlyForecastView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            hourlyForecastView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            hourlyForecastView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -40),
             hourlyForecastView.heightAnchor.constraint(equalToConstant: 120)
         ])
     }
     
     private func setupViews() {
-        contentView.addSubview(views)
         views.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(views)
+        
         NSLayoutConstraint.activate([
-            views.topAnchor.constraint(equalTo: hourlyForecastView.bottomAnchor, constant: 20),
-            views.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            views.widthAnchor.constraint(equalToConstant: 360),
-            views.heightAnchor.constraint(equalToConstant: 450)
+            views.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor),
+            views.heightAnchor.constraint(equalToConstant: 450),
         ])
     }
-
+    
     private func setupPrecipitationView() {
-        contentView.addSubview(precipitationView)
         precipitationView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(precipitationView)
+        
         NSLayoutConstraint.activate([
-            precipitationView.topAnchor.constraint(equalTo: views.bottomAnchor, constant: 20),
-            precipitationView.centerXAnchor.constraint(equalTo: views.centerXAnchor),
+            precipitationView.widthAnchor.constraint(equalTo:  hourlyForecastView.widthAnchor),
+            precipitationView.heightAnchor.constraint(equalToConstant: 360)
         ])
     }
     
-//    private func setupStackView() {
-//        let stackView = UIStackView(arrangedSubviews: [averageIndicatorsView, indexUfView])
-//        stackView.axis = .horizontal
-//        stackView.spacing = 20
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        contentView.addSubview(stackView)
-//        
-//        NSLayoutConstraint.activate([
-//            stackView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 20),
-//            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-//            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
-//        ])
-//    }
-
-    
-    private func setupAverageIndicatorsView() {
-        contentView.addSubview(averageIndicatorsView)
-        averageIndicatorsView.translatesAutoresizingMaskIntoConstraints = false
+    private func setupHorizontalIndicatorsStack() {
+        let horizontalIndicatorsStack = UIStackView(arrangedSubviews: [averageIndicatorsView, indexUfView])
+        horizontalIndicatorsStack.axis = .horizontal
+        horizontalIndicatorsStack.spacing = 25
+        horizontalIndicatorsStack.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(horizontalIndicatorsStack)
+        
         NSLayoutConstraint.activate([
-            averageIndicatorsView.topAnchor.constraint(equalTo: precipitationView.bottomAnchor, constant: 20),
-            averageIndicatorsView.leadingAnchor.constraint(equalTo: precipitationView.leadingAnchor)
+            horizontalIndicatorsStack.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor),
+            averageIndicatorsView.widthAnchor.constraint(equalTo: indexUfView.widthAnchor)
         ])
     }
     
-    private func setupIndexUfView() {
-        contentView.addSubview(indexUfView)
-        indexUfView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            indexUfView.topAnchor.constraint(equalTo: averageIndicatorsView.topAnchor),
-            indexUfView.trailingAnchor.constraint(equalTo: precipitationView.trailingAnchor)
-        ])
-    }
+    //    private func setupCompassView() {
+    //        stackView.addArrangedSubview(compasView)
+    //
+    //        compasView.translatesAutoresizingMaskIntoConstraints = false
+    //
+    //        NSLayoutConstraint.activate([
+    ////            compasView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+    ////            compasView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+    ////            compasView.widthAnchor.constraint(equalToConstant: 200), // Встановіть бажану ширину
+    //            compasView.heightAnchor.constraint(equalToConstant: 200) // Встановіть бажану висоту
+    //        ])
+    //    }
+    
 }
 
 // MARK: - setting tableView
@@ -144,41 +144,42 @@ extension ForecastWeathersViewController {
         tableView.isScrollEnabled = false
         tableView.separatorColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: views.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: views.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: views.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: views.bottomAnchor)
-
+            
         ])
         tableView.backgroundColor = UIColor.lightBlue
-        tableView.register(ForecastWeatherCell.self, forCellReuseIdentifier: "forecastWeatherCell")
+        tableView.register(ForecastWeatherCell.self, forCellReuseIdentifier: forecastCellIdentifier)
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let forecastWeatherCell = tableView.dequeueReusableCell(withIdentifier: "forecastWeatherCell", for: indexPath) as! ForecastWeatherCell
+        let forecastWeatherCell = tableView.dequeueReusableCell(withIdentifier: forecastCellIdentifier, for: indexPath) as! ForecastWeatherCell
         forecastWeatherCell.backgroundColor = .lightBlue
         return forecastWeatherCell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Ви натиснули на ячейку з номером \(indexPath.row)")
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         let headerImage = UIImageView()
         let headerLabel = UILabel()
-
-        headerImage.image = UIImage(systemName: "calendar")
+        
+        headerImage.image = UIImage(systemName: Strings.calendar)
         headerImage.tintColor = .gray
         headerView.addSubview(headerImage)
         headerImage.translatesAutoresizingMaskIntoConstraints = false
@@ -188,8 +189,8 @@ extension ForecastWeathersViewController {
             headerImage.heightAnchor.constraint(equalToConstant: 18),
             headerImage.widthAnchor.constraint(equalToConstant: 18)
         ])
-
-        headerLabel.text = "10-денний прогноз"
+        
+        headerLabel.text = Strings.tenDayForecast
         headerLabel.font = UIFont.systemFont(ofSize: 15)
         headerLabel.textColor = .gray
         headerView.addSubview(headerLabel)
@@ -198,12 +199,70 @@ extension ForecastWeathersViewController {
             headerLabel.topAnchor.constraint(equalTo: headerImage.topAnchor),
             headerLabel.leadingAnchor.constraint(equalTo: headerImage.trailingAnchor, constant: 5)
         ])
-
-
+        
+        
         return headerView
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
     }
 }
+
+//import UIKit
+//
+//class CompassView: UIView {
+//    override func draw(_ rect: CGRect) {
+//        let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
+//        let squareSize = min(rect.width, rect.height)
+//        let radius = squareSize / 2 - 10
+//
+//        // Ось якщо ви хочете, щоб коло було обрізане до квадрата
+//        self.clipsToBounds = true
+//
+//        // Малюємо коло
+//        UIColor.white.setStroke()
+//        let dashedPath = UIBezierPath()
+//        dashedPath.lineWidth = 1
+//        dashedPath.setLineDash([5, 5], count: 2, phase: 0)
+//
+//        for angle in stride(from: 0, to: CGFloat.pi * 2, by: CGFloat.pi / 48) {
+//            let startPoint = CGPoint(x: center.x + cos(angle) * (radius - 5), y: center.y + sin(angle) * (radius - 5))
+//            let endPoint = CGPoint(x: center.x + cos(angle) * (radius + 5), y: center.y + sin(angle) * (radius + 5))
+//            dashedPath.move(to: startPoint)
+//            dashedPath.addLine(to: endPoint)
+//        }
+//
+//        dashedPath.stroke()
+//
+//        // Малюємо стрілку
+//        UIColor.red.setFill()
+//        let arrowPath = UIBezierPath()
+//        arrowPath.move(to: CGPoint(x: center.x, y: center.y - radius))
+//        arrowPath.addLine(to: CGPoint(x: center.x - 5, y: center.y - 20))
+//        arrowPath.addLine(to: CGPoint(x: center.x + 5, y: center.y - 20))
+//        arrowPath.close()
+//        arrowPath.fill()
+//
+//
+//        // Малюємо напрямки
+//        let font = UIFont.systemFont(ofSize: 12)
+//        let attributes = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.white]
+//        let directions: [String] = ["Сх", "Пд", "Зх", "Пн"]
+//        let textRadius = radius - 30
+//
+//        for (index, direction) in directions.enumerated() {
+//            let angle = CGFloat(index) * (.pi / 2)
+//            let stringSize = (direction as NSString).size(withAttributes: attributes)
+//            let stringCenter = CGPoint(x: center.x + cos(angle) * textRadius - stringSize.width / 2,
+//                                       y: center.y + sin(angle) * textRadius - stringSize.height / 2)
+//            (direction as NSString).draw(at: stringCenter, withAttributes: attributes)
+//        }
+//
+//        UIColor.white.setFill()
+//        let text = "Пн"
+//        let textSize = (text as NSString).size(withAttributes: attributes)
+//        let textCenter = CGPoint(x: center.x - textSize.width / 2, y: center.y - textSize.height / 2)
+//        (text as NSString).draw(at: textCenter, withAttributes: attributes)
+//    }
+//}

@@ -18,6 +18,8 @@
 		AC4F80332AE061C8005E0C78 /* RefrechButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F80322AE061C8005E0C78 /* RefrechButton.swift */; };
 		AC4F80352AE06D68005E0C78 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F80342AE06D68005E0C78 /* ForecastTableViewCell.swift */; };
 		AC4F80372AE088BD005E0C78 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F80362AE088BD005E0C78 /* CustomImageView.swift */; };
+		AC5E2A6D2AF28FFE00A81C0A /* GoogleMapsTileOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = AC5E2A6C2AF28FFE00A81C0A /* GoogleMapsTileOverlay */; };
+		AC5E2A6F2AF2932800A81C0A /* overlay.json in Resources */ = {isa = PBXBuildFile; fileRef = AC5E2A6E2AF2932800A81C0A /* overlay.json */; };
 		AC8B88DA2ADC6F47008E69F7 /* ModelForCurrentWeatherRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B88D92ADC6F47008E69F7 /* ModelForCurrentWeatherRemote.swift */; };
 		AC8B88DC2ADC6FD2008E69F7 /* ModelForCurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B88DB2ADC6FD2008E69F7 /* ModelForCurrentWeather.swift */; };
 		AC8B88DE2ADC70C4008E69F7 /* WeatherAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B88DD2ADC70C4008E69F7 /* WeatherAPIService.swift */; };
@@ -72,6 +74,7 @@
 		AC4F80322AE061C8005E0C78 /* RefrechButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrechButton.swift; sourceTree = "<group>"; };
 		AC4F80342AE06D68005E0C78 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
 		AC4F80362AE088BD005E0C78 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		AC5E2A6E2AF2932800A81C0A /* overlay.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = overlay.json; sourceTree = "<group>"; };
 		AC8B88D92ADC6F47008E69F7 /* ModelForCurrentWeatherRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelForCurrentWeatherRemote.swift; sourceTree = "<group>"; };
 		AC8B88DB2ADC6FD2008E69F7 /* ModelForCurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelForCurrentWeather.swift; sourceTree = "<group>"; };
 		AC8B88DD2ADC70C4008E69F7 /* WeatherAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIService.swift; sourceTree = "<group>"; };
@@ -108,6 +111,7 @@
 			files = (
 				AC38F3782AD81F400009E3CF /* Alamofire in Frameworks */,
 				AC8B88EB2ADD7B49008E69F7 /* Alamofire in Frameworks */,
+				AC5E2A6D2AF28FFE00A81C0A /* GoogleMapsTileOverlay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +356,7 @@
 		ACAF693C2AF008D3005C3C23 /* PrecipitationView */ = {
 			isa = PBXGroup;
 			children = (
+				AC5E2A6E2AF2932800A81C0A /* overlay.json */,
 				ACAF693F2AF00938005C3C23 /* PrecipitationView.swift */,
 			);
 			path = PrecipitationView;
@@ -377,6 +382,7 @@
 			packageProductDependencies = (
 				AC38F3772AD81F400009E3CF /* Alamofire */,
 				AC8B88EA2ADD7B49008E69F7 /* Alamofire */,
+				AC5E2A6C2AF28FFE00A81C0A /* GoogleMapsTileOverlay */,
 			);
 			productName = TestWeather;
 			productReference = AC38F3522AD81C7D0009E3CF /* TestWeather.app */;
@@ -408,7 +414,8 @@
 			);
 			mainGroup = AC38F3492AD81C7D0009E3CF;
 			packageReferences = (
-				AC38F3762AD81F400009E3CF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AC38F3762AD81F400009E3CF /* XCRemoteSwiftPackageReference "Alamofire.git" */,
+				AC5E2A6B2AF28FFE00A81C0A /* XCRemoteSwiftPackageReference "GoogleMapsTileOverlay" */,
 			);
 			productRefGroup = AC38F3532AD81C7D0009E3CF /* Products */;
 			projectDirPath = "";
@@ -426,6 +433,7 @@
 			files = (
 				AC38F3622AD81C7F0009E3CF /* LaunchScreen.storyboard in Resources */,
 				AC8B89202ADF2A77008E69F7 /* Localizable.strings in Resources */,
+				AC5E2A6F2AF2932800A81C0A /* overlay.json in Resources */,
 				AC38F35F2AD81C7F0009E3CF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,6 +636,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestWeather/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WetherApp;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -660,6 +669,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestWeather/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WetherApp;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -705,7 +715,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AC38F3762AD81F400009E3CF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		AC38F3762AD81F400009E3CF /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -713,17 +723,30 @@
 				minimumVersion = 5.8.0;
 			};
 		};
+		AC5E2A6B2AF28FFE00A81C0A /* XCRemoteSwiftPackageReference "GoogleMapsTileOverlay" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thepeaklab/GoogleMapsTileOverlay";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		AC38F3772AD81F400009E3CF /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AC38F3762AD81F400009E3CF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = AC38F3762AD81F400009E3CF /* XCRemoteSwiftPackageReference "Alamofire.git" */;
 			productName = Alamofire;
+		};
+		AC5E2A6C2AF28FFE00A81C0A /* GoogleMapsTileOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC5E2A6B2AF28FFE00A81C0A /* XCRemoteSwiftPackageReference "GoogleMapsTileOverlay" */;
+			productName = GoogleMapsTileOverlay;
 		};
 		AC8B88EA2ADD7B49008E69F7 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AC38F3762AD81F400009E3CF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = AC38F3762AD81F400009E3CF /* XCRemoteSwiftPackageReference "Alamofire.git" */;
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */

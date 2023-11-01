@@ -35,7 +35,7 @@ extension ForecastWeatherCell {
     
     private func setupWeekdayLabel() {
         addSubview(weekdayLabel)
-        weekdayLabel.text = "День тижня"
+        weekdayLabel.text = Strings.weekday
         weekdayLabel.textColor = .white
         weekdayLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

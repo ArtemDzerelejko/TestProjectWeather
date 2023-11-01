@@ -27,6 +27,27 @@
 "chanceOfRain" = "Можливий дощ";
 "fetchingWeatherData" = "Отримання даних про погоду";
 
+// MARK: - ForecastWeathersViewController
+//averageIndicatorsView
+"averageIndicators" = "середні показники";
+"peakDailyAverageValue" = "вище найвищого середньодобового значення";
+
+//indexUfView
+"indexUf" = "індекс уф";
+"low" = "Низький";
+
+"tenDayForecast" = "10-денний прогноз";
+
+// MARK: - HourlyForecastView
+"hourlyWeatherForecast" = "Погодинний прогноз";
+
+// MARK: - PrecipitationView
+"precipitation" = "ОПАДИ";
+"myLocation" = "Моя локація";
+
+// MARK: - ForecastWeatherCell
+"weekday" = "День тижня";
+
 // MARK: - Error
 "error" = "Помилка";
 "ok" = "OK";

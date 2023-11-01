@@ -28,7 +28,6 @@ extension HourlyForecastViewCell {
         setupFirstLabel()
         setupSecondLabel()
         setupThirdLabel()
-        
     }
     
     private func setupFirstLabel() {
@@ -36,6 +35,7 @@ extension HourlyForecastViewCell {
         firstLabel.numberOfLines = 0
         addSubview(firstLabel)
         firstLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             firstLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             firstLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
@@ -47,6 +47,7 @@ extension HourlyForecastViewCell {
         secondLabel.tintColor = .white
         addSubview(secondLabel)
         secondLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             secondLabel.topAnchor.constraint(equalTo: firstLabel.bottomAnchor, constant: 5),
             secondLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
@@ -57,6 +58,7 @@ extension HourlyForecastViewCell {
         thirdLabel.numberOfLines = 0
         addSubview(thirdLabel)
         thirdLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             thirdLabel.topAnchor.constraint(equalTo: secondLabel.bottomAnchor, constant: 5),
             thirdLabel.centerXAnchor.constraint(equalTo: secondLabel.centerXAnchor),
