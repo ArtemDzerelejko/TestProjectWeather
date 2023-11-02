@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 
-class ForecastWeatherCell: UITableViewCell {
+class ForecastWeatherCustomCell: UITableViewCell {
     
     private let weekdayLabel = UILabel()
     private let weatherImage = UIImageView()
     private let temperatureLabel = UILabel()
-    private let systemImages = ["cloud.sun", "sun.max", "moon", "cloud.rain", "cloud.bolt"]
+    static let forecastCellIdentifier = "forecastWeatherCell"
+    static let forecastWeatherViewModel = ForecastWeatherViewModel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,7 +27,7 @@ class ForecastWeatherCell: UITableViewCell {
 }
 
 // MARK: - UI
-extension ForecastWeatherCell {
+extension ForecastWeatherCustomCell {
     private func configureUI() {
         setupWeekdayLabel()
         setupWeatherImage()
@@ -46,7 +47,7 @@ extension ForecastWeatherCell {
     }
     
     private func setupWeatherImage() {
-        if let randomImageName = systemImages.randomElement() {
+        if let randomImageName = ForecastWeatherCustomCell.forecastWeatherViewModel.systemImagesForForecastWeatherCustomCell.randomElement() {
             weatherImage.image = UIImage(systemName: randomImageName)
         }
         weatherImage.tintColor = .white

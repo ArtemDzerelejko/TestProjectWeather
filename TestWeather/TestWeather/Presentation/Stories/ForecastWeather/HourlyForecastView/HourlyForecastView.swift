@@ -19,12 +19,8 @@ class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewData
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
+    private let viewModel = ForecastWeatherViewModel()
     
-    private let hourlyForecastViewCell: String = "hourlyForecastViewCell"
-
-    private let systemImages = ["cloud.sun", "sun.max", "moon", "cloud.rain", "cloud.bolt"]
-    private let labelsTexts = ["Зараз", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         layoutSubviews()
@@ -84,7 +80,7 @@ class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewData
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(HourlyForecastViewCell.self, forCellWithReuseIdentifier: hourlyForecastViewCell)
+        collectionView.register(HourlyForecastViewCell.self, forCellWithReuseIdentifier: HourlyForecastViewCell.forecastCellIdentifier)
         addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -97,14 +93,14 @@ class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return labelsTexts.count
+        return viewModel.labelsTexts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: hourlyForecastViewCell, for: indexPath) as! HourlyForecastViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastViewCell.forecastCellIdentifier, for: indexPath) as! HourlyForecastViewCell
 
-        let labelText = labelsTexts[indexPath.item]
-        let imageName = systemImages.randomElement() ?? ""
+        let labelText = viewModel.labelsTexts[indexPath.item]
+        let imageName = viewModel.systemImagesForHourlyForecastView.randomElement() ?? ""
         let temperature = "15"
 
         cell.configure(labelText: labelText, imageName: imageName, temperature: temperature)

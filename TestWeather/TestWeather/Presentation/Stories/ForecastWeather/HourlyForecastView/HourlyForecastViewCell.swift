@@ -12,6 +12,7 @@ class HourlyForecastViewCell: UICollectionViewCell {
     private let firstLabel = UILabel()
     private let secondLabel = UIImageView()
     private let thirdLabel = UILabel()
+    static let forecastCellIdentifier = "forecastWeatherCell"
     
     override init(frame: CGRect) {
         super.init(frame: frame)

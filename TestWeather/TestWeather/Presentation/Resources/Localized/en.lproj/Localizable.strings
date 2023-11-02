@@ -30,7 +30,7 @@
 // MARK: - ForecastWeathersViewController
 //averageIndicatorsView
 "averageIndicators" = "average indicators";
-"peakDailyAverageValue" = "above the highest daily average value";
+"peakDailyAverageValue" = "above the highest";
 
 //indexUfView
 "indexUf" = "index uf";

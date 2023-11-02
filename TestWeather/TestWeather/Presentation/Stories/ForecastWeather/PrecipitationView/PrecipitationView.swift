@@ -11,13 +11,12 @@ import MapKit
 import CoreLocation
 import GoogleMapsTileOverlay
 
-
-class PrecipitationView: UIView, CLLocationManagerDelegate {
+class PrecipitationView: UIView {
     
     private let titleView = UIView()
     private let titleImageView = UIImageView()
     private let titleLabel = UILabel()
-    
+    private let mapView = MKMapView()
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
     
@@ -95,9 +94,9 @@ extension PrecipitationView {
     }
     
     private func setupMap() {
-        let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.layer.cornerRadius = 10
+        mapView.isScrollEnabled = false
         addSubview(mapView)
         
         NSLayoutConstraint.activate([
@@ -119,7 +118,7 @@ extension PrecipitationView {
 }
 
 // MARK: - CLLocationManagerDelegate
-extension PrecipitationView {
+extension PrecipitationView: CLLocationManagerDelegate {
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -129,21 +128,19 @@ extension PrecipitationView {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         currentLocation = location
-        
-        if let mapView = subviews.compactMap({ $0 as? MKMapView }).first {
-            let region = MKCoordinateRegion(
-                center: location.coordinate,
-                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-            )
-            mapView.setRegion(region, animated: true)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location.coordinate
-            annotation.title = Strings.myLocation
-            mapView.addAnnotation(annotation)
-        }
+
+        let region = MKCoordinateRegion(
+            center: location.coordinate,
+            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        )
+        mapView.setRegion(region, animated: true)
+
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location.coordinate
+        annotation.title = Strings.myLocation
+        mapView.addAnnotation(annotation)
     }
-    
+
     private func updateMapWithCurrentLocation() {
         if let mapView = subviews.compactMap({ $0 as? MKMapView }).first {
             setupMap(mapView)

@@ -10,15 +10,16 @@ import UIKit
 
 class SmallView: UIView {
     
-    private let titleView = UIView()
+    private let mainStackView = UIStackView()
+    private let titleStackView = UIStackView()
     private let titleImageView = UIImageView()
     private let titleLabel = UILabel()
     private let numericalValueLabel = UILabel()
     private let descriptionTextLabel = UILabel()
     
-    init(titleImage: String, title: String, numeric: String, descriptionText: String) {
+    init(titleImageName: String, title: String, numeric: String, descriptionText: String) {
         super.init(frame: .zero)
-        configureUI(titleImage: titleImage, title: title, numeric: numeric, descriptionText: descriptionText)
+        configureUI(titleImageName: titleImageName, title: title, numeric: numeric, descriptionText: descriptionText)
     }
     
     required init?(coder: NSCoder) {
@@ -27,50 +28,52 @@ class SmallView: UIView {
 }
 
 extension SmallView {
-    private func configureUI(titleImage: String, title: String, numeric: String, descriptionText: String) {
+    private func configureUI(titleImageName: String, title: String, numeric: String, descriptionText: String) {
         setupMainView()
-        setupTitleView()
-        setupTitleImageView(titleImage: titleImage)
+        setupMainStackView()
+        setupTitleStackView()
+        setupTitleImageView(titleImageName: titleImageName)
         setupTitleLabel(title: title)
         setupNumericalValueLabel(numeric: numeric)
         setupDescriptionTextLabel(descriptionText: descriptionText)
+        
     }
     
     private func setupMainView() {
-        backgroundColor = .lightBlue
-        layer.cornerRadius = 15
-        translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            topAnchor.constraint(equalTo: topAnchor),
-            leadingAnchor.constraint(equalTo: leadingAnchor),
-            trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomAnchor.constraint(equalTo: bottomAnchor),
-            heightAnchor.constraint(equalToConstant: 160)
-        ])
-    }
+           backgroundColor = .lightBlue
+           layer.cornerRadius = 15
+           translatesAutoresizingMaskIntoConstraints = false
+           NSLayoutConstraint.activate([
+               heightAnchor.constraint(equalToConstant: 160)
+           ])
+       }
     
-    private func setupTitleView() {
-        addSubview(titleView)
-        titleView.translatesAutoresizingMaskIntoConstraints = false
+    private func setupMainStackView() {
+        mainStackView.axis = .vertical
+        mainStackView.spacing = 5
+        addSubview(mainStackView)
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            titleView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            titleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            titleView.heightAnchor.constraint(equalToConstant: 20),
-            titleView.widthAnchor.constraint(equalToConstant: 100)
+            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
         ])
     }
     
-    private func setupTitleImageView(titleImage: String) {
-        titleImageView.image = UIImage(systemName: titleImage)
+    private func setupTitleStackView() {
+        titleStackView.axis = .horizontal
+        titleStackView.spacing = 5
+        mainStackView.addArrangedSubview(titleStackView)
+    }
+
+    
+    private func setupTitleImageView(titleImageName: String) {
+        titleImageView.image = UIImage(systemName: titleImageName)
         titleImageView.tintColor = .gray
-        titleView.addSubview(titleImageView)
+        titleStackView.addArrangedSubview(titleImageView)
         titleImageView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
-            titleImageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
-            titleImageView.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 5),
-            titleImageView.heightAnchor.constraint(equalToConstant: 18),
             titleImageView.widthAnchor.constraint(equalToConstant: 18)
         ])
     }
@@ -79,40 +82,26 @@ extension SmallView {
         titleLabel.text = title.uppercased()
         titleLabel.font = UIFont.systemFont(ofSize: 10)
         titleLabel.textColor = .gray
-        titleView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: titleImageView.centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: titleImageView.trailingAnchor, constant: 2),
-        ])
+        titleStackView.addArrangedSubview(titleLabel)
     }
     
     private func setupNumericalValueLabel(numeric: String) {
         numericalValueLabel.text = numeric
         numericalValueLabel.textColor = .white
         numericalValueLabel.font = UIFont.systemFont(ofSize: 25)
-        addSubview(numericalValueLabel)
-        numericalValueLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            numericalValueLabel.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 3),
-            numericalValueLabel.leadingAnchor.constraint(equalTo: titleImageView.leadingAnchor)
-        ])
+        mainStackView.addArrangedSubview(numericalValueLabel)
     }
     
     private func setupDescriptionTextLabel(descriptionText: String) {
         descriptionTextLabel.text = descriptionText
         descriptionTextLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        descriptionTextLabel.numberOfLines = 0
+        descriptionTextLabel.numberOfLines = 1
         descriptionTextLabel.textColor = .white
-        addSubview(descriptionTextLabel)
+        mainStackView.addArrangedSubview(descriptionTextLabel)
         descriptionTextLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            descriptionTextLabel.topAnchor.constraint(equalTo: numericalValueLabel.bottomAnchor, constant: 3),
-            descriptionTextLabel.leadingAnchor.constraint(equalTo: titleImageView.leadingAnchor),
-            descriptionTextLabel.widthAnchor.constraint(equalTo: titleView.widthAnchor)
+            descriptionTextLabel.widthAnchor.constraint(equalTo: mainStackView.widthAnchor)
         ])
     }
 }

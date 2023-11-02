@@ -30,7 +30,7 @@
 // MARK: - ForecastWeathersViewController
 //averageIndicatorsView
 "averageIndicators" = "середні показники";
-"peakDailyAverageValue" = "вище найвищого середньодобового значення";
+"peakDailyAverageValue" = "вище найвищого";
 
 //indexUfView
 "indexUf" = "індекс уф";
