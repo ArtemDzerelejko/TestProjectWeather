@@ -36,6 +36,28 @@ enum Strings {
     static let chanceOfRain: String = "chanceOfRain".localized
     static let fetchingWeatherData: String = "fetchingWeatherData".localized
     
+    // MARK: - ForecastWeathersViewController
+    //averageIndicatorsView
+    static let averageIndicators: String = "averageIndicators".localized
+    static let plusEight: String = "+8°"
+    static let peakDailyAverageValue: String = "peakDailyAverageValue".localized
+    
+    //indexUfView
+    static let indexUf: String = "indexUf".localized
+    static let one: String = "1"
+    static let low: String = "low".localized
+    
+    static let tenDayForecast: String = "tenDayForecast".localized
+    
+    // MARK: - HourlyForecastView
+    static let hourlyWeatherForecast: String = "hourlyWeatherForecast".localized
+    
+    // MARK: - PrecipitationView
+    static let precipitation: String = "precipitation".localized
+    static let myLocation: String = "myLocation".localized
+    
+    // MARK: - ForecastWeatherCell
+    static let weekday: String = "weekday".localized
     
     // MARK: - image
     static let sunMaxFill: String = "sun.max.fill"
@@ -44,6 +66,9 @@ enum Strings {
     static let cloudFill: String = "cloud.fill"
     static let smokeFill: String = "smoke.fill"
     static let clockArrow: String = "clock.arrow.2.circlepath"
+    static let arrowUpRight: String = "arrow.up.right"
+    static let calendar: String = "calendar"
+    static let umbrellaFill: String = "umbrella.fill"
     
     // MARK: - Error
     static let error: String = "error"

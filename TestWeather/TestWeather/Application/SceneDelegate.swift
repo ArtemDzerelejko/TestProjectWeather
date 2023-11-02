@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: LoadingViewController())
+        window?.rootViewController = UINavigationController(rootViewController: ForecastWeatherViewController())
         window?.makeKeyAndVisible()
     }
 

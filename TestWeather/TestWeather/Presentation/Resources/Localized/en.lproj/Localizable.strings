@@ -27,6 +27,28 @@
 "chanceOfRain" = "Chance of rain";
 "fetchingWeatherData" = "Fetching Weather Data";
 
+// MARK: - ForecastWeathersViewController
+//averageIndicatorsView
+"averageIndicators" = "average indicators";
+"peakDailyAverageValue" = "above the highest";
+
+//indexUfView
+"indexUf" = "index uf";
+"low" = "Low";
+
+"tenDayForecast" = "10-day forecast";
+
+// MARK: - HourlyForecastView
+"hourlyWeatherForecast" = "Hourly forecast";
+
+// MARK: - PrecipitationView
+"precipitation" = "PRECIPITATION";
+"myLocation" = "My location";
+
+// MARK: - ForecastWeatherCell
+"weekday" = "Weekday";
+
+
 // MARK: - Error
 "error" = "Error";
 "ok" = "OK";

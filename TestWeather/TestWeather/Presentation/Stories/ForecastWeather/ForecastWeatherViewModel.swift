@@ -14,6 +14,10 @@ final class ForecastWeatherViewModel {
     var onError: ((Error) -> Void)?
     var weatherData: ModelForForecastWeather?
     
+    let systemImagesForHourlyForecastView = ["cloud.sun", "sun.max", "moon", "cloud.rain", "cloud.bolt"]
+    let labelsTexts = ["Зараз", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]
+    let systemImagesForForecastWeatherCustomCell = ["cloud.sun", "sun.max", "moon", "cloud.rain", "cloud.bolt"]
+    
     func getForecastWeather() {
         weatherUseCase.creatingRequestToTheServerToGetForecastWeather { [weak self] result in
             DispatchQueue.main.async {

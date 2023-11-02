@@ -1,230 +1,190 @@
 //
-//  ForecastWeatherViewController.swift
+//  ScrollView.swift
 //  TestWeather
 //
-//  Created by artem on 16.10.2023.
+//  Created by artem on 30.10.2023.
 //
 
 import Foundation
 import UIKit
 
-final class ForecastWeatherViewController: UIViewController {
+class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    private let forecastWeatherViewModel = ForecastWeatherViewModel()
     private let scrollView = UIScrollView()
-    private let contentView = UIView()
-    private let mainDataLabel = UILabel()
-    private let backButton = CustomBackButton()
-    private let forecastWeatherLabel = CustomLabel(fontSize: 24)
-    private let countryLabel = CustomLabel(fontSize: 20)
-    private let cityLabel = CustomLabel(fontSize: 20)
-    private let loader = CustomLoaderView()
+    private let hourlyForecastView = HourlyForecastView()
+    private let stackView = UIStackView()
     private let tableView = UITableView()
-    private var forecastWeatherData: ModelForForecastWeather?
-    private let refreshControl = UIRefreshControl()
-    
-    private enum Constans {
-        static let cell: String = "Cell"
-        static let customCell: String = "CustomCell"
-    }
+    private let views = UIView()
+    private let precipitationView = PrecipitationView()
+    private let averageIndicatorsView = SmallView(titleImageName: Strings.arrowUpRight,
+                                                  title: Strings.averageIndicators,
+                                                  numeric: Strings.plusEight,
+                                                  descriptionText: Strings.peakDailyAverageValue)
+    private let indexUfView = SmallView(titleImageName: Strings.sunMaxFill,
+                                        title: Strings.indexUf,
+                                        numeric: Strings.one,
+                                        descriptionText: Strings.low)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.setHidesBackButton(true, animated: true)
+        self.view.backgroundColor = .lightGray
         configureUI()
-        loader.startAnimating()
-        onWeatherUpdate(viewModel: forecastWeatherViewModel)
-        errorHandler(viewModel: forecastWeatherViewModel)
-        forecastWeatherViewModel.getForecastWeather()
-    }
-    
-    private func updateUI(with forecastWeatherData: ModelForForecastWeather) {
-        self.forecastWeatherData = forecastWeatherData // Update forecastWeatherData
-        
-        if let country = forecastWeatherData.location?.country {
-            countryLabel.text = Strings.country + ": \(country)"
-        }
-        
-        if let city = forecastWeatherData.location?.name  {
-            cityLabel.text = Strings.city + ": \(city)"
-        }
-        
-        tableView.reloadData()
     }
 }
-
-//MARK: - forecasr weather Update
-
-private extension ForecastWeatherViewController {
-    func onWeatherUpdate(viewModel: ForecastWeatherViewModel) {
-        viewModel.onWeatherUpdate = { [weak self] weatherData in
-            self?.loader.stopAnimating()
-            self?.backButton.isHidden = false
-            self?.forecastWeatherLabel.isHidden = false
-            self?.updateUI(with: weatherData)
-        }
-    }
-}
-
-// MARK: - error handler
-
-private extension ForecastWeatherViewController {
-    func errorHandler(viewModel: ForecastWeatherViewModel) {
-        viewModel.onError = { [weak self] error in
-            self?.showErrorAlert(error)
-        }
-    }
-    
-    func showErrorAlert(_ error: Error) {
-        let alert = UIAlertController(title: Strings.error, message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: Strings.ok, style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-}
-
-
 
 // MARK: - UI
-
-private extension ForecastWeatherViewController {
-    func configureUI() {
-        setupBackground()
-        setupLoader()
-        setupBackButton()
-        setupForecastWeatherLabel()
-        setupCountryLabel()
-        setupCityLabel()
+extension ForecastWeatherViewController {
+    private func configureUI() {
+        setupScrollView()
+        setupStackView()
+        setupHourlyForecastView()
+        setupViews()
         setupTableView()
-        setupRefreshControl()
+        setupPrecipitationView()
+        setupHorizontalIndicatorsStack()
     }
     
-    func setupBackground() {
-        let gradientView = GradientBackgroundView(frame: view.bounds)
-        gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(gradientView)
-    }
-    
-    func setupLoader() {
-        view.addSubview(loader)
-        loader.center = view.center
-    }
-    
-    func setupBackButton() {
-        view.addSubview(backButton)
-        backButton.isHidden = true
-        backButton.tintColor = .white
-        backButton.translatesAutoresizingMaskIntoConstraints = false
+    private func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            backButton.widthAnchor.constraint(equalToConstant: 50),
-            backButton.heightAnchor.constraint(equalToConstant: 50),
-        ])
-        backButton.addTarget(self, action: #selector(moveToMainViewController), for: .touchUpInside)
-    }
-    
-    func setupForecastWeatherLabel() {
-        forecastWeatherLabel.isHidden = true
-        forecastWeatherLabel.text = Strings.forecastWeather
-        view.addSubview(forecastWeatherLabel)
-        forecastWeatherLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            forecastWeatherLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
-            forecastWeatherLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
-    func setupCountryLabel() {
-        view.addSubview(countryLabel)
-        countryLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            countryLabel.topAnchor.constraint(equalTo: forecastWeatherLabel.bottomAnchor, constant: 30),
-            countryLabel.centerXAnchor.constraint(equalTo: forecastWeatherLabel.centerXAnchor)
-        ])
-    }
-    
-    func setupCityLabel() {
-        view.addSubview(cityLabel)
-        cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cityLabel.topAnchor.constraint(equalTo: countryLabel.bottomAnchor, constant: 10),
-            cityLabel.centerXAnchor.constraint(equalTo: forecastWeatherLabel.centerXAnchor)
-        ])
-    }
-    
-    func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constans.cell)
-        tableView.backgroundColor = .clear
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 20),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-    
-    func setupRefreshControl() {
-        tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        refreshControl.bounds = CGRect(x: 0, y: 0, width: refreshControl.bounds.width, height: 60)
-        refreshControl.tintColor = .yellow
+    private func setupStackView() {
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(stackView)
         
-        let attributedText = NSAttributedString(string: Strings.fetchingWeatherData, attributes: [
-            .font: UIFont.systemFont(ofSize: 16),
-            .foregroundColor: UIColor.white
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20),
+            stackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
-        refreshControl.attributedTitle = attributedText
     }
     
+    private func setupHourlyForecastView() {
+        hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(hourlyForecastView)
+        
+        NSLayoutConstraint.activate([
+            hourlyForecastView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -40),
+            hourlyForecastView.heightAnchor.constraint(equalToConstant: 120)
+        ])
+    }
+    
+    private func setupViews() {
+        views.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(views)
+        
+        NSLayoutConstraint.activate([
+            views.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor),
+            views.heightAnchor.constraint(equalToConstant: 450),
+        ])
+    }
+    
+    private func setupPrecipitationView() {
+        precipitationView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(precipitationView)
+        
+        NSLayoutConstraint.activate([
+            precipitationView.widthAnchor.constraint(equalTo:  hourlyForecastView.widthAnchor),
+            precipitationView.heightAnchor.constraint(equalToConstant: 360)
+        ])
+    }
+    
+    private func setupHorizontalIndicatorsStack() {
+        let horizontalIndicatorsStack = UIStackView(arrangedSubviews: [averageIndicatorsView, indexUfView])
+        horizontalIndicatorsStack.axis = .horizontal
+        horizontalIndicatorsStack.spacing = 25
+        horizontalIndicatorsStack.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(horizontalIndicatorsStack)
+        
+        NSLayoutConstraint.activate([
+            horizontalIndicatorsStack.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor),
+            averageIndicatorsView.widthAnchor.constraint(equalTo: indexUfView.widthAnchor)
+        ])
+    }
 }
 
-extension ForecastWeatherViewController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - setting tableView
+extension ForecastWeatherViewController {
+    private func setupTableView() {
+        views.addSubview(tableView)
+        tableView.layer.cornerRadius = 15
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.isScrollEnabled = false
+        tableView.separatorColor = .white
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: views.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: views.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: views.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: views.bottomAnchor)
+            
+        ])
+        tableView.backgroundColor = UIColor.lightBlue
+        tableView.register(ForecastWeatherCustomCell.self, forCellReuseIdentifier: ForecastWeatherCustomCell.forecastCellIdentifier)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return forecastWeatherData?.forecast?.forecastday?.count ?? 0
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = ForecastTableViewCell(style: .default, reuseIdentifier: Constans.customCell)
-        cell.selectionStyle = .none
-        cell.backgroundColor = .clear
-        
-        if let forecast = forecastWeatherData?.forecast?.forecastday?[indexPath.row] {
-            if let date = forecast.date,
-               let maxTemp = forecast.day?.maxtempCelsius,
-               let minTemp = forecast.day?.mintempCelsius,
-               let chanceOfRain = forecast.day?.dailyChanceOfRain
-            {
-                cell.dateLabel.text = date
-                cell.maxTempLabel.text = Strings.maxTemperature + ": \(maxTemp)"
-                cell.minTempLabel.text = Strings.minTemperature + ": \(minTemp)"
-                cell.chanceOfRainLabel.text = Strings.chanceOfRain + ": \(chanceOfRain)"
-            }
-        }
-        
-        return cell
+        let forecastWeatherCell = tableView.dequeueReusableCell(withIdentifier: ForecastWeatherCustomCell.forecastCellIdentifier, for: indexPath) as! ForecastWeatherCustomCell
+        forecastWeatherCell.backgroundColor = .lightBlue
+        return forecastWeatherCell
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-}
-
-
-// MARK: - action
-
-extension ForecastWeatherViewController {
-    @objc func moveToMainViewController() {
-        navigationController?.popViewController(animated: true)
+        return 45
     }
     
-    @objc private func refreshData() {
-        forecastWeatherViewModel.getForecastWeather()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.refreshControl.endRefreshing()
-        }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        let headerImage = UIImageView()
+        let headerLabel = UILabel()
+        
+        headerImage.image = UIImage(systemName: Strings.calendar)
+        headerImage.tintColor = .gray
+        headerView.addSubview(headerImage)
+        headerImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            headerImage.topAnchor.constraint(equalTo: headerView.topAnchor, constant: -10),
+            headerImage.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 15),
+            headerImage.heightAnchor.constraint(equalToConstant: 18),
+            headerImage.widthAnchor.constraint(equalToConstant: 18)
+        ])
+        
+        headerLabel.text = Strings.tenDayForecast
+        headerLabel.font = UIFont.systemFont(ofSize: 15)
+        headerLabel.textColor = .gray
+        headerView.addSubview(headerLabel)
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            headerLabel.topAnchor.constraint(equalTo: headerImage.topAnchor),
+            headerLabel.leadingAnchor.constraint(equalTo: headerImage.trailingAnchor, constant: 5)
+        ])
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }
