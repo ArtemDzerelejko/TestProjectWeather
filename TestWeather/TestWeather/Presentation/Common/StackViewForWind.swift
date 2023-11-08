@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class StackViewForWind: UIView {
     
     private lazy var stackView = UIStackView().with {
