@@ -24,6 +24,18 @@ class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITa
                                         title: Strings.indexUf,
                                         numeric: Strings.one,
                                         descriptionText: Strings.low)
+    private let bigView = BigView(headerImageName: "wind", headerLabel: "вітер", numericalValuesLabelForWind: "10", numericalValuesLabelGustsOfWind: "15")
+    
+    private let sunriseView = SmallView(titleImageName: "sunrise.fill", title: "схід сонця", numeric: "07:09", descriptionText: "Захід сонця: 16:41")
+    private let feelsLike = SmallView(titleImageName: "thermometer.low", title: "відчуття як", numeric: "10°", descriptionText: "Вітер")
+    
+    private let weatherConditionView = SmallView(titleImageName: "drop.fill", title: "опади", numeric: "0 мм", descriptionText: "Потім очікується 5 мм")
+    private let visibilityView = SmallView(titleImageName: "eye.fill", title: "видимість", numeric: "34 км", descriptionText: "Обсолютно ясно")
+    
+    private let fourthQuarterView = BigView(headerImageName: "wind", headerLabel: "вітер", numericalValuesLabelForWind: "10", numericalValuesLabelGustsOfWind: "15")
+    
+    private let humidityView = SmallView(titleImageName: "humidity.fill", title: "вологість", numeric: "76%", descriptionText: "Точка роси зараз 7°.")
+    private let pressureView = SmallView(titleImageName: "tirepressure", title: "тиск", numeric: "", descriptionText: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +54,11 @@ extension ForecastWeatherViewController {
         setupTableView()
         setupPrecipitationView()
         setupHorizontalIndicatorsStack()
+        setupBigView()
+        setupMeteoInfoStackView()
+        setupPrecipitationVisibilityStackView()
+        setupFourthQuarterView()
+        setupHumidityPressureStackView()
     }
     
     private func setupScrollView() {
@@ -95,7 +112,7 @@ extension ForecastWeatherViewController {
         stackView.addArrangedSubview(precipitationView)
         
         NSLayoutConstraint.activate([
-            precipitationView.widthAnchor.constraint(equalTo:  hourlyForecastView.widthAnchor),
+            precipitationView.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor),
             precipitationView.heightAnchor.constraint(equalToConstant: 360)
         ])
     }
@@ -110,6 +127,63 @@ extension ForecastWeatherViewController {
         NSLayoutConstraint.activate([
             horizontalIndicatorsStack.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor),
             averageIndicatorsView.widthAnchor.constraint(equalTo: indexUfView.widthAnchor)
+        ])
+    }
+    
+    private func setupBigView() {
+        stackView.addArrangedSubview(bigView)
+        bigView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            bigView.widthAnchor.constraint(equalTo:  hourlyForecastView.widthAnchor)
+        ])
+    }
+    
+    private func setupMeteoInfoStackView() {
+        let meteoInfoStackView = UIStackView(arrangedSubviews: [sunriseView, feelsLike])
+        meteoInfoStackView.axis = .horizontal
+        meteoInfoStackView.spacing = 25
+        meteoInfoStackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(meteoInfoStackView)
+        
+        NSLayoutConstraint.activate([
+            meteoInfoStackView.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor),
+            sunriseView.widthAnchor.constraint(equalTo: feelsLike.widthAnchor)
+        ])
+    }
+    
+    private func setupPrecipitationVisibilityStackView() {
+        let precipitationVisibilityStackView = UIStackView(arrangedSubviews: [weatherConditionView, visibilityView])
+        precipitationVisibilityStackView.axis = .horizontal
+        precipitationVisibilityStackView.spacing = 25
+        precipitationVisibilityStackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(precipitationVisibilityStackView)
+        
+        NSLayoutConstraint.activate([
+            precipitationVisibilityStackView.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor),
+            weatherConditionView.widthAnchor.constraint(equalTo: visibilityView.widthAnchor)
+        ])
+    }
+    
+    private func setupFourthQuarterView() {
+        stackView.addArrangedSubview(fourthQuarterView)
+        fourthQuarterView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            fourthQuarterView.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor)
+        ])
+    }
+    
+    private func setupHumidityPressureStackView() {
+        let humidityPressureStackView = UIStackView(arrangedSubviews: [humidityView, pressureView])
+        humidityPressureStackView.axis = .horizontal
+        humidityPressureStackView.spacing = 25
+        humidityPressureStackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(humidityPressureStackView)
+        
+        NSLayoutConstraint.activate([
+            humidityPressureStackView.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor),
+            humidityView.widthAnchor.constraint(equalTo: pressureView.widthAnchor)
         ])
     }
 }

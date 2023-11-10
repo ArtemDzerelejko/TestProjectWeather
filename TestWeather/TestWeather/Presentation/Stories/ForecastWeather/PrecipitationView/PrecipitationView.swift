@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import MapKit
 import CoreLocation
-import GoogleMapsTileOverlay
 
 class PrecipitationView: UIView {
     
