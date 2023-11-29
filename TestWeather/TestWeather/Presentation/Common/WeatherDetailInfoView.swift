@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SmallView: UIView {
+class WeatherDetailInfoView: UIView {
     
     private let mainStackView = UIStackView()
     private let titleStackView = UIStackView()
@@ -27,7 +27,7 @@ class SmallView: UIView {
     }
 }
 
-extension SmallView {
+extension WeatherDetailInfoView {
     private func configureUI(titleImageName: String, title: String, numeric: String, descriptionText: String) {
         setupMainView()
         setupMainStackView()

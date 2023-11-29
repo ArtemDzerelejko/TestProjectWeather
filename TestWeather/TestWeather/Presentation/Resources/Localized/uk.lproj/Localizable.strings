@@ -27,6 +27,17 @@
 "chanceOfRain" = "Можливий дощ";
 "fetchingWeatherData" = "Отримання даних про погоду";
 
+"wind" = "вітер";
+"sunrise" = "схід сонця";
+"sunset" = "Захід сонця";
+"feelingLike" = "відчуття як";
+"thenItIsExpected" = "Потім очікується";
+"visibility" = "видимість";
+"absolutelyClear" = "Обсолютно ясно";
+"humidity" = "вологість";
+"dewPointNow" = "Точка роси зараз";
+"pressure" = "тиск";
+
 // MARK: - ForecastWeathersViewController
 //averageIndicatorsView
 "averageIndicators" = "середні показники";

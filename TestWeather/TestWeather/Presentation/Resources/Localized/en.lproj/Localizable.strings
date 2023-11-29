@@ -27,6 +27,17 @@
 "chanceOfRain" = "Chance of rain";
 "fetchingWeatherData" = "Fetching Weather Data";
 
+"wind" = "wind";
+"sunrise" = "sunrise";
+"sunset" = "Sunset";
+"feelingLike" = "feeling like";
+"thenItIsExpected" = "Then it is expected";
+"visibility" = "visibility";
+"absolutelyClear" = "absolutely clear";
+"humidity" = "humidity";
+"dewPointNow" = "Dew point now";
+"pressure" = "pressure";
+
 // MARK: - ForecastWeathersViewController
 //averageIndicatorsView
 "averageIndicators" = "average indicators";

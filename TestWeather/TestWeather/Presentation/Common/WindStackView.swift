@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
-class StackViewForWind: UIView {
+class WindStackView: UIView {
     
     private lazy var stackView = UIStackView().with {
         $0.axis = .vertical
         $0.spacing = 1
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var unitsOfMeasurement = UILabel().with {
@@ -33,7 +34,7 @@ class StackViewForWind: UIView {
     }
 }
 
-extension StackViewForWind {
+extension WindStackView {
     private func configureUI(unitsOfMeasurementText: String, windInfoText: String) {
         setupStackView()
         setupUnitsOfMeasurement(unitsOfMeasurementText: unitsOfMeasurementText)
@@ -42,7 +43,6 @@ extension StackViewForWind {
     
     private func setupStackView() {
         addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),

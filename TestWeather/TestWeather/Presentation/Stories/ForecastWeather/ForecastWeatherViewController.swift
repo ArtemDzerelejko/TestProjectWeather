@@ -16,26 +16,55 @@ class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITa
     private let tableView = UITableView()
     private let views = UIView()
     private let precipitationView = PrecipitationView()
-    private let averageIndicatorsView = SmallView(titleImageName: Strings.arrowUpRight,
+    private let averageIndicatorsView = WeatherDetailInfoView(titleImageName: Strings.arrowUpRight,
                                                   title: Strings.averageIndicators,
                                                   numeric: Strings.plusEight,
                                                   descriptionText: Strings.peakDailyAverageValue)
-    private let indexUfView = SmallView(titleImageName: Strings.sunMaxFill,
+    
+    private let indexUfView = WeatherDetailInfoView(titleImageName: Strings.sunMaxFill,
                                         title: Strings.indexUf,
                                         numeric: Strings.one,
                                         descriptionText: Strings.low)
-    private let bigView = BigView(headerImageName: "wind", headerLabel: "вітер", numericalValuesLabelForWind: "10", numericalValuesLabelGustsOfWind: "15")
     
-    private let sunriseView = SmallView(titleImageName: "sunrise.fill", title: "схід сонця", numeric: "07:09", descriptionText: "Захід сонця: 16:41")
-    private let feelsLike = SmallView(titleImageName: "thermometer.low", title: "відчуття як", numeric: "10°", descriptionText: "Вітер")
+    private let bigView = WeatherInfoView(headerImageName: Strings.windImage,
+                                  headerText: Strings.wind,
+                                  numericalValuesLabelForWind: "10",
+                                  numericalValuesLabelGustsOfWind: "15")
     
-    private let weatherConditionView = SmallView(titleImageName: "drop.fill", title: "опади", numeric: "0 мм", descriptionText: "Потім очікується 5 мм")
-    private let visibilityView = SmallView(titleImageName: "eye.fill", title: "видимість", numeric: "34 км", descriptionText: "Обсолютно ясно")
+    private let sunriseView = WeatherDetailInfoView(titleImageName: Strings.sunriseFill,
+                                        title: Strings.sunrise,
+                                        numeric: "07:09",
+                                        descriptionText: Strings.sunset + ": 16:41")
     
-    private let fourthQuarterView = BigView(headerImageName: "wind", headerLabel: "вітер", numericalValuesLabelForWind: "10", numericalValuesLabelGustsOfWind: "15")
+    private let feelsLike = WeatherDetailInfoView(titleImageName: Strings.thermometerLow,
+                                      title: Strings.feelingLike,
+                                      numeric: "10°",
+                                      descriptionText: Strings.wind)
     
-    private let humidityView = SmallView(titleImageName: "humidity.fill", title: "вологість", numeric: "76%", descriptionText: "Точка роси зараз 7°.")
-    private let pressureView = SmallView(titleImageName: "tirepressure", title: "тиск", numeric: "", descriptionText: "")
+    private let weatherConditionView = WeatherDetailInfoView(titleImageName: Strings.dropFill,
+                                                 title: Strings.precipitation,
+                                                 numeric: "0 мм",
+                                                 descriptionText: Strings.thenItIsExpected + " 5 мм")
+    
+    private let visibilityView = WeatherDetailInfoView(titleImageName: Strings.eyeFill,
+                                           title: Strings.visibility,
+                                           numeric: "34 км",
+                                           descriptionText: Strings.absolutelyClear)
+    
+    private let fourthQuarterView = WeatherInfoView(headerImageName: Strings.windImage,
+                                            headerText: Strings.wind,
+                                            numericalValuesLabelForWind: "10",
+                                            numericalValuesLabelGustsOfWind: "15")
+    
+    private let humidityView = WeatherDetailInfoView(titleImageName: Strings.humidityFill,
+                                         title: Strings.humidity,
+                                         numeric: "76%",
+                                         descriptionText: Strings.dewPointNow + " 7°.")
+    
+    private let pressureView = WeatherDetailInfoView(titleImageName: Strings.tirepressure,
+                                         title: Strings.pressure,
+                                         numeric: "",
+                                         descriptionText: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -219,7 +248,7 @@ extension ForecastWeatherViewController {
         forecastWeatherCell.backgroundColor = .lightBlue
         return forecastWeatherCell
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
     }
