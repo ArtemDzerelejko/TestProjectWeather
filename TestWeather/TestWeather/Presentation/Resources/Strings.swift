@@ -36,6 +36,17 @@ enum Strings {
     static let chanceOfRain: String = "chanceOfRain".localized
     static let fetchingWeatherData: String = "fetchingWeatherData".localized
     
+    static let wind: String = "wind".localized
+    static let sunrise: String = "sunrise".localized
+    static let sunset: String = "sunset".localized
+    static let feelingLike: String = "feelingLike".localized
+    static let thenItIsExpected: String = "thenItIsExpected".localized
+    static let visibility: String = "visibility".localized
+    static let absolutelyClear: String = "absolutelyClear".localized
+    static let humidity: String = "humidity".localized
+    static let dewPointNow: String = "dewPointNow".localized
+    static let pressure: String = "pressure".localized
+    
     // MARK: - ForecastWeathersViewController
     //averageIndicatorsView
     static let averageIndicators: String = "averageIndicators".localized
@@ -69,6 +80,13 @@ enum Strings {
     static let arrowUpRight: String = "arrow.up.right"
     static let calendar: String = "calendar"
     static let umbrellaFill: String = "umbrella.fill"
+    static let windImage: String = "wind"
+    static let sunriseFill: String = "sunrise.fill"
+    static let thermometerLow: String = "thermometer.low"
+    static let dropFill: String = "drop.fill"
+    static let eyeFill: String = "eye.fill"
+    static let humidityFill: String = "humidity.fill"
+    static let tirepressure: String = "tirepressure"
     
     // MARK: - Error
     static let error: String = "error"

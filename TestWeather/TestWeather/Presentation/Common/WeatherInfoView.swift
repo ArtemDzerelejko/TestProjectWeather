@@ -8,27 +8,32 @@
 import Foundation
 import UIKit
 
-class BigView: UIView {
+class WeatherInfoView: UIView {
     
     private lazy var mainStackView = UIStackView().with {
         $0.backgroundColor = .red
         $0.axis = .vertical
         $0.spacing = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var headerStackView = UIStackView().with {
         $0.backgroundColor = .green
         $0.axis = .horizontal
         $0.spacing = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private lazy var headerTitleImageView = UIImageView().with {
         $0.tintColor = .gray
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var headerTitleLabel = UILabel().with {
         $0.font = UIFont.systemFont(ofSize: 10)
         $0.textColor = .gray
+        $0.translatesAutoresizingMaskIntoConstraints = false
+
     }
     
     private lazy var numericalValuesLabelForWind = UILabel().with {
@@ -38,6 +43,7 @@ class BigView: UIView {
     
     private lazy var dividingLine = UIView().with {
         $0.backgroundColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var numericalValuesLabelGustsOfWind = UILabel().with {
@@ -45,11 +51,11 @@ class BigView: UIView {
         $0.font = UIFont.systemFont(ofSize: 30)
     }
     
-    private let stackViewForWeather = StackViewForWind(unitsOfMeasurementText: "м/c", windInfoText: "Вітер")
+    private let stackViewForWeather = WindStackView(unitsOfMeasurementText: "м/c", windInfoText: Strings.wind)
     
-    init(headerImageName: String, headerLabel: String, numericalValuesLabelForWind: String, numericalValuesLabelGustsOfWind: String) {
+    init(headerImageName: String, headerText: String, numericalValuesLabelForWind: String, numericalValuesLabelGustsOfWind: String) {
         super.init(frame: .zero)
-        configureUI(headerImageName: headerImageName, headerLabel: headerLabel, numericalValuesLabelForWind: numericalValuesLabelForWind, numericalValuesLabelGustsOfWind: numericalValuesLabelGustsOfWind)
+        configureUI(headerImageName: headerImageName, headerText: headerText, numericalValuesLabelForWind: numericalValuesLabelForWind, numericalValuesLabelGustsOfWind: numericalValuesLabelGustsOfWind)
     }
     
     required init?(coder: NSCoder) {
@@ -57,13 +63,13 @@ class BigView: UIView {
     }
 }
 
-extension BigView {
-    private func configureUI(headerImageName: String, headerLabel: String, numericalValuesLabelForWind: String, numericalValuesLabelGustsOfWind: String) {
+extension WeatherInfoView {
+    private func configureUI(headerImageName: String, headerText: String, numericalValuesLabelForWind: String, numericalValuesLabelGustsOfWind: String) {
         setupMainView()
         setupMainStackView()
         setupHeaderStackView()
         setupHeaderImageView(headerImageName: headerImageName)
-        setupHeaderLabel(headerLabel: headerLabel)
+        setupHeaderLabel(headerLabel: headerText)
         setupNumericalValuesLabelForWind(numericalValuesForWind: numericalValuesLabelForWind)
         setupDividingLine()
         setupNumericalValuesLabelGustsOfWind(numericalValuesGustsOfWind: numericalValuesLabelGustsOfWind)
@@ -80,7 +86,6 @@ extension BigView {
     
     private func setupMainStackView() {
         addSubview(mainStackView)
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
@@ -95,7 +100,6 @@ extension BigView {
     private func setupHeaderImageView(headerImageName: String) {
         headerTitleImageView.image = UIImage(systemName: headerImageName)
         headerStackView.addArrangedSubview(headerTitleImageView)
-        headerTitleImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             headerTitleImageView.widthAnchor.constraint(equalToConstant: 18)
         ])
@@ -113,7 +117,6 @@ extension BigView {
     
     private func setupDividingLine() {
         mainStackView.addArrangedSubview(dividingLine)
-        dividingLine.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dividingLine.heightAnchor.constraint(equalToConstant: 1)
         ])
