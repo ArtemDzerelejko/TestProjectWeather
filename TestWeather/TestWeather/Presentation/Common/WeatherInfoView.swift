@@ -10,52 +10,54 @@ import UIKit
 
 class WeatherInfoView: UIView {
     
+    private enum WindType: String {
+        case wind = "Вітер"
+        case gusts = "Пориви"
+    }
+    
     private lazy var mainStackView = UIStackView().with {
-        $0.backgroundColor = .red
         $0.axis = .vertical
+        $0.alignment = .leading
         $0.spacing = 5
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var headerStackView = UIStackView().with {
-        $0.backgroundColor = .green
+    private lazy var titleStackView = UIStackView().with {
+        $0.alignment = .leading
         $0.axis = .horizontal
-        $0.spacing = 5
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    private lazy var headerTitleImageView = UIImageView().with {
-        $0.tintColor = .gray
+        $0.spacing = 2
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var headerTitleLabel = UILabel().with {
-        $0.font = UIFont.systemFont(ofSize: 10)
-        $0.textColor = .gray
+    private lazy var imageForTitle = UIImageView().with {
+        $0.image = UIImage(systemName: "wind")
+        $0.contentMode = .scaleAspectFit
+        $0.tintColor = .white
         $0.translatesAutoresizingMaskIntoConstraints = false
-
     }
     
-    private lazy var numericalValuesLabelForWind = UILabel().with {
+    private lazy var labelForTitle = UILabel().with {
+        $0.text = Strings.wind
         $0.textColor = .white
-        $0.font = UIFont.systemFont(ofSize: 30)
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var dividingLine = UIView().with {
+    private let windView = WindView(numberWind: "7",
+                                    windType: WindType.wind.rawValue)
+    
+    private lazy var divider = UIView().with {
         $0.backgroundColor = .white
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var numericalValuesLabelGustsOfWind = UILabel().with {
-        $0.textColor = .white
-        $0.font = UIFont.systemFont(ofSize: 30)
-    }
+    private let gustsOfWind = WindView(numberWind: "10",
+                                       windType: WindType.gusts.rawValue)
     
-    private let stackViewForWeather = WindStackView(unitsOfMeasurementText: "м/c", windInfoText: Strings.wind)
+    private let compassArrowView = WindIndicatorView(frame: .zero)
     
-    init(headerImageName: String, headerText: String, numericalValuesLabelForWind: String, numericalValuesLabelGustsOfWind: String) {
-        super.init(frame: .zero)
-        configureUI(headerImageName: headerImageName, headerText: headerText, numericalValuesLabelForWind: numericalValuesLabelForWind, numericalValuesLabelGustsOfWind: numericalValuesLabelGustsOfWind)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -63,22 +65,19 @@ class WeatherInfoView: UIView {
     }
 }
 
+// MARK: - UI
+
 extension WeatherInfoView {
-    private func configureUI(headerImageName: String, headerText: String, numericalValuesLabelForWind: String, numericalValuesLabelGustsOfWind: String) {
+    private func configureUI() {
         setupMainView()
+        setupCompassArrowView()
         setupMainStackView()
-        setupHeaderStackView()
-        setupHeaderImageView(headerImageName: headerImageName)
-        setupHeaderLabel(headerLabel: headerText)
-        setupNumericalValuesLabelForWind(numericalValuesForWind: numericalValuesLabelForWind)
-        setupDividingLine()
-        setupNumericalValuesLabelGustsOfWind(numericalValuesGustsOfWind: numericalValuesLabelGustsOfWind)
     }
     
     private func setupMainView() {
-        backgroundColor = .lightBlue
+        backgroundColor = .gray
         layer.cornerRadius = 15
-        translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: 160)
         ])
@@ -86,44 +85,72 @@ extension WeatherInfoView {
     
     private func setupMainStackView() {
         addSubview(mainStackView)
+        
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -100)
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -150)
         ])
+        setupTitleStackView()
+        setupWindView()
+        setupDivider()
+        setupGustsOfWind()
     }
     
-    private func setupHeaderStackView() {
-        mainStackView.addArrangedSubview(headerStackView)
-    }
-    
-    private func setupHeaderImageView(headerImageName: String) {
-        headerTitleImageView.image = UIImage(systemName: headerImageName)
-        headerStackView.addArrangedSubview(headerTitleImageView)
+    private func setupCompassArrowView() {
+        addSubview(compassArrowView)
+        compassArrowView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            headerTitleImageView.widthAnchor.constraint(equalToConstant: 18)
+            compassArrowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            compassArrowView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            compassArrowView.widthAnchor.constraint(equalToConstant: 100),
+            compassArrowView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
-    
-    private func setupHeaderLabel(headerLabel: String) {
-        headerTitleLabel.text = headerLabel.uppercased()
-        headerStackView.addArrangedSubview(headerTitleLabel)
+}
+
+// MARK: - setupTitleStackViewА що
+extension WeatherInfoView {
+    private func setupTitleStackView() {
+        mainStackView.addArrangedSubview(titleStackView)
+        titleStackView.addArrangedSubview(imageForTitle)
+        titleStackView.addArrangedSubview(labelForTitle)
     }
-    
-    private func setupNumericalValuesLabelForWind(numericalValuesForWind: String) {
-        numericalValuesLabelForWind.text = numericalValuesForWind
-        mainStackView.addArrangedSubview(numericalValuesLabelForWind)
-    }
-    
-    private func setupDividingLine() {
-        mainStackView.addArrangedSubview(dividingLine)
+}
+
+// MARK: - setupWindView
+extension WeatherInfoView {
+    private func setupWindView() {
+        mainStackView.addArrangedSubview(windView)
+        
         NSLayoutConstraint.activate([
-            dividingLine.heightAnchor.constraint(equalToConstant: 1)
+            windView.heightAnchor.constraint(equalToConstant: 50),
+            windView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -30),
         ])
     }
-    
-    private func setupNumericalValuesLabelGustsOfWind(numericalValuesGustsOfWind: String) {
-        numericalValuesLabelGustsOfWind.text = numericalValuesGustsOfWind
-        mainStackView.addArrangedSubview(numericalValuesLabelGustsOfWind)
+}
+
+// MARK: - setup divider
+extension WeatherInfoView {
+    private func setupDivider() {
+        mainStackView.addArrangedSubview(divider)
+        
+        NSLayoutConstraint.activate([
+            divider.widthAnchor.constraint(equalTo: mainStackView.widthAnchor),
+            divider.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+}
+
+// MARK: - setupGustsOfWind
+extension WeatherInfoView  {
+    private func setupGustsOfWind() {
+        mainStackView.addArrangedSubview(gustsOfWind)
+        
+        NSLayoutConstraint.activate([
+            gustsOfWind.heightAnchor.constraint(equalToConstant: 50),
+            gustsOfWind.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -30),
+        ])
     }
 }

@@ -26,10 +26,11 @@ class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITa
                                         numeric: Strings.one,
                                         descriptionText: Strings.low)
     
-    private let bigView = WeatherInfoView(headerImageName: Strings.windImage,
-                                  headerText: Strings.wind,
-                                  numericalValuesLabelForWind: "10",
-                                  numericalValuesLabelGustsOfWind: "15")
+//    private let bigView = WeatherInfoView(headerImageName: Strings.windImage,
+//                                  headerText: Strings.wind,
+//                                  numericalValuesLabelForWind: "10",
+//                                  numericalValuesLabelGustsOfWind: "15")
+    private let weatherInfoView = WeatherInfoView()
     
     private let sunriseView = WeatherDetailInfoView(titleImageName: Strings.sunriseFill,
                                         title: Strings.sunrise,
@@ -51,10 +52,12 @@ class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITa
                                            numeric: "34 км",
                                            descriptionText: Strings.absolutelyClear)
     
-    private let fourthQuarterView = WeatherInfoView(headerImageName: Strings.windImage,
-                                            headerText: Strings.wind,
-                                            numericalValuesLabelForWind: "10",
-                                            numericalValuesLabelGustsOfWind: "15")
+//    private let fourthQuarterView = WeatherInfoView(headerImageName: Strings.windImage,
+//                                            headerText: Strings.wind,
+//                                            numericalValuesLabelForWind: "10",
+//                                            numericalValuesLabelGustsOfWind: "15")
+    
+    private let quarterView = QuarterView()
     
     private let humidityView = WeatherDetailInfoView(titleImageName: Strings.humidityFill,
                                          title: Strings.humidity,
@@ -160,11 +163,11 @@ extension ForecastWeatherViewController {
     }
     
     private func setupBigView() {
-        stackView.addArrangedSubview(bigView)
-        bigView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(weatherInfoView)
+        weatherInfoView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            bigView.widthAnchor.constraint(equalTo:  hourlyForecastView.widthAnchor)
+            weatherInfoView.widthAnchor.constraint(equalTo:  hourlyForecastView.widthAnchor)
         ])
     }
     
@@ -195,11 +198,11 @@ extension ForecastWeatherViewController {
     }
     
     private func setupFourthQuarterView() {
-        stackView.addArrangedSubview(fourthQuarterView)
-        fourthQuarterView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(quarterView)
+        quarterView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            fourthQuarterView.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor)
+            quarterView.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor)
         ])
     }
     

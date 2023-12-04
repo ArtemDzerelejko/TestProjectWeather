@@ -16,6 +16,9 @@
 		AC38F37A2AD822690009E3CF /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F3792AD822690009E3CF /* LoadingViewController.swift */; };
 		AC38F37C2AD827160009E3CF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F37B2AD827160009E3CF /* MainViewController.swift */; };
 		AC38F37E2AD828270009E3CF /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC38F37D2AD828270009E3CF /* GradientBackgroundView.swift */; };
+		AC4B92BE2B18CFD200A98F86 /* WindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B92BD2B18CFD200A98F86 /* WindView.swift */; };
+		AC4B92C02B1A18B600A98F86 /* QuarterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B92BF2B1A18B600A98F86 /* QuarterView.swift */; };
+		AC4B92C22B1A269000A98F86 /* ParametersOfTheQuarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4B92C12B1A269000A98F86 /* ParametersOfTheQuarter.swift */; };
 		AC4F80332AE061C8005E0C78 /* RefrechButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F80322AE061C8005E0C78 /* RefrechButton.swift */; };
 		AC4F80372AE088BD005E0C78 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F80362AE088BD005E0C78 /* CustomImageView.swift */; };
 		AC5E2A6D2AF28FFE00A81C0A /* GoogleMapsTileOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = AC5E2A6C2AF28FFE00A81C0A /* GoogleMapsTileOverlay */; };
@@ -40,6 +43,10 @@
 		AC8B89202ADF2A77008E69F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AC8B89222ADF2A77008E69F7 /* Localizable.strings */; };
 		AC8B89272ADF2AC3008E69F7 /* Localizable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B89262ADF2AC3008E69F7 /* Localizable+Extensions.swift */; };
 		AC8B89BF2AE022FB008E69F7 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B89BE2AE022FB008E69F7 /* CustomLabel.swift */; };
+		AC8DF0C02B1DF1A500C31C86 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DF0BF2B1DF1A500C31C86 /* DividerView.swift */; };
+		AC8DF0C22B1E01F400C31C86 /* WindIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DF0C12B1E01F400C31C86 /* WindIndicatorView.swift */; };
+		AC8DF0C42B1E0C8200C31C86 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DF0C32B1E0C8200C31C86 /* CGFloat+Extensions.swift */; };
+		AC8DF0C62B1E1CF200C31C86 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DF0C52B1E1CF200C31C86 /* CompassView.swift */; };
 		ACAF69332AEA8672005C3C23 /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF69322AEA8672005C3C23 /* HourlyForecastView.swift */; };
 		ACAF69352AEBF43C005C3C23 /* ForecastWeatherCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF69342AEBF43C005C3C23 /* ForecastWeatherCustomCell.swift */; };
 		ACAF69372AEF9BFB005C3C23 /* ForecastWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAF69362AEF9BFB005C3C23 /* ForecastWeatherViewController.swift */; };
@@ -73,6 +80,9 @@
 		AC38F3792AD822690009E3CF /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		AC38F37B2AD827160009E3CF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		AC38F37D2AD828270009E3CF /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
+		AC4B92BD2B18CFD200A98F86 /* WindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindView.swift; sourceTree = "<group>"; };
+		AC4B92BF2B1A18B600A98F86 /* QuarterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarterView.swift; sourceTree = "<group>"; };
+		AC4B92C12B1A269000A98F86 /* ParametersOfTheQuarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersOfTheQuarter.swift; sourceTree = "<group>"; };
 		AC4F80322AE061C8005E0C78 /* RefrechButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefrechButton.swift; sourceTree = "<group>"; };
 		AC4F80362AE088BD005E0C78 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		AC5E2A6E2AF2932800A81C0A /* overlay.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = overlay.json; sourceTree = "<group>"; };
@@ -97,6 +107,10 @@
 		AC8B89232ADF2A79008E69F7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AC8B89262ADF2AC3008E69F7 /* Localizable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Localizable+Extensions.swift"; sourceTree = "<group>"; };
 		AC8B89BE2AE022FB008E69F7 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		AC8DF0BF2B1DF1A500C31C86 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		AC8DF0C12B1E01F400C31C86 /* WindIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindIndicatorView.swift; sourceTree = "<group>"; };
+		AC8DF0C32B1E0C8200C31C86 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
+		AC8DF0C52B1E1CF200C31C86 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
 		ACAF69322AEA8672005C3C23 /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
 		ACAF69342AEBF43C005C3C23 /* ForecastWeatherCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherCustomCell.swift; sourceTree = "<group>"; };
 		ACAF69362AEF9BFB005C3C23 /* ForecastWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +266,12 @@
 				ACAF69412AF12E92005C3C23 /* WeatherDetailInfoView.swift */,
 				AC5E2A922AF3ED4B00A81C0A /* WeatherInfoView.swift */,
 				AC15BD7B2AF931FD00B7408E /* WindStackView.swift */,
+				AC4B92BD2B18CFD200A98F86 /* WindView.swift */,
+				AC4B92BF2B1A18B600A98F86 /* QuarterView.swift */,
+				AC4B92C12B1A269000A98F86 /* ParametersOfTheQuarter.swift */,
+				AC8DF0BF2B1DF1A500C31C86 /* DividerView.swift */,
+				AC8DF0C12B1E01F400C31C86 /* WindIndicatorView.swift */,
+				AC8DF0C52B1E1CF200C31C86 /* CompassView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -320,6 +340,7 @@
 			children = (
 				AC8B89262ADF2AC3008E69F7 /* Localizable+Extensions.swift */,
 				ACDE85C72AFBD8B100D0DBDC /* UIView+Extensions.swift */,
+				AC8DF0C32B1E0C8200C31C86 /* CGFloat+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -441,10 +462,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC4B92BE2B18CFD200A98F86 /* WindView.swift in Sources */,
+				AC8DF0C42B1E0C8200C31C86 /* CGFloat+Extensions.swift in Sources */,
 				AC8B88DC2ADC6FD2008E69F7 /* ModelForCurrentWeather.swift in Sources */,
 				AC8B88E02ADC71FD008E69F7 /* WeatherRepository.swift in Sources */,
+				AC8DF0C22B1E01F400C31C86 /* WindIndicatorView.swift in Sources */,
 				AC8B88FD2ADF1585008E69F7 /* CustomButton.swift in Sources */,
 				ACAF693B2AEFF218005C3C23 /* HourlyForecastViewCell.swift in Sources */,
+				AC4B92C02B1A18B600A98F86 /* QuarterView.swift in Sources */,
 				AC8B88DA2ADC6F47008E69F7 /* ModelForCurrentWeatherRemote.swift in Sources */,
 				ACAF69352AEBF43C005C3C23 /* ForecastWeatherCustomCell.swift in Sources */,
 				ACDE85C82AFBD8B100D0DBDC /* UIView+Extensions.swift in Sources */,
@@ -452,6 +477,7 @@
 				AC8B89BF2AE022FB008E69F7 /* CustomLabel.swift in Sources */,
 				AC38F3582AD81C7D0009E3CF /* SceneDelegate.swift in Sources */,
 				AC8B88E62ADC7CB0008E69F7 /* CurrentWeatherViewModel.swift in Sources */,
+				AC4B92C22B1A269000A98F86 /* ParametersOfTheQuarter.swift in Sources */,
 				AC8B88F12ADD834A008E69F7 /* ModelForForecastWeather.swift in Sources */,
 				AC8B88F32ADDA29C008E69F7 /* ForecastWeatherViewModel.swift in Sources */,
 				AC38F37A2AD822690009E3CF /* LoadingViewController.swift in Sources */,
@@ -467,11 +493,13 @@
 				AC38F37C2AD827160009E3CF /* MainViewController.swift in Sources */,
 				AC8B88FB2ADEB353008E69F7 /* CustomLoaderView.swift in Sources */,
 				ACAF69372AEF9BFB005C3C23 /* ForecastWeatherViewController.swift in Sources */,
+				AC8DF0C02B1DF1A500C31C86 /* DividerView.swift in Sources */,
 				AC8B88DE2ADC70C4008E69F7 /* WeatherAPIService.swift in Sources */,
 				AC38F37E2AD828270009E3CF /* GradientBackgroundView.swift in Sources */,
 				AC8B89272ADF2AC3008E69F7 /* Localizable+Extensions.swift in Sources */,
 				AC8B88FF2ADF19E5008E69F7 /* CustomBarButtonItem.swift in Sources */,
 				ACAF69402AF00938005C3C23 /* PrecipitationView.swift in Sources */,
+				AC8DF0C62B1E1CF200C31C86 /* CompassView.swift in Sources */,
 				ACAF69422AF12E92005C3C23 /* WeatherDetailInfoView.swift in Sources */,
 				AC4F80372AE088BD005E0C78 /* CustomImageView.swift in Sources */,
 			);
@@ -629,7 +657,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YQK4TQG3P5;
+				DEVELOPMENT_TEAM = 7A3H3B82LM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestWeather/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WetherApp;
@@ -662,7 +690,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YQK4TQG3P5;
+				DEVELOPMENT_TEAM = 7A3H3B82LM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestWeather/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WetherApp;
