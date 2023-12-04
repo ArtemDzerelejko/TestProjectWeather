@@ -41,17 +41,28 @@ extension PrecipitationView {
     }
     
     private func setupViewForMap() {
-        backgroundColor = .lightBlue
-        layer.cornerRadius = 15
-        translatesAutoresizingMaskIntoConstraints = false
-        
+        // Створення ефекту розмиття
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(blurView)
+
+        // Задання фонового кольору (у вашому випадку світло-синій)
+        backgroundColor = .clear
+
+        // Задання прозорості та округлення кутів
+        blurView.alpha = 0.8
+        blurView.clipsToBounds = true
+        blurView.layer.cornerRadius = 15
+
         NSLayoutConstraint.activate([
-            topAnchor.constraint(equalTo: topAnchor),
-            leadingAnchor.constraint(equalTo: leadingAnchor),
-            trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomAnchor.constraint(equalTo: bottomAnchor),
+            blurView.topAnchor.constraint(equalTo: topAnchor),
+            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            blurView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
+
     
     private func setupTitleView() {
         addSubview(titleView)

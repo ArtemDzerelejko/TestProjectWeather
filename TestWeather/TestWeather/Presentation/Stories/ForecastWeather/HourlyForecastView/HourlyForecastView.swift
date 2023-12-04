@@ -39,8 +39,22 @@ class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewData
     }
 
     private func setupHourlyForecastWeatherView() {
-        backgroundColor = .lightBlue
-        layer.cornerRadius = 15
+        
+        
+        let blurEffect = UIBlurEffect(style: .light)
+               let blurView = UIVisualEffectView(effect: blurEffect)
+               blurView.frame = bounds
+               addSubview(blurView)
+
+               // Задання фонового кольору (у вашому випадку червоний)
+               backgroundColor = .clear
+
+               // Задання прозорості
+        blurView.clipsToBounds = true
+               blurView.alpha = 0.8
+        
+//        backgroundColor = .red
+        blurView.layer.cornerRadius = 15
         translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

@@ -7,6 +7,9 @@
 
 import Foundation
 import UIKit
+import AVFoundation
+import AVKit
+
 
 class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -69,6 +72,13 @@ class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITa
                                          numeric: "",
                                          descriptionText: "")
     
+    private let compassView = WeatherDetailInfoView(titleImageName: "",
+                                         title: "Compass",
+                                         numeric: "",
+                                         descriptionText: "")
+    
+    private let compassArrowView = CompassArrowView(frame: .zero)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .lightGray
@@ -79,6 +89,36 @@ class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITa
 // MARK: - UI
 extension ForecastWeatherViewController {
     private func configureUI() {
+        if let videoPath = Bundle.main.path(forResource: "space", ofType: "mp4") {
+
+                
+                let player = AVPlayer(url: URL(fileURLWithPath: videoPath))
+
+                
+                let playerLayer = AVPlayerLayer(player: player)
+
+                
+                playerLayer.frame = view.bounds
+
+                
+                playerLayer.videoGravity = .resizeAspectFill
+
+                
+                view.layer.addSublayer(playerLayer)
+
+              
+                player.play()
+
+              
+                NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
+                                                       object: player.currentItem,
+                                                       queue: nil) { [weak player] _ in
+                    player?.seek(to: CMTime.zero)
+                    player?.play() 
+                }
+            }
+           
+    
         setupScrollView()
         setupStackView()
         setupHourlyForecastView()
@@ -91,10 +131,15 @@ extension ForecastWeatherViewController {
         setupPrecipitationVisibilityStackView()
         setupFourthQuarterView()
         setupHumidityPressureStackView()
+        setupCompassView()
+        setupCompassImageView()
     }
+    
+//    private func setupback
     
     private func setupScrollView() {
         view.addSubview(scrollView)
+        scrollView.backgroundColor = .clear
         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -218,6 +263,27 @@ extension ForecastWeatherViewController {
             humidityView.widthAnchor.constraint(equalTo: pressureView.widthAnchor)
         ])
     }
+    
+    private func setupCompassView() {
+        stackView.addArrangedSubview(compassView)
+        
+        compassView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            compassView.heightAnchor.constraint(equalToConstant: 300)
+        ])
+    }
+    
+    private func setupCompassImageView() {
+        compassView.addSubview(compassArrowView)
+        
+        compassArrowView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            compassArrowView.centerXAnchor.constraint(equalTo: compassView.centerXAnchor),
+            compassArrowView.centerYAnchor.constraint(equalTo: compassView.centerYAnchor)
+        ])
+    }
 }
 
 // MARK: - setting tableView
@@ -238,7 +304,18 @@ extension ForecastWeatherViewController {
             tableView.bottomAnchor.constraint(equalTo: views.bottomAnchor)
             
         ])
-        tableView.backgroundColor = UIColor.lightBlue
+        let blurEffect = UIBlurEffect(style: .light)
+               let blurView = UIVisualEffectView(effect: blurEffect)
+               blurView.frame = tableView.bounds
+               blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+               // Додаємо ефект розмиття як підшар до фону таблиці
+               tableView.backgroundView = blurView
+
+               // Встановлюємо інші властивості таблиці
+               tableView.backgroundColor = .clear
+               tableView.separatorStyle = .none
+        
         tableView.register(ForecastWeatherCustomCell.self, forCellReuseIdentifier: ForecastWeatherCustomCell.forecastCellIdentifier)
     }
     
@@ -248,7 +325,17 @@ extension ForecastWeatherViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let forecastWeatherCell = tableView.dequeueReusableCell(withIdentifier: ForecastWeatherCustomCell.forecastCellIdentifier, for: indexPath) as! ForecastWeatherCustomCell
-        forecastWeatherCell.backgroundColor = .lightBlue
+        
+        let blurEffect = UIBlurEffect(style: .light)
+               let blurView = UIVisualEffectView(effect: blurEffect)
+               blurView.frame = tableView.bounds
+               blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+               // Додаємо ефект розмиття як підшар до фону таблиці
+        forecastWeatherCell.backgroundView = blurView
+
+//        forecastWeatherCell.backgroundView =
+        forecastWeatherCell.backgroundColor = .clear
         return forecastWeatherCell
     }
     

@@ -75,13 +75,32 @@ extension WeatherInfoView {
     }
     
     private func setupMainView() {
-        backgroundColor = .gray
-        layer.cornerRadius = 15
+        // Створення ефекту розмиття
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(blurView)
+
+        // Задання фонового кольору (у вашому випадку сірий)
+        backgroundColor = .clear
+
         
+        // Задання прозорості та округлення кутів
+        blurView.alpha = 0.8
+        blurView.clipsToBounds = true
+        blurView.layer.cornerRadius = 15
+
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 160)
+            blurView.topAnchor.constraint(equalTo: topAnchor),
+            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            blurView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            // Додайте обмеження висоти для розташування елементів відносно нижнього краю
+            heightAnchor.constraint(equalToConstant: 160),
         ])
     }
+
     
     private func setupMainStackView() {
         addSubview(mainStackView)
@@ -102,10 +121,10 @@ extension WeatherInfoView {
         compassArrowView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            compassArrowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            compassArrowView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20),
             compassArrowView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            compassArrowView.widthAnchor.constraint(equalToConstant: 100),
-            compassArrowView.heightAnchor.constraint(equalToConstant: 100)
+            compassArrowView.widthAnchor.constraint(equalToConstant: 170),
+            compassArrowView.heightAnchor.constraint(equalToConstant: 170)
         ])
     }
 }

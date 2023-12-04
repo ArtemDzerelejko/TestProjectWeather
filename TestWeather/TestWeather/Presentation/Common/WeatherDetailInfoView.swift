@@ -40,14 +40,22 @@ extension WeatherDetailInfoView {
     }
     
     private func setupMainView() {
-           backgroundColor = .lightBlue
-           layer.cornerRadius = 15
-           translatesAutoresizingMaskIntoConstraints = false
-           NSLayoutConstraint.activate([
-               heightAnchor.constraint(equalToConstant: 160)
-           ])
-       }
-    
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = bounds
+        blurView.clipsToBounds = true
+
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurView)
+        backgroundColor = .clear
+        layer.cornerRadius = 15
+        clipsToBounds = true
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: 160)
+        ])
+    }
+
     private func setupMainStackView() {
         mainStackView.axis = .vertical
         mainStackView.spacing = 5
