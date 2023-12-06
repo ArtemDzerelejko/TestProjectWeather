@@ -17,11 +17,11 @@ class BlurredBackgroundViewHelper {
             blurView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             blurView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             blurView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
+            
             view.heightAnchor.constraint(equalToConstant: height),
         ])
     }
-
+    
     static func setupBlurredBackgroundForPrecipitationView(for view: UIView) {
         let blurView = settingForBlurredBackground(for: view)
         
@@ -32,7 +32,7 @@ class BlurredBackgroundViewHelper {
             blurView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-
+    
     private static func settingForBlurredBackground(for view: UIView) -> UIVisualEffectView {
         let blurEffect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: blurEffect)
@@ -44,14 +44,13 @@ class BlurredBackgroundViewHelper {
         blurView.layer.cornerRadius = 15
         return blurView
     }
-
     
     static func createBlurView(with style: UIBlurEffect.Style, for tableView: UITableView) -> UIVisualEffectView {
-            let blurEffect = UIBlurEffect(style: style)
-            let blurView = UIVisualEffectView(effect: blurEffect)
-            blurView.frame = tableView.bounds
-            blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            return blurView
-        }
+        let blurEffect = UIBlurEffect(style: style)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = tableView.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        return blurView
+    }
 }
 
