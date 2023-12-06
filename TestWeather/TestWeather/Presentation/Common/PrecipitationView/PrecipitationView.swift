@@ -41,7 +41,7 @@ extension PrecipitationView {
     }
     
     private func setupViewForMap() {
-        BlurredBackgroundViewHelper.setupBlurredBackground(for: self)
+        BlurredBackgroundViewHelper.setupBlurredBackgroundForPrecipitationView(for: self)
     }
 
     
