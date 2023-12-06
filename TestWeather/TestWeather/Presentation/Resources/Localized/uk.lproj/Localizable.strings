@@ -59,6 +59,22 @@
 // MARK: - ForecastWeatherCell
 "weekday" = "День тижня";
 
+// MARK: - WindView
+"unitsOfMeasurement" = "м/с";
+
+//MARK: - QuarterView
+"thirdQuarter" = "третя чверть";
+"light" = "Освітленість";
+"moonrise" = "Схід місяця";
+"nextFullMoon" = "Наступний повний\nмісяць";
+
+// MARK: - ForecastWeatherViewController
+"compass" = "Компас";
+
+// MARK: - ForecastWeatherViewModel
+"odessa" = "Одесса";
+"cloudy" = "Хмарно";
+
 // MARK: - Error
 "error" = "Помилка";
 "ok" = "OK";

@@ -19,65 +19,58 @@ class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITa
     private let tableView = UITableView()
     private let views = UIView()
     private let precipitationView = PrecipitationView()
+    private let headerView = HeaderView(city: ForecastWeatherViewModel.locationCity, temperature: ForecastWeatherViewModel.temperature, weather: ForecastWeatherViewModel.weather)
+    
     private let averageIndicatorsView = WeatherDetailInfoView(titleImageName: Strings.arrowUpRight,
-                                                  title: Strings.averageIndicators,
-                                                  numeric: Strings.plusEight,
-                                                  descriptionText: Strings.peakDailyAverageValue)
+                                                              title: Strings.averageIndicators,
+                                                              numeric: Strings.plusEight,
+                                                              descriptionText: Strings.peakDailyAverageValue)
     
     private let indexUfView = WeatherDetailInfoView(titleImageName: Strings.sunMaxFill,
-                                        title: Strings.indexUf,
-                                        numeric: Strings.one,
-                                        descriptionText: Strings.low)
+                                                    title: Strings.indexUf,
+                                                    numeric: Strings.one,
+                                                    descriptionText: Strings.low)
     
-//    private let bigView = WeatherInfoView(headerImageName: Strings.windImage,
-//                                  headerText: Strings.wind,
-//                                  numericalValuesLabelForWind: "10",
-//                                  numericalValuesLabelGustsOfWind: "15")
     private let weatherInfoView = WeatherInfoView()
     
     private let sunriseView = WeatherDetailInfoView(titleImageName: Strings.sunriseFill,
-                                        title: Strings.sunrise,
-                                        numeric: "07:09",
-                                        descriptionText: Strings.sunset + ": 16:41")
+                                                    title: Strings.sunrise,
+                                                    numeric: "07:09",
+                                                    descriptionText: Strings.sunset + ": 16:41")
     
     private let feelsLike = WeatherDetailInfoView(titleImageName: Strings.thermometerLow,
-                                      title: Strings.feelingLike,
-                                      numeric: "10°",
-                                      descriptionText: Strings.wind)
+                                                  title: Strings.feelingLike,
+                                                  numeric: "10°",
+                                                  descriptionText: Strings.wind)
     
     private let weatherConditionView = WeatherDetailInfoView(titleImageName: Strings.dropFill,
-                                                 title: Strings.precipitation,
-                                                 numeric: "0 мм",
-                                                 descriptionText: Strings.thenItIsExpected + " 5 мм")
+                                                             title: Strings.precipitation,
+                                                             numeric: "0 мм",
+                                                             descriptionText: Strings.thenItIsExpected + " 5 мм")
     
     private let visibilityView = WeatherDetailInfoView(titleImageName: Strings.eyeFill,
-                                           title: Strings.visibility,
-                                           numeric: "34 км",
-                                           descriptionText: Strings.absolutelyClear)
-    
-//    private let fourthQuarterView = WeatherInfoView(headerImageName: Strings.windImage,
-//                                            headerText: Strings.wind,
-//                                            numericalValuesLabelForWind: "10",
-//                                            numericalValuesLabelGustsOfWind: "15")
+                                                       title: Strings.visibility,
+                                                       numeric: "34 км",
+                                                       descriptionText: Strings.absolutelyClear)
     
     private let quarterView = QuarterView()
     
     private let humidityView = WeatherDetailInfoView(titleImageName: Strings.humidityFill,
-                                         title: Strings.humidity,
-                                         numeric: "76%",
-                                         descriptionText: Strings.dewPointNow + " 7°.")
+                                                     title: Strings.humidity,
+                                                     numeric: "76%",
+                                                     descriptionText: Strings.dewPointNow + " 7°.")
     
     private let pressureView = WeatherDetailInfoView(titleImageName: Strings.tirepressure,
-                                         title: Strings.pressure,
-                                         numeric: "",
-                                         descriptionText: "")
+                                                     title: Strings.pressure,
+                                                     numeric: "",
+                                                     descriptionText: "")
     
-    private let compassView = WeatherDetailInfoView(titleImageName: "",
-                                         title: "Compass",
-                                         numeric: "",
-                                         descriptionText: "")
+    private let compassView = WeatherDetailInfoView(titleImageName: Strings.locationNorth,
+                                                    title: Strings.compass,
+                                                    numeric: "",
+                                                    descriptionText: "")
     
-    private let compassArrowView = CompassArrowView(frame: .zero)
+    private let compassArrowView = CompassView(frame: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,38 +82,10 @@ class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITa
 // MARK: - UI
 extension ForecastWeatherViewController {
     private func configureUI() {
-        if let videoPath = Bundle.main.path(forResource: "space", ofType: "mp4") {
-
-                
-                let player = AVPlayer(url: URL(fileURLWithPath: videoPath))
-
-                
-                let playerLayer = AVPlayerLayer(player: player)
-
-                
-                playerLayer.frame = view.bounds
-
-                
-                playerLayer.videoGravity = .resizeAspectFill
-
-                
-                view.layer.addSublayer(playerLayer)
-
-              
-                player.play()
-
-              
-                NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                                       object: player.currentItem,
-                                                       queue: nil) { [weak player] _ in
-                    player?.seek(to: CMTime.zero)
-                    player?.play() 
-                }
-            }
-           
-    
+        
         setupScrollView()
         setupStackView()
+        setupHeaderView()
         setupHourlyForecastView()
         setupViews()
         setupTableView()
@@ -135,7 +100,22 @@ extension ForecastWeatherViewController {
         setupCompassImageView()
     }
     
-//    private func setupback
+    
+    public func setupBackgroundVideo(player: AVPlayer) {
+        //       AVPlayerItem
+        //        player.currentItem
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = view.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        view.layer.insertSublayer(playerLayer, at: 0)
+        player.play()
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
+                                               object: player.currentItem,
+                                               queue: nil) { [weak player] _ in
+            player?.seek(to: CMTime.zero)
+            player?.play()
+        }
+    }
     
     private func setupScrollView() {
         view.addSubview(scrollView)
@@ -164,12 +144,20 @@ extension ForecastWeatherViewController {
         ])
     }
     
+    private func setupHeaderView() {
+        stackView.addArrangedSubview(headerView)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            headerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -40),
+        ])
+    }
+    
     private func setupHourlyForecastView() {
         hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(hourlyForecastView)
         
         NSLayoutConstraint.activate([
-            hourlyForecastView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -40),
+            hourlyForecastView.widthAnchor.constraint(equalTo: headerView.widthAnchor),
             hourlyForecastView.heightAnchor.constraint(equalToConstant: 120)
         ])
     }
@@ -266,7 +254,6 @@ extension ForecastWeatherViewController {
     
     private func setupCompassView() {
         stackView.addArrangedSubview(compassView)
-        
         compassView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -304,17 +291,10 @@ extension ForecastWeatherViewController {
             tableView.bottomAnchor.constraint(equalTo: views.bottomAnchor)
             
         ])
-        let blurEffect = UIBlurEffect(style: .light)
-               let blurView = UIVisualEffectView(effect: blurEffect)
-               blurView.frame = tableView.bounds
-               blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-               // Додаємо ефект розмиття як підшар до фону таблиці
-               tableView.backgroundView = blurView
-
-               // Встановлюємо інші властивості таблиці
-               tableView.backgroundColor = .clear
-               tableView.separatorStyle = .none
+        let blurView = BlurredBackgroundViewHelper.createBlurView(with: .light, for: tableView)
+        tableView.backgroundView = blurView
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
         
         tableView.register(ForecastWeatherCustomCell.self, forCellReuseIdentifier: ForecastWeatherCustomCell.forecastCellIdentifier)
     }
@@ -325,16 +305,8 @@ extension ForecastWeatherViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let forecastWeatherCell = tableView.dequeueReusableCell(withIdentifier: ForecastWeatherCustomCell.forecastCellIdentifier, for: indexPath) as! ForecastWeatherCustomCell
-        
-        let blurEffect = UIBlurEffect(style: .light)
-               let blurView = UIVisualEffectView(effect: blurEffect)
-               blurView.frame = tableView.bounds
-               blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-               // Додаємо ефект розмиття як підшар до фону таблиці
+        let blurView = BlurredBackgroundViewHelper.createBlurView(with: .light, for: tableView)
         forecastWeatherCell.backgroundView = blurView
-
-//        forecastWeatherCell.backgroundView =
         forecastWeatherCell.backgroundColor = .clear
         return forecastWeatherCell
     }
@@ -349,7 +321,7 @@ extension ForecastWeatherViewController {
         let headerLabel = UILabel()
         
         headerImage.image = UIImage(systemName: Strings.calendar)
-        headerImage.tintColor = .gray
+        headerImage.tintColor = .white
         headerView.addSubview(headerImage)
         headerImage.translatesAutoresizingMaskIntoConstraints = false
         
@@ -362,7 +334,7 @@ extension ForecastWeatherViewController {
         
         headerLabel.text = Strings.tenDayForecast
         headerLabel.font = UIFont.systemFont(ofSize: 15)
-        headerLabel.textColor = .gray
+        headerLabel.textColor = .white
         headerView.addSubview(headerLabel)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         

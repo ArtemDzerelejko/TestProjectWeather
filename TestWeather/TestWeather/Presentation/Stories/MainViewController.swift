@@ -5,7 +5,7 @@
 //  Created by artem on 12.10.2023.
 //
 
-import Foundation
+import AVFoundation
 import UIKit
 
 final class MainViewController: UIViewController {
@@ -14,6 +14,7 @@ final class MainViewController: UIViewController {
     let forecastWeather = UIButton()
     let currentWeatherButton = CustomButton(title: Strings.currentWeather)
     let forecastWeatherButton = CustomButton(title: Strings.forecastWeather)
+    var player: AVPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,13 @@ private extension MainViewController {
         setupBackground()
         setupCurrentWeatherButton()
         setupForecastWeatherButton()
+        setupVideoPath()
+    }
+    
+    func setupVideoPath() {
+        if let videoPath = Bundle.main.path(forResource: "space", ofType: "mp4") {
+            player = AVPlayer(url: URL(fileURLWithPath: videoPath))
+        }
     }
     
     func setupBackground() {
@@ -71,6 +79,8 @@ extension MainViewController {
     
     @objc func goToForecastWeatherViewController() {
         let forecastWeatherViewController = ForecastWeatherViewController()
+        forecastWeatherViewController.loadViewIfNeeded()
+        forecastWeatherViewController.setupBackgroundVideo(player: player)
         self.show(forecastWeatherViewController, sender: self)
     }
 }

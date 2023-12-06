@@ -40,20 +40,7 @@ extension WeatherDetailInfoView {
     }
     
     private func setupMainView() {
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.frame = bounds
-        blurView.clipsToBounds = true
-
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(blurView)
-        backgroundColor = .clear
-        layer.cornerRadius = 15
-        clipsToBounds = true
-        translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 160)
-        ])
+        BlurredBackgroundViewHelper.setupBlurredBackground(for: self)
     }
 
     private func setupMainStackView() {
@@ -63,9 +50,9 @@ extension WeatherDetailInfoView {
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
+            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
     
@@ -78,7 +65,7 @@ extension WeatherDetailInfoView {
     
     private func setupTitleImageView(titleImageName: String) {
         titleImageView.image = UIImage(systemName: titleImageName)
-        titleImageView.tintColor = .gray
+        titleImageView.tintColor = .white
         titleStackView.addArrangedSubview(titleImageView)
         titleImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -88,8 +75,9 @@ extension WeatherDetailInfoView {
     
     private func setupTitleLabel(title: String) {
         titleLabel.text = title.uppercased()
-        titleLabel.font = UIFont.systemFont(ofSize: 10)
-        titleLabel.textColor = .gray
+        titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        titleLabel.numberOfLines = 0
+        titleLabel.textColor = .white
         titleStackView.addArrangedSubview(titleLabel)
     }
     

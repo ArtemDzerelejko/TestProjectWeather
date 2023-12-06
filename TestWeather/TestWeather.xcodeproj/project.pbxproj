@@ -24,6 +24,10 @@
 		AC5E2A6D2AF28FFE00A81C0A /* GoogleMapsTileOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = AC5E2A6C2AF28FFE00A81C0A /* GoogleMapsTileOverlay */; };
 		AC5E2A6F2AF2932800A81C0A /* overlay.json in Resources */ = {isa = PBXBuildFile; fileRef = AC5E2A6E2AF2932800A81C0A /* overlay.json */; };
 		AC5E2A932AF3ED4C00A81C0A /* WeatherInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E2A922AF3ED4B00A81C0A /* WeatherInfoView.swift */; };
+		AC7EBC392B20F14E00F02F2A /* TemperatureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7EBC382B20F14E00F02F2A /* TemperatureInfo.swift */; };
+		AC8A485F2B1F154900430F65 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A485E2B1F154900430F65 /* Keys.swift */; };
+		AC8A48612B1F500A00430F65 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A48602B1F500A00430F65 /* HeaderView.swift */; };
+		AC8A48652B1F7CA400430F65 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A48642B1F7CA400430F65 /* PageViewController.swift */; };
 		AC8B88DA2ADC6F47008E69F7 /* ModelForCurrentWeatherRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B88D92ADC6F47008E69F7 /* ModelForCurrentWeatherRemote.swift */; };
 		AC8B88DC2ADC6FD2008E69F7 /* ModelForCurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B88DB2ADC6FD2008E69F7 /* ModelForCurrentWeather.swift */; };
 		AC8B88DE2ADC70C4008E69F7 /* WeatherAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B88DD2ADC70C4008E69F7 /* WeatherAPIService.swift */; };
@@ -90,6 +94,10 @@
 		AC4F80362AE088BD005E0C78 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		AC5E2A6E2AF2932800A81C0A /* overlay.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = overlay.json; sourceTree = "<group>"; };
 		AC5E2A922AF3ED4B00A81C0A /* WeatherInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfoView.swift; sourceTree = "<group>"; };
+		AC7EBC382B20F14E00F02F2A /* TemperatureInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureInfo.swift; sourceTree = "<group>"; };
+		AC8A485E2B1F154900430F65 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		AC8A48602B1F500A00430F65 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		AC8A48642B1F7CA400430F65 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		AC8B88D92ADC6F47008E69F7 /* ModelForCurrentWeatherRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelForCurrentWeatherRemote.swift; sourceTree = "<group>"; };
 		AC8B88DB2ADC6FD2008E69F7 /* ModelForCurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelForCurrentWeather.swift; sourceTree = "<group>"; };
 		AC8B88DD2ADC70C4008E69F7 /* WeatherAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIService.swift; sourceTree = "<group>"; };
@@ -163,6 +171,7 @@
 				AC38F36A2AD81DA50009E3CF /* Data */,
 				AC38F36E2AD81DDD0009E3CF /* Domain */,
 				AC38F3722AD81E0E0009E3CF /* Presentation */,
+				AC7EBC372B20C8CA00F02F2A /* DontReview */,
 				AC8B89242ADF2A9E008E69F7 /* Util */,
 			);
 			path = TestWeather;
@@ -278,6 +287,9 @@
 				AC8DF0C12B1E01F400C31C86 /* WindIndicatorView.swift */,
 				AC8DF0C52B1E1CF200C31C86 /* CompassView.swift */,
 				AC8DF0CC2B1E65DE00C31C86 /* BlurredBackgroundView.swift */,
+				AC8A48602B1F500A00430F65 /* HeaderView.swift */,
+				AC7EBC382B20F14E00F02F2A /* TemperatureInfo.swift */,
+				ACAF693C2AF008D3005C3C23 /* PrecipitationView */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -297,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				AC8B891D2ADF2A5A008E69F7 /* Strings.swift */,
+				AC8A485E2B1F154900430F65 /* Keys.swift */,
 				AC8DF0CA2B1E625100C31C86 /* space.mp4 */,
 				AC8DF0C82B1E4FFF00C31C86 /* sun.mp4 */,
 				AC8B89182ADF2997008E69F7 /* Localized */,
@@ -304,6 +317,14 @@
 				AC38F3602AD81C7F0009E3CF /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		AC7EBC372B20C8CA00F02F2A /* DontReview */ = {
+			isa = PBXGroup;
+			children = (
+				AC8A48642B1F7CA400430F65 /* PageViewController.swift */,
+			);
+			path = DontReview;
 			sourceTree = "<group>";
 		};
 		AC8B88E92ADD788B008E69F7 /* CurrentWeather */ = {
@@ -321,7 +342,6 @@
 				AC8B88F22ADDA29C008E69F7 /* ForecastWeatherViewModel.swift */,
 				ACAF69362AEF9BFB005C3C23 /* ForecastWeatherViewController.swift */,
 				ACAF69392AEFF1DC005C3C23 /* HourlyForecastView */,
-				ACAF693C2AF008D3005C3C23 /* PrecipitationView */,
 				ACAF69312AEA8651005C3C23 /* CustomCell */,
 			);
 			path = ForecastWeather;
@@ -476,6 +496,7 @@
 				AC8B88DA2ADC6F47008E69F7 /* ModelForCurrentWeatherRemote.swift in Sources */,
 				ACAF69352AEBF43C005C3C23 /* ForecastWeatherCustomCell.swift in Sources */,
 				ACDE85C82AFBD8B100D0DBDC /* UIView+Extensions.swift in Sources */,
+				AC7EBC392B20F14E00F02F2A /* TemperatureInfo.swift in Sources */,
 				AC38F3562AD81C7D0009E3CF /* AppDelegate.swift in Sources */,
 				AC8B89BF2AE022FB008E69F7 /* CustomLabel.swift in Sources */,
 				AC38F3582AD81C7D0009E3CF /* SceneDelegate.swift in Sources */,
@@ -487,9 +508,11 @@
 				AC5E2A932AF3ED4C00A81C0A /* WeatherInfoView.swift in Sources */,
 				AC8DF0CD2B1E65DE00C31C86 /* BlurredBackgroundView.swift in Sources */,
 				AC8B88E22ADC7238008E69F7 /* WeatherRepositoryProtocol.swift in Sources */,
+				AC8A48612B1F500A00430F65 /* HeaderView.swift in Sources */,
 				AC8B88E42ADC7295008E69F7 /* WeatherUseCase.swift in Sources */,
 				AC8B891E2ADF2A5A008E69F7 /* Strings.swift in Sources */,
 				AC15BD7C2AF931FD00B7408E /* WindStackView.swift in Sources */,
+				AC8A485F2B1F154900430F65 /* Keys.swift in Sources */,
 				ACAF69332AEA8672005C3C23 /* HourlyForecastView.swift in Sources */,
 				AC8B88E82ADD5D26008E69F7 /* CurrentWeatherViewController.swift in Sources */,
 				AC8B88EF2ADD7ECF008E69F7 /* ModelForForecastWeatherRemote.swift in Sources */,
@@ -498,6 +521,7 @@
 				AC8B88FB2ADEB353008E69F7 /* CustomLoaderView.swift in Sources */,
 				ACAF69372AEF9BFB005C3C23 /* ForecastWeatherViewController.swift in Sources */,
 				AC8DF0C02B1DF1A500C31C86 /* DividerView.swift in Sources */,
+				AC8A48652B1F7CA400430F65 /* PageViewController.swift in Sources */,
 				AC8B88DE2ADC70C4008E69F7 /* WeatherAPIService.swift in Sources */,
 				AC38F37E2AD828270009E3CF /* GradientBackgroundView.swift in Sources */,
 				AC8B89272ADF2AC3008E69F7 /* Localizable+Extensions.swift in Sources */,
@@ -665,7 +689,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestWeather/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WetherApp;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For the correct operation of the location";
+				INFOPLIST_KEY_NSMotionUsageDescription = "For correct operation of the compass";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -698,7 +724,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestWeather/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WetherApp;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "For the correct operation of the location";
+				INFOPLIST_KEY_NSMotionUsageDescription = "For correct operation of the compass";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

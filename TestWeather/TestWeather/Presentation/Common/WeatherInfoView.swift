@@ -30,7 +30,7 @@ class WeatherInfoView: UIView {
     }
     
     private lazy var imageForTitle = UIImageView().with {
-        $0.image = UIImage(systemName: "wind")
+        $0.image = UIImage(systemName: Strings.windImage)
         $0.contentMode = .scaleAspectFit
         $0.tintColor = .white
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -45,10 +45,7 @@ class WeatherInfoView: UIView {
     private let windView = WindView(numberWind: "7",
                                     windType: WindType.wind.rawValue)
     
-    private lazy var divider = UIView().with {
-        $0.backgroundColor = .white
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private let divider = DividerView()
     
     private let gustsOfWind = WindView(numberWind: "10",
                                        windType: WindType.gusts.rawValue)
@@ -75,32 +72,9 @@ extension WeatherInfoView {
     }
     
     private func setupMainView() {
-        // Створення ефекту розмиття
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(blurView)
-
-        // Задання фонового кольору (у вашому випадку сірий)
-        backgroundColor = .clear
-
-        
-        // Задання прозорості та округлення кутів
-        blurView.alpha = 0.8
-        blurView.clipsToBounds = true
-        blurView.layer.cornerRadius = 15
-
-        NSLayoutConstraint.activate([
-            blurView.topAnchor.constraint(equalTo: topAnchor),
-            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            blurView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            // Додайте обмеження висоти для розташування елементів відносно нижнього краю
-            heightAnchor.constraint(equalToConstant: 160),
-        ])
+        BlurredBackgroundViewHelper.setupBlurredBackground(for: self)
     }
-
+    
     
     private func setupMainStackView() {
         addSubview(mainStackView)
@@ -127,19 +101,13 @@ extension WeatherInfoView {
             compassArrowView.heightAnchor.constraint(equalToConstant: 170)
         ])
     }
-}
-
-// MARK: - setupTitleStackViewА що
-extension WeatherInfoView {
+    
     private func setupTitleStackView() {
         mainStackView.addArrangedSubview(titleStackView)
         titleStackView.addArrangedSubview(imageForTitle)
         titleStackView.addArrangedSubview(labelForTitle)
     }
-}
-
-// MARK: - setupWindView
-extension WeatherInfoView {
+    
     private func setupWindView() {
         mainStackView.addArrangedSubview(windView)
         
@@ -148,22 +116,15 @@ extension WeatherInfoView {
             windView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, constant: -30),
         ])
     }
-}
-
-// MARK: - setup divider
-extension WeatherInfoView {
+    
     private func setupDivider() {
         mainStackView.addArrangedSubview(divider)
         
         NSLayoutConstraint.activate([
             divider.widthAnchor.constraint(equalTo: mainStackView.widthAnchor),
-            divider.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
-}
-
-// MARK: - setupGustsOfWind
-extension WeatherInfoView  {
+    
     private func setupGustsOfWind() {
         mainStackView.addArrangedSubview(gustsOfWind)
         

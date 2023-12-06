@@ -34,6 +34,7 @@ class ParametersOfTheQuarter: UIView {
     }
 }
 
+// MARK: - UI
 extension ParametersOfTheQuarter {
     private func configure(parameter: String, numParameters: String) {
         setupParametersLabel(parameter: parameter)
@@ -43,6 +44,7 @@ extension ParametersOfTheQuarter {
     private func setupParametersLabel(parameter: String) {
         parametersLabel.text = parameter
         addSubview(parametersLabel)
+        
         NSLayoutConstraint.activate([
             parametersLabel.topAnchor.constraint(equalTo: topAnchor),
             parametersLabel.leadingAnchor.constraint(equalTo: leadingAnchor),

@@ -19,6 +19,7 @@ class DividerView: UIView {
     }
 }
 
+// MARK: - UI
 extension DividerView {
     private func configure() {
         setupDivider()
@@ -27,6 +28,7 @@ extension DividerView {
     private func setupDivider() {
         backgroundColor = .white
         translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: 1)
         ])

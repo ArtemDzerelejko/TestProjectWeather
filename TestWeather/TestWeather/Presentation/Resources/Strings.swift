@@ -70,6 +70,25 @@ enum Strings {
     // MARK: - ForecastWeatherCell
     static let weekday: String = "weekday".localized
     
+    // MARK: - WeatherInfoView
+    static let gusts: String = "gusts".localized
+    
+    // MARK: - WindView
+    static let unitsOfMeasurement: String = "unitsOfMeasurement".localized
+    
+    // MARK: - ForecastWeatherViewController
+    static let compass: String = "compass".localized
+
+    // MARK: - QuarterView
+    static let thirdQuarter: String = "thirdQuarter".localized
+    static let light: String = "light".localized
+    static let moonrise: String = "moonrise".localized
+    static let nextFullMoon: String = "nextFullMoon".localized
+    
+    // MARK: - ForecastWeatherViewModel
+    static let odessa: String = "odessa".localized
+    static let cloudy: String = "cloudy".localized
+    
     // MARK: - image
     static let sunMaxFill: String = "sun.max.fill"
     static let arrowBackwardCircle: String = "arrow.backward.circle"
@@ -87,6 +106,8 @@ enum Strings {
     static let eyeFill: String = "eye.fill"
     static let humidityFill: String = "humidity.fill"
     static let tirepressure: String = "tirepressure"
+    static let moonphaseWaxingCrescent: String = "moonphase.waxing.crescent"
+    static let locationNorth: String = "location.north"
     
     // MARK: - Error
     static let error: String = "error"

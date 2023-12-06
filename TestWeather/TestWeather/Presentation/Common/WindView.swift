@@ -23,7 +23,7 @@ class WindView: UIView {
     }
     
     private lazy var unitOfMeasurementForGustsOfWind = UILabel().with {
-        $0.text = "м/с"
+        $0.text = Strings.unitsOfMeasurement
         $0.textColor = .white
         $0.textAlignment = .center
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -49,13 +49,8 @@ class WindView: UIView {
 
 extension WindView {
     private func configure(numberWind: String, windType: String) {
-        setupMainView()
         setupNumberForWind(numberWind: numberWind)
         setupHorizontalStackView(windType: windType)
-    }
-    
-    private func setupMainView() {
-//        backgroundColor = .red
     }
     
     private func setupNumberForWind(numberWind: String) {

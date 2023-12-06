@@ -30,14 +30,14 @@ class QuarterView: UIView {
     }
     
     private lazy var imageForTitle = UIImageView().with {
-        $0.image = UIImage(systemName: "moonphase.waxing.crescent")
+        $0.image = UIImage(systemName: Strings.moonphaseWaxingCrescent)
         $0.contentMode = .scaleAspectFit
         $0.tintColor = .white
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private lazy var labelForTitle = UILabel().with {
-        $0.text = "третя чверть"
+        $0.text = Strings.thirdQuarter
         $0.textColor = .white
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -45,9 +45,9 @@ class QuarterView: UIView {
     private let dividerViewFirst = DividerView()
     private let dividerViewSecond = DividerView()
     
-    private let lightParametersOfTheQuarter = ParametersOfTheQuarter(parameter: "Освітленість", numParameters: "57%")
-    private let moonRiseParametersOfTheQuarter = ParametersOfTheQuarter(parameter: "Схід місяця", numParameters: "22:57")
-    private let nextFullMoonParametersOfTheQuarter = ParametersOfTheQuarter(parameter: "Наступний повний\nмісяць", numParameters: "23 дн.")
+    private let lightParametersOfTheQuarter = ParametersOfTheQuarter(parameter: Strings.light, numParameters: "57%")
+    private let moonRiseParametersOfTheQuarter = ParametersOfTheQuarter(parameter: Strings.moonrise, numParameters: "22:57")
+    private let nextFullMoonParametersOfTheQuarter = ParametersOfTheQuarter(parameter: Strings.nextFullMoon, numParameters: "23 дн.")
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -67,30 +67,7 @@ extension QuarterView {
     }
     
     private func setupMainView() {
-        // Створення ефекту розмиття
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(blurView)
-
-        // Задання фонового кольору (у вашому випадку сірий)
-        backgroundColor = .clear
-
-        
-        // Задання прозорості та округлення кутів
-        blurView.alpha = 0.8
-        blurView.clipsToBounds = true
-        blurView.layer.cornerRadius = 15
-
-        NSLayoutConstraint.activate([
-            blurView.topAnchor.constraint(equalTo: topAnchor),
-            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            blurView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            // Додайте обмеження висоти для розташування елементів відносно нижнього краю
-            heightAnchor.constraint(equalToConstant: 160),
-        ])
+        BlurredBackgroundViewHelper.setupBlurredBackground(for: self)
     }
     
     // MARK: - setupMainStackView

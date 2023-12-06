@@ -41,26 +41,7 @@ extension PrecipitationView {
     }
     
     private func setupViewForMap() {
-        // Створення ефекту розмиття
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(blurView)
-
-        // Задання фонового кольору (у вашому випадку світло-синій)
-        backgroundColor = .clear
-
-        // Задання прозорості та округлення кутів
-        blurView.alpha = 0.8
-        blurView.clipsToBounds = true
-        blurView.layer.cornerRadius = 15
-
-        NSLayoutConstraint.activate([
-            blurView.topAnchor.constraint(equalTo: topAnchor),
-            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            blurView.bottomAnchor.constraint(equalTo: bottomAnchor),
-        ])
+        BlurredBackgroundViewHelper.setupBlurredBackground(for: self)
     }
 
     
@@ -78,7 +59,7 @@ extension PrecipitationView {
     
     private func setupTitleImageView() {
         titleImageView.image = UIImage(systemName: Strings.umbrellaFill)
-        titleImageView.tintColor = .gray
+        titleImageView.tintColor = .white
         titleView.addSubview(titleImageView)
         titleImageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -93,7 +74,7 @@ extension PrecipitationView {
     private func setupTitleLabel() {
         titleLabel.text = Strings.precipitation
         titleLabel.font = UIFont.systemFont(ofSize: 15)
-        titleLabel.textColor = .gray
+        titleLabel.textColor = .white
         titleView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         

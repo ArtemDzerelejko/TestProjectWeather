@@ -17,7 +17,7 @@ class WindStackView: UIView {
     }
     
     private lazy var unitsOfMeasurement = UILabel().with {
-        $0.textColor = .gray
+        $0.textColor = .white
     }
     
     private lazy var windInfo = UILabel().with {
