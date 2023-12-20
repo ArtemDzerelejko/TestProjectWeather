@@ -10,5 +10,5 @@ import Foundation
 protocol WeatherRepositoryProtocol {
     func creatingRequestToTheServerToGetWeather(completion: @escaping (Result<ModelForCurrentWeather, Error>) -> Void)
     
-    func creatingRequestToTheServerToGetForecastWeather(completion: @escaping (Result<ModelForForecastWeather, Error>) -> Void)
+    func creatingRequestToTheServerToGetForecastWeather(country: String, completion: @escaping (Result<ModelForForecastWeather, Error>) -> Void)
 }

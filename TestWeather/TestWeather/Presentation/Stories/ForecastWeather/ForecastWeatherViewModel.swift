@@ -20,9 +20,17 @@ final class ForecastWeatherViewModel {
     static let locationCity = Strings.odessa
     static let temperature = "4°"
     static let weather = Strings.cloudy
+    let country: String
+    static let time = "14:33"
+    static let higher = "8°"
+    static let lower = "5°"
+    
+    init(country: String) {
+        self.country = country
+    }
     
     func getForecastWeather() {
-        weatherUseCase.creatingRequestToTheServerToGetForecastWeather { [weak self] result in
+        weatherUseCase.creatingRequestToTheServerToGetForecastWeather(country: country) { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {

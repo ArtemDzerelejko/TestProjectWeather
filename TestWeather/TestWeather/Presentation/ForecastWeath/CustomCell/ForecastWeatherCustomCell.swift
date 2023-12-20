@@ -14,7 +14,7 @@ class ForecastWeatherCustomCell: UITableViewCell {
     private let weatherImage = UIImageView()
     private let temperatureLabel = UILabel()
     static let forecastCellIdentifier = "forecastWeatherCell"
-    static let forecastWeatherViewModel = ForecastWeatherViewModel()
+    static let forecastWeatherViewModel = ForecastWeatherViewModel(country: "Ukraine")
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

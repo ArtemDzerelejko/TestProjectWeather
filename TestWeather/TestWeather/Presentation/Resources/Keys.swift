@@ -9,4 +9,6 @@ import UIKit
 
 struct Keys {
     static let windDirection = "WindDirection"
+    static let cellId = "cellId"
+    static let reuseIdentifier = "locationWeatherCellReuseId"
 }

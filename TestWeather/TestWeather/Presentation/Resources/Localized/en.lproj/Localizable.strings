@@ -75,6 +75,10 @@
 "odessa" = "Odessa";
 "cloudy" = "Cloudy";
 
+// MARK: - LocationWeatherViewController
+ "searchForCityOrAirport" = "Search for a city or airport";
+ "weatherLogo" = "Weather";
+
 // MARK: - Error
 "error" = "Error";
 "ok" = "OK";

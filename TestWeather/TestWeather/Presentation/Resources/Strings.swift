@@ -89,6 +89,10 @@ enum Strings {
     static let odessa: String = "odessa".localized
     static let cloudy: String = "cloudy".localized
     
+    // MARK: - LocationWeatherViewController
+    static let searchForCityOrAirport: String = "searchForCityOrAirport".localized
+    static let weatherLogo: String = "weatherLogo".localized
+    
     // MARK: - image
     static let sunMaxFill: String = "sun.max.fill"
     static let arrowBackwardCircle: String = "arrow.backward.circle"
@@ -108,6 +112,8 @@ enum Strings {
     static let tirepressure: String = "tirepressure"
     static let moonphaseWaxingCrescent: String = "moonphase.waxing.crescent"
     static let locationNorth: String = "location.north"
+    static let ellipsisCircle: String =  "ellipsis.circle"
+    static let trashFill: String = "trash.fill"
     
     // MARK: - Error
     static let error: String = "error"

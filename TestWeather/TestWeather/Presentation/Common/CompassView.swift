@@ -38,7 +38,6 @@ class CompassView: UIView {
 }
 
 // MARK: - UI
-
 extension CompassView {
     private func configureUI() {
         setupBackgroundImageView()
@@ -69,16 +68,15 @@ extension CompassView {
 }
 
 // MARK: - MotionManager
-
 extension CompassView {
     private func configureMotionManager() {
-        if motionManager.isDeviceMotionAvailable {
-            motionManager.deviceMotionUpdateInterval = 0.1
-            motionManager.startDeviceMotionUpdates(to: .main) { [weak self] (data, error) in
+        if motionManager.isMagnetometerAvailable {
+            motionManager.magnetometerUpdateInterval = 0.1
+            motionManager.startMagnetometerUpdates(to: .main) { [weak self] (data, error) in
                 guard let self = self else { return }
                 
-                if let attitude = data?.attitude {
-                    let rotation = atan2(attitude.pitch, attitude.roll)
+                if let magneticField = data?.magneticField {
+                    let rotation = atan2(magneticField.y, magneticField.x)
                     UIView.animate(withDuration: 0.5) {
                         self.arrowImageView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
                     }

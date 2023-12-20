@@ -9,6 +9,12 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
+    private enum Country: String {
+        case london = "London"
+        case ukraine = "Ukraine"
+        case usa = "USA"
+    }
+    
     var pages = [UIViewController]()
     let pageControl = UIPageControl()
     let initialPage = 0
@@ -20,6 +26,15 @@ class PageViewController: UIPageViewController {
         style()
         layout()
     }
+        
+    init() {
+//        super.init(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: [UIPageViewController.OptionsKey.interPageSpacing : 200, UIPageViewController.OptionsKey.spineLocation : 100])
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension PageViewController {
@@ -30,16 +45,15 @@ extension PageViewController {
         
         pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)
         
-        
-        let page1 = ForecastWeatherViewController()
-        let page2 = ViewController2()
-        let page3 = ViewController3()
+        let page1 = WeatherFactory.getWeather(forCountry: Country.london.rawValue)
+        let page2 = WeatherFactory.getWeather(forCountry: Country.ukraine.rawValue)
+        let page3 = WeatherFactory.getWeather(forCountry: Country.usa.rawValue)
         
         pages.append(page1)
         pages.append(page2)
         pages.append(page3)
         
-        setViewControllers([pages[initialPage]], direction: .forward, animated: false, completion: nil)
+        setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
     }
     
     func style() {
@@ -100,8 +114,7 @@ extension PageViewController: UIPageViewControllerDataSource {
 // MARK: - Delegates
 
 extension PageViewController: UIPageViewControllerDelegate {
-    
-    // How we keep our pageControl in sync with viewControllers
+
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
         guard let viewControllers = pageViewController.viewControllers else { return }
@@ -109,6 +122,7 @@ extension PageViewController: UIPageViewControllerDelegate {
         
         pageControl.currentPage = currentIndex
     }
+    
 }
 
 // MARK: - ViewControllers
@@ -133,3 +147,5 @@ class ViewController3: UIViewController {
         view.backgroundColor = .systemBlue
     }
 }
+
+

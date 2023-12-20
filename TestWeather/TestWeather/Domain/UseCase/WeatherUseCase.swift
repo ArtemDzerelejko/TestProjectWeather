@@ -15,7 +15,7 @@ final class WeatherUseCase {
         weatherRepository.creatingRequestToTheServerToGetWeather(completion: completion)
     }
     
-    func creatingRequestToTheServerToGetForecastWeather(completion: @escaping (Result<ModelForForecastWeather, Error>) -> Void) {
-        weatherRepository.creatingRequestToTheServerToGetForecastWeather(completion: completion)
+    func creatingRequestToTheServerToGetForecastWeather(country: String, completion: @escaping (Result<ModelForForecastWeather, Error>) -> Void) {
+        weatherRepository.creatingRequestToTheServerToGetForecastWeather(country: country, completion: completion)
     }
 }

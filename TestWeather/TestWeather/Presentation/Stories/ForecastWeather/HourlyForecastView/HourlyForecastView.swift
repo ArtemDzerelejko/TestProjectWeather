@@ -19,7 +19,7 @@ class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewData
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
-    private let viewModel = ForecastWeatherViewModel()
+    private let viewModel = ForecastWeatherViewModel(country: "Ukraine")
     
     override init(frame: CGRect) {
         super.init(frame: frame)

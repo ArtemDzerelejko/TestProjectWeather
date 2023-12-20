@@ -73,14 +73,17 @@ private extension MainViewController {
 
 extension MainViewController {
     @objc func goToCurrentWeatherViewController() {
-        let currentWeatherViewController = CurrentWeatherViewController()
+        let currentWeatherViewController = PageViewController()
         self.show(currentWeatherViewController, sender: self)
     }
     
     @objc func goToForecastWeatherViewController() {
-        let forecastWeatherViewController = ForecastWeatherViewController()
+        let forecastWeatherViewController: ForecastWeatherViewController = WeatherFactory.getWeather(forCountry: "Ukraine")
         forecastWeatherViewController.loadViewIfNeeded()
         forecastWeatherViewController.setupBackgroundVideo(player: player)
+//        forecastWeatherViewController.modalPresentationStyle = .fullScreen
+//        self.present(forecastWeatherViewController, animated: true)
+////        self.navigationController?.pushViewController(forecastWeatherViewController, animated: true)
         self.show(forecastWeatherViewController, sender: self)
     }
 }

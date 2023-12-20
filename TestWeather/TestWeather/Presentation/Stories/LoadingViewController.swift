@@ -71,6 +71,7 @@ private extension LoadingViewController {
 private extension LoadingViewController {
     func transitionToMainViewController() {
         let mainViewController = MainViewController()
-        navigationController?.pushViewController(mainViewController, animated: true)
+        self.present(mainViewController, animated: true)
+//        navigationController?.pushViewController(mainViewController, animated: true)
     }
 }

@@ -75,6 +75,10 @@
 "odessa" = "Одесса";
 "cloudy" = "Хмарно";
 
+// MARK: - LocationWeatherViewController
+ "searchForCityOrAirport" = "Пошук міста чи аеропорту";
+ "weatherLogo" = "Погода";
+
 // MARK: - Error
 "error" = "Помилка";
 "ok" = "OK";

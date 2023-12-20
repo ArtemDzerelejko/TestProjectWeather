@@ -11,15 +11,16 @@ import AVFoundation
 import AVKit
 
 
-class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+final class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var viewModel: ForecastWeatherViewModel!
     private let scrollView = UIScrollView()
     private let hourlyForecastView = HourlyForecastView()
     private let stackView = UIStackView()
     private let tableView = UITableView()
     private let views = UIView()
     private let precipitationView = PrecipitationView()
-    private let headerView = HeaderView(city: ForecastWeatherViewModel.locationCity, temperature: ForecastWeatherViewModel.temperature, weather: ForecastWeatherViewModel.weather)
+    private var headerView: HeaderView!
     
     private let averageIndicatorsView = WeatherDetailInfoView(titleImageName: Strings.arrowUpRight,
                                                               title: Strings.averageIndicators,
@@ -72,9 +73,11 @@ class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITa
     
     private let compassArrowView = CompassView(frame: .zero)
     
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .lightGray
+        headerView = HeaderView(city: viewModel.country, temperature: ForecastWeatherViewModel.temperature, weather: ForecastWeatherViewModel.weather)
         configureUI()
     }
 }

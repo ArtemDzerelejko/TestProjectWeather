@@ -53,4 +53,3 @@ class BlurredBackgroundViewHelper {
         return blurView
     }
 }
-

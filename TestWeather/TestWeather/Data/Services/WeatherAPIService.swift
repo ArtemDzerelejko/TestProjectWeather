@@ -60,8 +60,8 @@ final class WeatherAPIService {
         }
     }
     
-    func fetchForecastWeather(completion: @escaping (Result<ModelForForecastWeatherRemote, Error>) -> Void) {
-        guard let url = WeatherAPIService.makeWeatherURL(endpoint: Constans.forecastJson, parameters: ["key": WeatherAPIService.apiKey, "q": Constans.defaultLocation, "aqi": Constans.defaultAQI, "days": Constans.numberOfDays]) else {
+    func fetchForecastWeather(country: String, completion: @escaping (Result<ModelForForecastWeatherRemote, Error>) -> Void) {
+        guard let url = WeatherAPIService.makeWeatherURL(endpoint: Constans.forecastJson, parameters: ["key": WeatherAPIService.apiKey, "q": country, "aqi": Constans.defaultAQI, "days": Constans.numberOfDays]) else {
             completion(.failure(NSError(domain: Constans.invalidURL, code: -1, userInfo: nil)))
             return
         }
