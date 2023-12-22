@@ -14,7 +14,7 @@ final class WeatherRepository: WeatherRepositoryProtocol {
     private let weatherAPIService = WeatherAPIService()
     private let userDefaults = UserDefaults.standard
     
-    private enum Constans {
+    private struct Constans {
         static let lastSessionWeatherDataKey: String = "lastSessionWeatherData"
         static let lastSessionForecastWeatherDataKey: String = "lastSessionForecastWeatherData"
     }

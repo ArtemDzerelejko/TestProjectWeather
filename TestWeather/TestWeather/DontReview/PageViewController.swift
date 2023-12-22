@@ -30,7 +30,7 @@ final class PageViewController: UIPageViewController {
         style()
         layout()
     }
-        
+    
     init() {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
@@ -109,7 +109,7 @@ extension PageViewController: UIPageViewControllerDataSource {
 // MARK: - Delegates
 
 extension PageViewController: UIPageViewControllerDelegate {
-
+    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
         guard let viewControllers = pageViewController.viewControllers else { return }

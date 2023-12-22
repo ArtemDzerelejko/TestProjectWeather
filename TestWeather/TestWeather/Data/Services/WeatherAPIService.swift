@@ -13,7 +13,7 @@ final class WeatherAPIService {
     private static let apiKey = "1d99baeca95549f48e1121104231210"
     private static let baseURL = "http://api.weatherapi.com/v1"
     
-    private enum Constans {
+    private struct Constans {
         static let defaultLocation: String = "Ukraine"
         static let defaultAQI: String = "defaultAQI"
         static let numberOfDays: String = "7"
