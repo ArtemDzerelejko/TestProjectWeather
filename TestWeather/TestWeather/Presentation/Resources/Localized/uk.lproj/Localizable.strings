@@ -79,6 +79,9 @@
  "searchForCityOrAirport" = "Пошук міста чи аеропорту";
  "weatherLogo" = "Погода";
 
+// MARK: - ForecastWeatherCustomCell
+"ukraine" = "Україна";
+
 // MARK: - Error
 "error" = "Помилка";
 "ok" = "OK";

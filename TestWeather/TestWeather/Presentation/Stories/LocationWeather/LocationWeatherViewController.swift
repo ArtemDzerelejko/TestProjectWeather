@@ -7,29 +7,38 @@
 
 import UIKit
 
-class LocationWeatherViewController: UIViewController {
+final class LocationWeatherViewController: UIViewController {
     
     private lazy var searchController = UISearchController(searchResultsController: nil).with {
         $0.searchBar.placeholder = Strings.searchForCityOrAirport
         $0.searchBar.tintColor = .white
     }
     
-    private lazy var moreSettingsButton: UIBarButtonItem = {
-        let image = UIImage(systemName: Strings.ellipsisCircle)?.withRenderingMode(.alwaysOriginal)
-        let button = UIButton(type: .custom)
+    private lazy var image = UIImage(systemName: Strings.ellipsisCircle)?.with {
+        $0.withRenderingMode(.alwaysOriginal)
+    }
+    
+    private lazy var button = UIButton(type: .custom).with {
         let imageSize = CGSize(width: 25, height: 25)
         let scaledImage = image?.scaledToFitSize(imageSize)
-        
         let tintedImage = scaledImage?.withTintColor(.black)
-        button.setImage(tintedImage, for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        return UIBarButtonItem(customView: button)
-    }()
+        $0.setImage(tintedImage, for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFit
+    }
+    
+    private lazy var moreSettingsButton = UIBarButtonItem().with {
+        $0.customView = button
+    }
     
     private lazy var tableView = UITableView().with {
         $0.register(LocationWeatherCell.self, forCellReuseIdentifier: Keys.reuseIdentifier)
         $0.backgroundColor = .lightGray
         $0.showsVerticalScrollIndicator = false
+        $0.delegate = self
+        $0.dataSource = self
+        $0.dragInteractionEnabled = true
+        $0.dragDelegate = self
+        $0.dropDelegate = self
     }
     
     private var dataArray: [String] = ["Cell 1", "Cell 2", "Cell 3", "Cell 4", "Cell 5", "Cell 6", "Cell 7", "Cell 8", "Cell 9", "Cell 10"]
@@ -47,14 +56,14 @@ class LocationWeatherViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = .lightGray
-        
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.searchController = searchController
     }
 }
 
-// MARK: - setupUI
-private extension LocationWeatherViewController {
+// MARK: - UI
+
+extension LocationWeatherViewController {
     func configureUI() {
         setupBackgroundColor()
         setupTableView()
@@ -65,12 +74,6 @@ private extension LocationWeatherViewController {
     }
     
     func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.dragInteractionEnabled = true
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
-        
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -83,6 +86,7 @@ private extension LocationWeatherViewController {
 }
 
 // MARK: - setup TableView delegate, dataSource
+
 extension LocationWeatherViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
@@ -119,6 +123,7 @@ extension LocationWeatherViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 // MARK: - setup UISearchResultsUpdating
+
 extension LocationWeatherViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
@@ -127,13 +132,15 @@ extension LocationWeatherViewController: UISearchResultsUpdating {
 }
 
 // MARK: - setup DragDelegate
+
 extension LocationWeatherViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         return [UIDragItem(itemProvider: NSItemProvider())]
     }
 }
 
-// MARK: - setup DropDelegate {
+// MARK: - setup DropDelegate
+
 extension LocationWeatherViewController: UITableViewDropDelegate {
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         if session.localDragSession != nil {

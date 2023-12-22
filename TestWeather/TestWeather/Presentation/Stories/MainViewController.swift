@@ -9,11 +9,8 @@ import AVFoundation
 import UIKit
 
 final class MainViewController: UIViewController {
-    
-    let todayWeather = UIButton()
-    let forecastWeather = UIButton()
-    let currentWeatherButton = CustomButton(title: Strings.currentWeather)
-    let forecastWeatherButton = CustomButton(title: Strings.forecastWeather)
+
+    private let forecastWeatherButton = CustomButton(title: Strings.forecastWeather)
     var player: AVPlayer!
     
     override func viewDidLoad() {
@@ -27,13 +24,12 @@ final class MainViewController: UIViewController {
 private extension MainViewController {
     func configureUI() {
         setupBackground()
-        setupCurrentWeatherButton()
         setupForecastWeatherButton()
         setupVideoPath()
     }
     
     func setupVideoPath() {
-        if let videoPath = Bundle.main.path(forResource: "space", ofType: "mp4") {
+        if let videoPath = Bundle.main.path(forResource: "sun", ofType: "mp4") {
             player = AVPlayer(url: URL(fileURLWithPath: videoPath))
         }
     }
@@ -44,23 +40,11 @@ private extension MainViewController {
         view.addSubview(gradientView)
     }
     
-    func setupCurrentWeatherButton() {
-        view.addSubview(currentWeatherButton)
-        currentWeatherButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            currentWeatherButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            currentWeatherButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            currentWeatherButton.widthAnchor.constraint(equalToConstant: 250),
-            currentWeatherButton.heightAnchor.constraint(equalToConstant: 60)
-        ])
-        currentWeatherButton.addTarget(self, action: #selector(goToCurrentWeatherViewController), for: .touchUpInside)
-    }
-    
     func setupForecastWeatherButton() {
         view.addSubview(forecastWeatherButton)
-        forecastWeatherButton.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
-            forecastWeatherButton.topAnchor.constraint(equalTo: currentWeatherButton.bottomAnchor, constant: 30),
+            forecastWeatherButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             forecastWeatherButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             forecastWeatherButton.widthAnchor.constraint(equalToConstant: 250),
             forecastWeatherButton.heightAnchor.constraint(equalToConstant: 60)
@@ -71,19 +55,11 @@ private extension MainViewController {
 
 // MARK: - action
 
-extension MainViewController {
-    @objc func goToCurrentWeatherViewController() {
-        let currentWeatherViewController = PageViewController()
-        self.show(currentWeatherViewController, sender: self)
-    }
-    
+private extension MainViewController {
     @objc func goToForecastWeatherViewController() {
-        let forecastWeatherViewController: ForecastWeatherViewController = WeatherFactory.getWeather(forCountry: "Ukraine")
+        let forecastWeatherViewController: ForecastWeatherViewController = WeatherFactory.getWeather(forCountry: Strings.ukraine)
         forecastWeatherViewController.loadViewIfNeeded()
         forecastWeatherViewController.setupBackgroundVideo(player: player)
-//        forecastWeatherViewController.modalPresentationStyle = .fullScreen
-//        self.present(forecastWeatherViewController, animated: true)
-////        self.navigationController?.pushViewController(forecastWeatherViewController, animated: true)
         self.show(forecastWeatherViewController, sender: self)
     }
 }

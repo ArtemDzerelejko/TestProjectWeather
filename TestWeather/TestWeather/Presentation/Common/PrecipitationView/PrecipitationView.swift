@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class PrecipitationView: UIView {
+final class PrecipitationView: UIView {
     
     private let titleView = UIView()
     private let titleImageView = UIImageView()
@@ -21,6 +21,7 @@ class PrecipitationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         configureUI()
         setupLocationManager()
     }
@@ -31,8 +32,9 @@ class PrecipitationView: UIView {
 }
 
 // MARK: - UI
-extension PrecipitationView {
-    private func configureUI() {
+
+private extension PrecipitationView {
+    func configureUI() {
         setupViewForMap()
         setupTitleView()
         setupTitleImageView()
@@ -40,12 +42,11 @@ extension PrecipitationView {
         setupMap()
     }
     
-    private func setupViewForMap() {
+    func setupViewForMap() {
         BlurredBackgroundViewHelper.setupBlurredBackgroundForPrecipitationView(for: self)
     }
 
-    
-    private func setupTitleView() {
+    func setupTitleView() {
         addSubview(titleView)
         titleView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -57,7 +58,7 @@ extension PrecipitationView {
         ])
     }
     
-    private func setupTitleImageView() {
+    func setupTitleImageView() {
         titleImageView.image = UIImage(systemName: Strings.umbrellaFill)
         titleImageView.tintColor = .white
         titleView.addSubview(titleImageView)
@@ -71,7 +72,7 @@ extension PrecipitationView {
         ])
     }
     
-    private func setupTitleLabel() {
+    func setupTitleLabel() {
         titleLabel.text = Strings.precipitation
         titleLabel.font = UIFont.systemFont(ofSize: 15)
         titleLabel.textColor = .white
@@ -84,7 +85,7 @@ extension PrecipitationView {
         ])
     }
     
-    private func setupMap() {
+    func setupMap() {
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.layer.cornerRadius = 10
         mapView.isScrollEnabled = false
@@ -99,7 +100,7 @@ extension PrecipitationView {
         setupMap(mapView)
     }
     
-    private func setupMap(_ mapView: MKMapView) {
+    func setupMap(_ mapView: MKMapView) {
         let initialRegion = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
             span: MKCoordinateSpan(latitudeDelta: 180, longitudeDelta: 360)
@@ -109,6 +110,7 @@ extension PrecipitationView {
 }
 
 // MARK: - CLLocationManagerDelegate
+
 extension PrecipitationView: CLLocationManagerDelegate {
     private func setupLocationManager() {
         locationManager.delegate = self

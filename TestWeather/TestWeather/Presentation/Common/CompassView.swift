@@ -8,7 +8,7 @@
 import UIKit
 import CoreMotion
 
-class CompassView: UIView {
+final class CompassView: UIView {
     
     private var motionManager = CMMotionManager()
     
@@ -28,6 +28,7 @@ class CompassView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         configureUI()
         configureMotionManager()
     }
@@ -38,13 +39,14 @@ class CompassView: UIView {
 }
 
 // MARK: - UI
-extension CompassView {
-    private func configureUI() {
+
+private extension CompassView {
+    func configureUI() {
         setupBackgroundImageView()
         setupArrowImageView()
     }
     
-    private func setupBackgroundImageView() {
+    func setupBackgroundImageView() {
         addSubview(backgroundImageView)
         
         NSLayoutConstraint.activate([
@@ -55,7 +57,7 @@ extension CompassView {
         ])
     }
     
-    private func setupArrowImageView() {
+    func setupArrowImageView() {
         addSubview(arrowImageView)
         
         NSLayoutConstraint.activate([
@@ -68,8 +70,9 @@ extension CompassView {
 }
 
 // MARK: - MotionManager
-extension CompassView {
-    private func configureMotionManager() {
+
+private extension CompassView {
+    func configureMotionManager() {
         if motionManager.isMagnetometerAvailable {
             motionManager.magnetometerUpdateInterval = 0.1
             motionManager.startMagnetometerUpdates(to: .main) { [weak self] (data, error) in

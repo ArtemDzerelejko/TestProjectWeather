@@ -79,6 +79,9 @@
  "searchForCityOrAirport" = "Search for a city or airport";
  "weatherLogo" = "Weather";
 
+// MARK: - ForecastWeatherCustomCell
+"ukraine" = "Ukraine";
+
 // MARK: - Error
 "error" = "Error";
 "ok" = "OK";

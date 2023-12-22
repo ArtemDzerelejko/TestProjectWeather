@@ -8,13 +8,27 @@
 import Foundation
 import UIKit
 
-class ForecastWeatherCustomCell: UITableViewCell {
+final class ForecastWeatherCustomCell: UITableViewCell {
     
-    private let weekdayLabel = UILabel()
-    private let weatherImage = UIImageView()
-    private let temperatureLabel = UILabel()
-    static let forecastCellIdentifier = "forecastWeatherCell"
-    static let forecastWeatherViewModel = ForecastWeatherViewModel(country: "Ukraine")
+    private lazy var weekdayLabel = UILabel().with {
+        $0.text = Strings.weekday
+        $0.textColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var weatherImage = UIImageView().with {
+        $0.tintColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var temperatureLabel = UILabel().with {
+        $0.text = "15°"
+        $0.textColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    static let forecastCellIdentifier = Keys.forecastWeatherCell
+    static let forecastWeatherViewModel = ForecastWeatherViewModel(country: Strings.ukraine)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,18 +41,17 @@ class ForecastWeatherCustomCell: UITableViewCell {
 }
 
 // MARK: - UI
-extension ForecastWeatherCustomCell {
-    private func configureUI() {
+
+private extension ForecastWeatherCustomCell {
+    func configureUI() {
         setupWeekdayLabel()
         setupWeatherImage()
         setupTemperatureLabel()
     }
     
-    private func setupWeekdayLabel() {
+    func setupWeekdayLabel() {
         addSubview(weekdayLabel)
-        weekdayLabel.text = Strings.weekday
-        weekdayLabel.textColor = .white
-        weekdayLabel.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             weekdayLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             weekdayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -46,13 +59,12 @@ extension ForecastWeatherCustomCell {
         ])
     }
     
-    private func setupWeatherImage() {
+    func setupWeatherImage() {
         if let randomImageName = ForecastWeatherCustomCell.forecastWeatherViewModel.systemImagesForForecastWeatherCustomCell.randomElement() {
             weatherImage.image = UIImage(systemName: randomImageName)
         }
-        weatherImage.tintColor = .white
         addSubview(weatherImage)
-        weatherImage.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             weatherImage.centerYAnchor.constraint(equalTo: centerYAnchor),
             weatherImage.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -61,11 +73,9 @@ extension ForecastWeatherCustomCell {
         ])
     }
     
-    private func setupTemperatureLabel() {
-        temperatureLabel.text = "15°"
-        temperatureLabel.textColor = .white
+    func setupTemperatureLabel() {
         addSubview(temperatureLabel)
-        temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
+      
         NSLayoutConstraint.activate([
             temperatureLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             temperatureLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)

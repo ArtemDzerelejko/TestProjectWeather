@@ -16,13 +16,9 @@ final class LocationWeatherCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var cityTimeStackView = СityTimeStackView(city: ForecastWeatherViewModel.locationCity, time: ForecastWeatherViewModel.time).with {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private lazy var cityTimeStackView = СityTimeStackView(city: ForecastWeatherViewModel.locationCity, time: ForecastWeatherViewModel.time)
     
-    private lazy var weatherInfoStackView = WeatherInfoStackView(weather: ForecastWeatherViewModel.weather, higher: ForecastWeatherViewModel.higher, lower: ForecastWeatherViewModel.lower).with {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    private lazy var weatherInfoStackView = WeatherInfoStackView(weather: ForecastWeatherViewModel.weather, higher: ForecastWeatherViewModel.higher, lower: ForecastWeatherViewModel.lower)
     
     private lazy var temperatureLabel = UILabel().with {
         $0.text = ForecastWeatherViewModel.temperature

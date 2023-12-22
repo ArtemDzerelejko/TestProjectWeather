@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HeaderView: UIView {
+final class HeaderView: UIView {
     
     private lazy var verticalStackView = UIStackView().with {
         $0.axis = .vertical
@@ -15,7 +15,7 @@ class HeaderView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var cityName = UILabel().with {
+    private lazy var cityNameLabel = UILabel().with {
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 30, weight: .medium)
         $0.textAlignment = .center
@@ -29,7 +29,7 @@ class HeaderView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
         
-    private lazy var weatherCondition = UILabel().with {
+    private lazy var weatherConditionLabel = UILabel().with {
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 20, weight: .light)
         $0.textAlignment = .center
@@ -49,6 +49,7 @@ class HeaderView: UIView {
     
     init(city: String, temperature: String, weather: String) {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         configureUI(city: city, temperature: temperature, weather: weather)
     }
     
@@ -58,12 +59,13 @@ class HeaderView: UIView {
 }
 
 // MARK: - UI
+
 private extension HeaderView {
     func configureUI(city: String, temperature: String, weather: String) {
         setupVerticalStackView(city: city, temperature: temperature, weather: weather)
     }
     
-    private func setupVerticalStackView(city: String, temperature: String, weather: String) {
+    func setupVerticalStackView(city: String, temperature: String, weather: String) {
         addSubview(verticalStackView)
         
         NSLayoutConstraint.activate([
@@ -73,28 +75,28 @@ private extension HeaderView {
             verticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
-        setupCityName(city: city)
+        setupCityNameLabel(city: city)
         setupTemperatureLabel(temperature: temperature)
-        setupWeatherCondition(weather: weather)
+        setupWeatherConditionLabel(weather: weather)
         setupHorizantalStackView()
     }
     
-    private func setupCityName(city: String) {
-        verticalStackView.addArrangedSubview(cityName)
-        cityName.text = city
+    func setupCityNameLabel(city: String) {
+        verticalStackView.addArrangedSubview(cityNameLabel)
+        cityNameLabel.text = city
     }
     
-    private func setupTemperatureLabel(temperature: String) {
+    func setupTemperatureLabel(temperature: String) {
         verticalStackView.addArrangedSubview(temperatureLabel)
         temperatureLabel.text = temperature
     }
     
-    private func setupWeatherCondition(weather: String) {
-        verticalStackView.addArrangedSubview(weatherCondition)
-        weatherCondition.text = weather
+    func setupWeatherConditionLabel(weather: String) {
+        verticalStackView.addArrangedSubview(weatherConditionLabel)
+        weatherConditionLabel.text = weather
     }
     
-    private func setupHorizantalStackView() {
+    func setupHorizantalStackView() {
         verticalStackView.addArrangedSubview(horizantalStackView)
         horizantalStackView.addArrangedSubview(heightTemperature)
         horizantalStackView.addArrangedSubview(lowTemperature)

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WeatherInfoView: UIView {
+final class WeatherInfoView: UIView {
     
     private enum WindType: String {
         case wind = "Вітер"
@@ -54,6 +54,7 @@ class WeatherInfoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         configureUI()
     }
     
@@ -64,19 +65,18 @@ class WeatherInfoView: UIView {
 
 // MARK: - UI
 
-extension WeatherInfoView {
-    private func configureUI() {
+private extension WeatherInfoView {
+    func configureUI() {
         setupMainView()
         setupCompassArrowView()
         setupMainStackView()
     }
     
-    private func setupMainView() {
+    func setupMainView() {
         BlurredBackgroundViewHelper.setupBlurredBackground(for: self)
     }
     
-    
-    private func setupMainStackView() {
+    func setupMainStackView() {
         addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
@@ -90,7 +90,7 @@ extension WeatherInfoView {
         setupGustsOfWind()
     }
     
-    private func setupCompassArrowView() {
+    func setupCompassArrowView() {
         addSubview(compassArrowView)
         compassArrowView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -102,13 +102,13 @@ extension WeatherInfoView {
         ])
     }
     
-    private func setupTitleStackView() {
+    func setupTitleStackView() {
         mainStackView.addArrangedSubview(titleStackView)
         titleStackView.addArrangedSubview(imageForTitle)
         titleStackView.addArrangedSubview(labelForTitle)
     }
     
-    private func setupWindView() {
+    func setupWindView() {
         mainStackView.addArrangedSubview(windView)
         
         NSLayoutConstraint.activate([
@@ -117,7 +117,7 @@ extension WeatherInfoView {
         ])
     }
     
-    private func setupDivider() {
+    func setupDivider() {
         mainStackView.addArrangedSubview(divider)
         
         NSLayoutConstraint.activate([
@@ -125,7 +125,7 @@ extension WeatherInfoView {
         ])
     }
     
-    private func setupGustsOfWind() {
+    func setupGustsOfWind() {
         mainStackView.addArrangedSubview(gustsOfWind)
         
         NSLayoutConstraint.activate([

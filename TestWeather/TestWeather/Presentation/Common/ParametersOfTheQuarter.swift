@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ParametersOfTheQuarter: UIView {
+final class ParametersOfTheQuarter: UIView {
     
     private lazy var parametersLabel = UILabel().with {
         $0.textAlignment = .left
@@ -16,7 +16,7 @@ class ParametersOfTheQuarter: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var numericalParameters = UILabel().with {
+    private lazy var numericalParametersLabel = UILabel().with {
         $0.text = "57 %"
         $0.textAlignment = .center
         $0.textColor = .white
@@ -35,13 +35,14 @@ class ParametersOfTheQuarter: UIView {
 }
 
 // MARK: - UI
-extension ParametersOfTheQuarter {
-    private func configure(parameter: String, numParameters: String) {
+
+private extension ParametersOfTheQuarter {
+    func configure(parameter: String, numParameters: String) {
         setupParametersLabel(parameter: parameter)
-        setupNumericalParameters(numParameters: numParameters)
+        setupNumericalParametersLabel(numParameters: numParameters)
     }
     
-    private func setupParametersLabel(parameter: String) {
+    func setupParametersLabel(parameter: String) {
         parametersLabel.text = parameter
         addSubview(parametersLabel)
         
@@ -52,14 +53,14 @@ extension ParametersOfTheQuarter {
         ])
     }
     
-    private func setupNumericalParameters(numParameters: String) {
-        numericalParameters.text = numParameters
-        addSubview(numericalParameters)
+    func setupNumericalParametersLabel(numParameters: String) {
+        numericalParametersLabel.text = numParameters
+        addSubview(numericalParametersLabel)
         
         NSLayoutConstraint.activate([
-            numericalParameters.topAnchor.constraint(equalTo: parametersLabel.topAnchor),
-            numericalParameters.leadingAnchor.constraint(equalTo: parametersLabel.trailingAnchor, constant: 20),
-            numericalParameters.bottomAnchor.constraint(equalTo: parametersLabel.bottomAnchor)
+            numericalParametersLabel.topAnchor.constraint(equalTo: parametersLabel.topAnchor),
+            numericalParametersLabel.leadingAnchor.constraint(equalTo: parametersLabel.trailingAnchor, constant: 20),
+            numericalParametersLabel.bottomAnchor.constraint(equalTo: parametersLabel.bottomAnchor)
         ])
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import CoreMotion
 
-class WindIndicatorView: UIView {
+final class WindIndicatorView: UIView {
     
     private static var sharedHourlyWindUpdateTimer: Timer?
     
@@ -43,13 +43,13 @@ class WindIndicatorView: UIView {
 
 // MARK: - UI
 
-extension WindIndicatorView {
-    private func configure() {
+private extension WindIndicatorView {
+    func configure() {
         setupBackgroundImageView()
         setupArrowImageView()
     }
     
-    private func setupBackgroundImageView() {
+    func setupBackgroundImageView() {
         addSubview(backgroundImageView)
         
         NSLayoutConstraint.activate([
@@ -61,7 +61,7 @@ extension WindIndicatorView {
         sendSubviewToBack(backgroundImageView)
     }
     
-    private func setupArrowImageView() {
+    func setupArrowImageView() {
         addSubview(arrowImageView)
         
         NSLayoutConstraint.activate([
@@ -72,18 +72,18 @@ extension WindIndicatorView {
         ])
     }
     
-    private func generateRandomWindDirection() -> Double {
+    func generateRandomWindDirection() -> Double {
         Double.random(in: 0...360)
     }
     
-    private func rotateArrowTo(direction: Double) {
+    func rotateArrowTo(direction: Double) {
         UIView.animate(withDuration: 1.0) {
             let rotationAngle = CGFloat(direction).truncatingRemainder(dividingBy: 360)
             self.arrowImageView.transform = CGAffineTransform(rotationAngle: rotationAngle.toRadians())
         }
     }
     
-    private func loadSavedWindDirection() {
+    func loadSavedWindDirection() {
         if let savedWindDirection = UserDefaults.standard.value(forKey: Keys.windDirection) as? Double {
             rotateArrowTo(direction: savedWindDirection)
         }
@@ -92,8 +92,8 @@ extension WindIndicatorView {
 
 // MARK: - Action
 
-extension WindIndicatorView {
-    @objc private func updateWindDirection() {
+private extension WindIndicatorView {
+    @objc func updateWindDirection() {
         let newWindDirection = generateRandomWindDirection()
         rotateArrowTo(direction: newWindDirection)
         UserDefaults.standard.set(newWindDirection, forKey: Keys.windDirection)
@@ -102,14 +102,14 @@ extension WindIndicatorView {
 
 // MARK: - setup Timer
 
-extension WindIndicatorView {
-    private func startHourlyWindUpdateTimer() {
+private extension WindIndicatorView {
+    func startHourlyWindUpdateTimer() {
         if WindIndicatorView.sharedHourlyWindUpdateTimer == nil {
             WindIndicatorView.sharedHourlyWindUpdateTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.updateWindDirection), userInfo: nil, repeats: true)
         }
     }
     
-    private func stopHourlyWindUpdateTimer() {
+    func stopHourlyWindUpdateTimer() {
         WindIndicatorView.sharedHourlyWindUpdateTimer?.invalidate()
         WindIndicatorView.sharedHourlyWindUpdateTimer = nil
     }

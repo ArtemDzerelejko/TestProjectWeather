@@ -7,7 +7,7 @@
 
 import UIKit
 
-class QuarterView: UIView {
+final class QuarterView: UIView {
     
     private lazy var mainStackView = UIStackView().with {
         $0.axis = .vertical
@@ -51,6 +51,7 @@ class QuarterView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         configureUI()
     }
     
@@ -59,19 +60,21 @@ class QuarterView: UIView {
     }
 }
 
-extension QuarterView {
-    private func configureUI() {
+// MARK: - UI
+
+private extension QuarterView {
+    func configureUI() {
         setupMainView()
         setupMoonImageView()
         setupMainStackView()
     }
     
-    private func setupMainView() {
+    func setupMainView() {
         BlurredBackgroundViewHelper.setupBlurredBackground(for: self)
     }
     
     // MARK: - setupMainStackView
-    private func setupMainStackView() {
+    func setupMainStackView() {
         addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
@@ -83,7 +86,7 @@ extension QuarterView {
         setupParametersofTheQuarter()
     }
     
-    private func setupMoonImageView() {
+    func setupMoonImageView() {
         addSubview(moonImageView)
         
         NSLayoutConstraint.activate([
@@ -96,13 +99,13 @@ extension QuarterView {
     }
     
     // MARK: - setupTitleStackView
-    private func setupTitleStackView() {
+    func setupTitleStackView() {
         mainStackView.addArrangedSubview(titleStackView)
         titleStackView.addArrangedSubview(imageForTitle)
         titleStackView.addArrangedSubview(labelForTitle)
     }
     
-    private func setupParametersofTheQuarter() {
+    func setupParametersofTheQuarter() {
         mainStackView.addArrangedSubview(lightParametersOfTheQuarter)
         mainStackView.addArrangedSubview(dividerViewFirst)
         dividerViewFirst.widthAnchor.constraint(equalTo: mainStackView.widthAnchor).isActive = true

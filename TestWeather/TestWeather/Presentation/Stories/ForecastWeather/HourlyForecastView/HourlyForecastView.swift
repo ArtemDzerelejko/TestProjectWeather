@@ -9,21 +9,36 @@ import UIKit
 
 class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    private let hourlyForecastWeatherLabel = UILabel()
-    private let lineView = UIView()
-    private let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.showsHorizontalScrollIndicator = false
-        return collectionView
-    }()
-    private let viewModel = ForecastWeatherViewModel(country: "Ukraine")
+    private lazy var hourlyForecastWeatherLabel = UILabel().with {
+        $0.text = Strings.hourlyWeatherForecast
+        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.textColor = UIColor.white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var lineView = UIView().with {
+        $0.backgroundColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var layout = UICollectionViewFlowLayout().with {
+        $0.scrollDirection = .horizontal
+    }
+    
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).with {
+        $0.backgroundColor = .clear
+        $0.showsHorizontalScrollIndicator = false
+        $0.delegate = self
+        $0.dataSource = self
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private let viewModel = ForecastWeatherViewModel(country: Strings.ukraine)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         layoutSubviews()
+        translatesAutoresizingMaskIntoConstraints = false
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -43,10 +58,6 @@ class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewData
     }
 
     private func setupHourlyForecastWeatherLabel() {
-        hourlyForecastWeatherLabel.text = Strings.hourlyWeatherForecast
-        hourlyForecastWeatherLabel.font = UIFont.systemFont(ofSize: 15)
-        hourlyForecastWeatherLabel.textColor = UIColor.white
-        hourlyForecastWeatherLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(hourlyForecastWeatherLabel)
 
         NSLayoutConstraint.activate([
@@ -56,8 +67,6 @@ class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewData
     }
 
     private func setupLine() {
-        lineView.backgroundColor = .white
-        lineView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(lineView)
         
         NSLayoutConstraint.activate([
@@ -69,11 +78,8 @@ class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewData
     }
 
     private func setupCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.register(HourlyForecastViewCell.self, forCellWithReuseIdentifier: HourlyForecastViewCell.forecastCellIdentifier)
         addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 3),
@@ -93,9 +99,7 @@ class HourlyForecastView: UIView, UICollectionViewDelegate, UICollectionViewData
         let labelText = viewModel.labelsTexts[indexPath.item]
         let imageName = viewModel.systemImagesForHourlyForecastView.randomElement() ?? ""
         let temperature = "15"
-
         cell.configure(labelText: labelText, imageName: imageName, temperature: temperature)
-
         return cell
     }
 

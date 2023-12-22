@@ -7,9 +7,9 @@
 
 import UIKit
 
-class WindView: UIView {
+final class WindView: UIView {
     
-    private lazy var numberForWind = UILabel().with {
+    private lazy var numberForWindLabel = UILabel().with {
         $0.textColor = .white
         $0.textAlignment = .center
         $0.font = UIFont.boldSystemFont(ofSize: 30)
@@ -22,7 +22,7 @@ class WindView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var unitOfMeasurementForGustsOfWind = UILabel().with {
+    private lazy var unitOfMeasurementForGustsOfWindLabel = UILabel().with {
         $0.text = Strings.unitsOfMeasurement
         $0.textColor = .white
         $0.textAlignment = .center
@@ -47,36 +47,36 @@ class WindView: UIView {
 
 // MARK: - UI
 
-extension WindView {
-    private func configure(numberWind: String, windType: String) {
-        setupNumberForWind(numberWind: numberWind)
+private extension WindView {
+    func configure(numberWind: String, windType: String) {
+        setupNumberForWindLabel(numberWind: numberWind)
         setupHorizontalStackView(windType: windType)
     }
     
-    private func setupNumberForWind(numberWind: String) {
-        numberForWind.text = numberWind
-        addSubview(numberForWind)
+    func setupNumberForWindLabel(numberWind: String) {
+        numberForWindLabel.text = numberWind
+        addSubview(numberForWindLabel)
         
         NSLayoutConstraint.activate([
-            numberForWind.topAnchor.constraint(equalTo: topAnchor),
-            numberForWind.leadingAnchor.constraint(equalTo: leadingAnchor),
-            numberForWind.bottomAnchor.constraint(equalTo: bottomAnchor),
-            numberForWind.widthAnchor.constraint(equalToConstant: 40)
+            numberForWindLabel.topAnchor.constraint(equalTo: topAnchor),
+            numberForWindLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            numberForWindLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            numberForWindLabel.widthAnchor.constraint(equalToConstant: 40)
         ])
     }
     
-    private func setupHorizontalStackView(windType: String) {
+    func setupHorizontalStackView(windType: String) {
         addSubview(horizontalStackView)
         
         NSLayoutConstraint.activate([
-            horizontalStackView.topAnchor.constraint(equalTo: numberForWind.topAnchor),
-            horizontalStackView.leadingAnchor.constraint(equalTo: numberForWind.trailingAnchor, constant: 5),
+            horizontalStackView.topAnchor.constraint(equalTo: numberForWindLabel.topAnchor),
+            horizontalStackView.leadingAnchor.constraint(equalTo: numberForWindLabel.trailingAnchor, constant: 5),
         ])
-        horizontalStackView.addArrangedSubview(unitOfMeasurementForGustsOfWind)
+        horizontalStackView.addArrangedSubview(unitOfMeasurementForGustsOfWindLabel)
         setupWindType(windType: windType)
     }
     
-    private func setupWindType(windType: String) {
+    func setupWindType(windType: String) {
         windTypeLabel.text = windType
         horizontalStackView.addArrangedSubview(windTypeLabel)
     }

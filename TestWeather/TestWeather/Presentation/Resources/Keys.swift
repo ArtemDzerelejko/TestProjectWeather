@@ -11,4 +11,5 @@ struct Keys {
     static let windDirection = "WindDirection"
     static let cellId = "cellId"
     static let reuseIdentifier = "locationWeatherCellReuseId"
+    static let forecastWeatherCell = "forecastWeatherCell"
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class СityTimeStackView: UIStackView {
+final class СityTimeStackView: UIStackView {
     
     private lazy var cityLabel = UILabel().with {
         $0.textColor = .white
@@ -31,12 +31,14 @@ class СityTimeStackView: UIStackView {
     }
 }
 
-// MARK: - setupUI
+// MARK: - UI
+
 private extension СityTimeStackView {
     func configureUI(city: String, time: String) {
         setupСityTimeStackView()
         setupCityLabel(city: city)
         setupTimeLabel(time: time)
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setupСityTimeStackView() {

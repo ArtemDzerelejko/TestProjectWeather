@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TemperatureInfo: UIView {
+final class TemperatureInfo: UIView {
     
     private lazy var horizontalStackView = UIStackView().with {
         $0.axis = .horizontal
@@ -35,22 +35,24 @@ class TemperatureInfo: UIView {
     }
 }
 
-extension TemperatureInfo {
-    private func configureUI(temperatureInfo: String, temperatureNumber: String) {
+// MARK: - UI
+
+private extension TemperatureInfo {
+    func configureUI(temperatureInfo: String, temperatureNumber: String) {
         setupTemperatureInfoLabel(temperatureInfo: temperatureInfo)
         setupTemperatureNumberLabel(temperatureNumber: temperatureNumber)
         setupHorizontalStackView()
     }
     
-    private func setupTemperatureInfoLabel(temperatureInfo: String) {
+    func setupTemperatureInfoLabel(temperatureInfo: String) {
         temperatureInfoLabel.text = temperatureInfo
     }
     
-    private func setupTemperatureNumberLabel(temperatureNumber: String) {
+    func setupTemperatureNumberLabel(temperatureNumber: String) {
         temperatureNumberLabel.text = temperatureNumber
     }
     
-    private func setupHorizontalStackView() {
+    func setupHorizontalStackView() {
         addSubview(horizontalStackView)
         NSLayoutConstraint.activate([
             horizontalStackView.topAnchor.constraint(equalTo: topAnchor),

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PageViewController: UIPageViewController {
+final class PageViewController: UIPageViewController {
     
     private enum Country: String {
         case london = "London"
@@ -16,19 +16,22 @@ class PageViewController: UIPageViewController {
     }
     
     var pages = [UIViewController]()
-    let pageControl = UIPageControl()
-    let initialPage = 0
     
+    private lazy var pageControl = UIPageControl().with {
+        $0.currentPageIndicatorTintColor = .black
+        $0.pageIndicatorTintColor = .systemGray2
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let initialPage = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setup()
         style()
         layout()
     }
         
     init() {
-//        super.init(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: [UIPageViewController.OptionsKey.interPageSpacing : 200, UIPageViewController.OptionsKey.spineLocation : 100])
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
     
@@ -38,28 +41,20 @@ class PageViewController: UIPageViewController {
 }
 
 extension PageViewController {
-    
     func setup() {
         dataSource = self
         delegate = self
-        
         pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)
-        
         let page1 = WeatherFactory.getWeather(forCountry: Country.london.rawValue)
         let page2 = WeatherFactory.getWeather(forCountry: Country.ukraine.rawValue)
         let page3 = WeatherFactory.getWeather(forCountry: Country.usa.rawValue)
-        
         pages.append(page1)
         pages.append(page2)
         pages.append(page3)
-        
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
     }
     
     func style() {
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.currentPageIndicatorTintColor = .black
-        pageControl.pageIndicatorTintColor = .systemGray2
         pageControl.numberOfPages = pages.count
         pageControl.currentPage = initialPage
     }

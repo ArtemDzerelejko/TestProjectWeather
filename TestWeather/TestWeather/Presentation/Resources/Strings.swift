@@ -2,12 +2,12 @@
 //  Strings.swift
 //  TestWeather
 //
-//  Created by artem on 17.10.2023.
+//  Created by artem on 21.12.2023.
 //
 
 import Foundation
 
-enum Strings {
+struct Strings {
     // MARK: - MainViewController
     static let currentWeather: String = "currentWeather".localized
     static let forecastWeather: String = "forecastWeather".localized
@@ -92,6 +92,9 @@ enum Strings {
     // MARK: - LocationWeatherViewController
     static let searchForCityOrAirport: String = "searchForCityOrAirport".localized
     static let weatherLogo: String = "weatherLogo".localized
+    
+    // MARK: - ForecastWeatherCustomCell
+    static let ukraine: String = "ukraine".localized
     
     // MARK: - image
     static let sunMaxFill: String = "sun.max.fill"

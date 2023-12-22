@@ -10,10 +10,14 @@ import UIKit
 
 final class CustomButton: UIButton {
     
-    private let label = UILabel()
+    private lazy var label = UILabel().with {
+        $0.textColor = UIColor.white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     init(title: String) {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         setupButtonImage()
         setupLabel(title: title)
         setupShadow()
@@ -26,24 +30,23 @@ final class CustomButton: UIButton {
 
 // MARK: - UI
 
-extension CustomButton {
-    private func setupButtonImage() {
+private extension CustomButton {
+    func setupButtonImage() {
         let buttonImage = UIImage(resource: .button)
         setBackgroundImage(buttonImage, for: .normal)
     }
     
-    private func setupLabel(title: String) {
+    func setupLabel(title: String) {
         label.text = title
-        label.textColor = UIColor.white
         addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: centerXAnchor),
             label.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     
-    private func setupShadow() {
+    func setupShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 1, height: 2)
         layer.shadowRadius = 4

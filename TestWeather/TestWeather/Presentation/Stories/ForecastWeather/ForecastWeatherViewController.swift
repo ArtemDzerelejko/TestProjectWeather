@@ -14,11 +14,36 @@ import AVKit
 final class ForecastWeatherViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var viewModel: ForecastWeatherViewModel!
-    private let scrollView = UIScrollView()
+    
+    private lazy var scrollView = UIScrollView().with {
+        $0.backgroundColor = .clear
+        $0.showsVerticalScrollIndicator = false
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     private let hourlyForecastView = HourlyForecastView()
-    private let stackView = UIStackView()
-    private let tableView = UITableView()
-    private let views = UIView()
+    
+    private lazy var stackView = UIStackView().with {
+        $0.axis = .vertical
+        $0.spacing = 20
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var tableView = UITableView().with {
+        $0.backgroundColor = .clear
+        $0.separatorStyle = .none
+        $0.layer.cornerRadius = 15
+        $0.delegate = self
+        $0.dataSource = self
+        $0.isScrollEnabled = false
+        $0.separatorColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var views = UIView().with {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     private let precipitationView = PrecipitationView()
     private var headerView: HeaderView!
     
@@ -73,19 +98,18 @@ final class ForecastWeatherViewController: UIViewController, UITableViewDelegate
     
     private let compassArrowView = CompassView(frame: .zero)
     
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
         headerView = HeaderView(city: viewModel.country, temperature: ForecastWeatherViewModel.temperature, weather: ForecastWeatherViewModel.weather)
         configureUI()
     }
 }
 
 // MARK: - UI
+
 extension ForecastWeatherViewController {
     private func configureUI() {
-        
         setupScrollView()
         setupStackView()
         setupHeaderView()
@@ -102,7 +126,6 @@ extension ForecastWeatherViewController {
         setupCompassView()
         setupCompassImageView()
     }
-    
     
     public func setupBackgroundVideo(player: AVPlayer) {
         //       AVPlayerItem
@@ -122,9 +145,7 @@ extension ForecastWeatherViewController {
     
     private func setupScrollView() {
         view.addSubview(scrollView)
-        scrollView.backgroundColor = .clear
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -134,9 +155,6 @@ extension ForecastWeatherViewController {
     }
     
     private func setupStackView() {
-        stackView.axis = .vertical
-        stackView.spacing = 20
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(stackView)
         
         NSLayoutConstraint.activate([
@@ -149,14 +167,13 @@ extension ForecastWeatherViewController {
     
     private func setupHeaderView() {
         stackView.addArrangedSubview(headerView)
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             headerView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -40),
         ])
     }
     
     private func setupHourlyForecastView() {
-        hourlyForecastView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(hourlyForecastView)
         
         NSLayoutConstraint.activate([
@@ -166,7 +183,6 @@ extension ForecastWeatherViewController {
     }
     
     private func setupViews() {
-        views.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(views)
         
         NSLayoutConstraint.activate([
@@ -176,7 +192,6 @@ extension ForecastWeatherViewController {
     }
     
     private func setupPrecipitationView() {
-        precipitationView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(precipitationView)
         
         NSLayoutConstraint.activate([
@@ -200,7 +215,6 @@ extension ForecastWeatherViewController {
     
     private func setupBigView() {
         stackView.addArrangedSubview(weatherInfoView)
-        weatherInfoView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             weatherInfoView.widthAnchor.constraint(equalTo:  hourlyForecastView.widthAnchor)
@@ -235,7 +249,6 @@ extension ForecastWeatherViewController {
     
     private func setupFourthQuarterView() {
         stackView.addArrangedSubview(quarterView)
-        quarterView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             quarterView.widthAnchor.constraint(equalTo: hourlyForecastView.widthAnchor)
@@ -267,8 +280,6 @@ extension ForecastWeatherViewController {
     private func setupCompassImageView() {
         compassView.addSubview(compassArrowView)
         
-        compassArrowView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             compassArrowView.centerXAnchor.constraint(equalTo: compassView.centerXAnchor),
             compassArrowView.centerYAnchor.constraint(equalTo: compassView.centerYAnchor)
@@ -280,13 +291,7 @@ extension ForecastWeatherViewController {
 extension ForecastWeatherViewController {
     private func setupTableView() {
         views.addSubview(tableView)
-        tableView.layer.cornerRadius = 15
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.isScrollEnabled = false
-        tableView.separatorColor = .white
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
+    
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: views.topAnchor),
             tableView.leftAnchor.constraint(equalTo: views.leftAnchor),
@@ -296,9 +301,6 @@ extension ForecastWeatherViewController {
         ])
         let blurView = BlurredBackgroundViewHelper.createBlurView(with: .light, for: tableView)
         tableView.backgroundView = blurView
-        tableView.backgroundColor = .clear
-        tableView.separatorStyle = .none
-        
         tableView.register(ForecastWeatherCustomCell.self, forCellReuseIdentifier: ForecastWeatherCustomCell.forecastCellIdentifier)
     }
     

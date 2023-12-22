@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DividerView: UIView {
+final class DividerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -20,12 +20,13 @@ class DividerView: UIView {
 }
 
 // MARK: - UI
-extension DividerView {
-    private func configure() {
+
+private extension DividerView {
+    func configure() {
         setupDivider()
     }
     
-    private func setupDivider() {
+    func setupDivider() {
         backgroundColor = .white
         translatesAutoresizingMaskIntoConstraints = false
         

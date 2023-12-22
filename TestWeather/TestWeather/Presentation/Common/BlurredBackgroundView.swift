@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BlurredBackgroundViewHelper {
+final class BlurredBackgroundViewHelper {
     
     static func setupBlurredBackground(for view: UIView, height: CGFloat = 160) {
         let blurView = settingForBlurredBackground(for: view)

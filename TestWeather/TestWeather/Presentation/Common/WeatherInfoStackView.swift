@@ -7,15 +7,15 @@
 
 import UIKit
 
-class WeatherInfoStackView: UIStackView {
+final class WeatherInfoStackView: UIStackView {
     
-    private lazy var weatherInfo = UILabel().with {
+    private lazy var weatherInfoLabel = UILabel().with {
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var temperatureRange = UILabel().with {
+    private lazy var temperatureRangeLabel = UILabel().with {
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -31,20 +31,22 @@ class WeatherInfoStackView: UIStackView {
     }
 }
 
-// MARK: - setupUI
+// MARK: - UI
+
 private extension WeatherInfoStackView {
     func configureUI(weather: String, higher: String, lower: String) {
-        setupWeatherInfo(weather: weather)
-        setupTemperatureRange(higher: higher, lower: lower)
+        setupWeatherInfoLabel(weather: weather)
+        setupTemperatureRangeLabel(higher: higher, lower: lower)
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func setupWeatherInfo(weather: String) {
-        weatherInfo.text = weather
-        addArrangedSubview(weatherInfo)
+    func setupWeatherInfoLabel(weather: String) {
+        weatherInfoLabel.text = weather
+        addArrangedSubview(weatherInfoLabel)
     }
     
-    func setupTemperatureRange(higher: String, lower: String) {
-        temperatureRange.text = "В:\(higher) H:\(lower)"
-        addArrangedSubview(temperatureRange)
+    func setupTemperatureRangeLabel(higher: String, lower: String) {
+        temperatureRangeLabel.text = "В:\(higher) H:\(lower)"
+        addArrangedSubview(temperatureRangeLabel)
     }
 }
