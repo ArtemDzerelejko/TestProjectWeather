@@ -13,7 +13,7 @@ final class WeatherAPIService {
     private static let apiKey = "1d99baeca95549f48e1121104231210"
     private static let baseURL = "http://api.weatherapi.com/v1"
     
-    private enum Constans {
+    private struct Constans {
         static let defaultLocation: String = "Ukraine"
         static let defaultAQI: String = "defaultAQI"
         static let numberOfDays: String = "7"
@@ -60,8 +60,8 @@ final class WeatherAPIService {
         }
     }
     
-    func fetchForecastWeather(completion: @escaping (Result<ModelForForecastWeatherRemote, Error>) -> Void) {
-        guard let url = WeatherAPIService.makeWeatherURL(endpoint: Constans.forecastJson, parameters: ["key": WeatherAPIService.apiKey, "q": Constans.defaultLocation, "aqi": Constans.defaultAQI, "days": Constans.numberOfDays]) else {
+    func fetchForecastWeather(country: String, completion: @escaping (Result<ModelForForecastWeatherRemote, Error>) -> Void) {
+        guard let url = WeatherAPIService.makeWeatherURL(endpoint: Constans.forecastJson, parameters: ["key": WeatherAPIService.apiKey, "q": country, "aqi": Constans.defaultAQI, "days": Constans.numberOfDays]) else {
             completion(.failure(NSError(domain: Constans.invalidURL, code: -1, userInfo: nil)))
             return
         }

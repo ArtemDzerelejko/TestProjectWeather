@@ -8,14 +8,41 @@
 import Foundation
 import UIKit
 
-class WeatherDetailInfoView: UIView {
+final class WeatherDetailInfoView: UIView {
     
-    private let mainStackView = UIStackView()
-    private let titleStackView = UIStackView()
-    private let titleImageView = UIImageView()
-    private let titleLabel = UILabel()
-    private let numericalValueLabel = UILabel()
-    private let descriptionTextLabel = UILabel()
+    private lazy var mainStackView = UIStackView().with {
+        $0.axis = .vertical
+        $0.spacing = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var titleStackView = UIStackView().with {
+        $0.axis = .horizontal
+        $0.spacing = 5
+    }
+    
+    private lazy var titleImageView = UIImageView().with {
+        $0.tintColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var titleLabel = UILabel().with {
+        $0.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        $0.numberOfLines = 0
+        $0.textColor = .white
+    }
+    
+    private lazy var numericalValueLabel = UILabel().with {
+        $0.textColor = .white
+        $0.font = UIFont.systemFont(ofSize: 25)
+    }
+    
+    private lazy var descriptionTextLabel = UILabel().with {
+        $0.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        $0.numberOfLines = 1
+        $0.textColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     init(titleImageName: String, title: String, numeric: String, descriptionText: String) {
         super.init(frame: .zero)
@@ -27,8 +54,10 @@ class WeatherDetailInfoView: UIView {
     }
 }
 
-extension WeatherDetailInfoView {
-    private func configureUI(titleImageName: String, title: String, numeric: String, descriptionText: String) {
+// MARK: - UI
+
+private extension WeatherDetailInfoView {
+    func configureUI(titleImageName: String, title: String, numeric: String, descriptionText: String) {
         setupMainView()
         setupMainStackView()
         setupTitleStackView()
@@ -36,69 +65,48 @@ extension WeatherDetailInfoView {
         setupTitleLabel(title: title)
         setupNumericalValueLabel(numeric: numeric)
         setupDescriptionTextLabel(descriptionText: descriptionText)
-        
     }
     
-    private func setupMainView() {
-           backgroundColor = .lightBlue
-           layer.cornerRadius = 15
-           translatesAutoresizingMaskIntoConstraints = false
-           NSLayoutConstraint.activate([
-               heightAnchor.constraint(equalToConstant: 160)
-           ])
-       }
-    
-    private func setupMainStackView() {
-        mainStackView.axis = .vertical
-        mainStackView.spacing = 5
+    func setupMainView() {
+        BlurredBackgroundViewHelper.setupBlurredBackground(for: self)
+    }
+
+    func setupMainStackView() {
         addSubview(mainStackView)
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
+            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
     
-    private func setupTitleStackView() {
-        titleStackView.axis = .horizontal
-        titleStackView.spacing = 5
+    func setupTitleStackView() {
         mainStackView.addArrangedSubview(titleStackView)
     }
 
-    
-    private func setupTitleImageView(titleImageName: String) {
+    func setupTitleImageView(titleImageName: String) {
         titleImageView.image = UIImage(systemName: titleImageName)
-        titleImageView.tintColor = .gray
         titleStackView.addArrangedSubview(titleImageView)
-        titleImageView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             titleImageView.widthAnchor.constraint(equalToConstant: 18)
         ])
     }
     
-    private func setupTitleLabel(title: String) {
+    func setupTitleLabel(title: String) {
         titleLabel.text = title.uppercased()
-        titleLabel.font = UIFont.systemFont(ofSize: 10)
-        titleLabel.textColor = .gray
         titleStackView.addArrangedSubview(titleLabel)
     }
     
-    private func setupNumericalValueLabel(numeric: String) {
+    func setupNumericalValueLabel(numeric: String) {
         numericalValueLabel.text = numeric
-        numericalValueLabel.textColor = .white
-        numericalValueLabel.font = UIFont.systemFont(ofSize: 25)
         mainStackView.addArrangedSubview(numericalValueLabel)
     }
     
-    private func setupDescriptionTextLabel(descriptionText: String) {
+    func setupDescriptionTextLabel(descriptionText: String) {
         descriptionTextLabel.text = descriptionText
-        descriptionTextLabel.font = UIFont.systemFont(ofSize: 13, weight: .bold)
-        descriptionTextLabel.numberOfLines = 1
-        descriptionTextLabel.textColor = .white
         mainStackView.addArrangedSubview(descriptionTextLabel)
-        descriptionTextLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             descriptionTextLabel.widthAnchor.constraint(equalTo: mainStackView.widthAnchor)

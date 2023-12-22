@@ -14,7 +14,7 @@ final class WeatherRepository: WeatherRepositoryProtocol {
     private let weatherAPIService = WeatherAPIService()
     private let userDefaults = UserDefaults.standard
     
-    private enum Constans {
+    private struct Constans {
         static let lastSessionWeatherDataKey: String = "lastSessionWeatherData"
         static let lastSessionForecastWeatherDataKey: String = "lastSessionForecastWeatherData"
     }
@@ -45,19 +45,19 @@ final class WeatherRepository: WeatherRepositoryProtocol {
         }
     }
     
-    func creatingRequestToTheServerToGetForecastWeather(completion: @escaping (Result<ModelForForecastWeather, Error>) -> Void) {
+    func creatingRequestToTheServerToGetForecastWeather(country: String, completion: @escaping (Result<ModelForForecastWeather, Error>) -> Void) {
         var isNeedUpdateData: Bool = true
-        if let weatherData = getLastSessionWeatherData(type: ModelForForecastWeatherRemote.self, forKey: Constans.lastSessionForecastWeatherDataKey) {
+        if let weatherData = getLastSessionWeatherData(type: ModelForForecastWeatherRemote.self, forKey: Constans.lastSessionForecastWeatherDataKey + country) {
             let adaptedData = ModelForForecastWeather(location: weatherData.location, current: weatherData.current, forecast: weatherData.forecast)
             isNeedUpdateData = false
             completion(.success(adaptedData))
         }
         
-        weatherAPIService.fetchForecastWeather { result in
+        weatherAPIService.fetchForecastWeather(country: country) { result in
             switch result {
             case .success(let weatherData):
                 
-                self.saveLastSessionWeatherData(weatherData, forKey: Constans.lastSessionForecastWeatherDataKey)
+                self.saveLastSessionWeatherData(weatherData, forKey: Constans.lastSessionForecastWeatherDataKey + country)
                 let adaptedData = ModelForForecastWeather(location: weatherData.location, current: weatherData.current, forecast: weatherData.forecast)
                 if isNeedUpdateData {
                     completion(.success(adaptedData))
@@ -68,6 +68,8 @@ final class WeatherRepository: WeatherRepositoryProtocol {
                 
             }
         }
+        
+        // TODO: - зробити з країною
     }
     
     private func saveLastSessionWeatherData<T: Codable>(_ weatherData: T, forKey: String) {

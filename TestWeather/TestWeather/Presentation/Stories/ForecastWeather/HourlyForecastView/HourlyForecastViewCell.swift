@@ -8,11 +8,25 @@
 import Foundation
 import UIKit
 
-class HourlyForecastViewCell: UICollectionViewCell {
-    private let firstLabel = UILabel()
-    private let secondLabel = UIImageView()
-    private let thirdLabel = UILabel()
-    static let forecastCellIdentifier = "forecastWeatherCell"
+final class HourlyForecastViewCell: UICollectionViewCell {
+    
+    private lazy var firstLabel = UILabel().with {
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var secondLabel = UIImageView().with {
+        $0.tintColor = .white
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private lazy var thirdLabel = UILabel().with {
+        $0.numberOfLines = 0
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    static let forecastCellIdentifier = Keys.forecastWeatherCell
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,10 +46,7 @@ extension HourlyForecastViewCell {
     }
     
     private func setupFirstLabel() {
-        firstLabel.textAlignment = .center
-        firstLabel.numberOfLines = 0
         addSubview(firstLabel)
-        firstLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             firstLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
@@ -45,9 +56,7 @@ extension HourlyForecastViewCell {
     }
     
     private func setupSecondLabel() {
-        secondLabel.tintColor = .white
         addSubview(secondLabel)
-        secondLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             secondLabel.topAnchor.constraint(equalTo: firstLabel.bottomAnchor, constant: 5),
@@ -56,9 +65,7 @@ extension HourlyForecastViewCell {
     }
     
     private func setupThirdLabel() {
-        thirdLabel.numberOfLines = 0
         addSubview(thirdLabel)
-        thirdLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             thirdLabel.topAnchor.constraint(equalTo: secondLabel.bottomAnchor, constant: 5),

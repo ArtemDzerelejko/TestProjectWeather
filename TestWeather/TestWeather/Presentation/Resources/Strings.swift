@@ -2,12 +2,12 @@
 //  Strings.swift
 //  TestWeather
 //
-//  Created by artem on 17.10.2023.
+//  Created by artem on 21.12.2023.
 //
 
 import Foundation
 
-enum Strings {
+struct Strings {
     // MARK: - MainViewController
     static let currentWeather: String = "currentWeather".localized
     static let forecastWeather: String = "forecastWeather".localized
@@ -70,6 +70,32 @@ enum Strings {
     // MARK: - ForecastWeatherCell
     static let weekday: String = "weekday".localized
     
+    // MARK: - WeatherInfoView
+    static let gusts: String = "gusts".localized
+    
+    // MARK: - WindView
+    static let unitsOfMeasurement: String = "unitsOfMeasurement".localized
+    
+    // MARK: - ForecastWeatherViewController
+    static let compass: String = "compass".localized
+
+    // MARK: - QuarterView
+    static let thirdQuarter: String = "thirdQuarter".localized
+    static let light: String = "light".localized
+    static let moonrise: String = "moonrise".localized
+    static let nextFullMoon: String = "nextFullMoon".localized
+    
+    // MARK: - ForecastWeatherViewModel
+    static let odessa: String = "odessa".localized
+    static let cloudy: String = "cloudy".localized
+    
+    // MARK: - LocationWeatherViewController
+    static let searchForCityOrAirport: String = "searchForCityOrAirport".localized
+    static let weatherLogo: String = "weatherLogo".localized
+    
+    // MARK: - ForecastWeatherCustomCell
+    static let ukraine: String = "ukraine".localized
+    
     // MARK: - image
     static let sunMaxFill: String = "sun.max.fill"
     static let arrowBackwardCircle: String = "arrow.backward.circle"
@@ -87,6 +113,10 @@ enum Strings {
     static let eyeFill: String = "eye.fill"
     static let humidityFill: String = "humidity.fill"
     static let tirepressure: String = "tirepressure"
+    static let moonphaseWaxingCrescent: String = "moonphase.waxing.crescent"
+    static let locationNorth: String = "location.north"
+    static let ellipsisCircle: String =  "ellipsis.circle"
+    static let trashFill: String = "trash.fill"
     
     // MARK: - Error
     static let error: String = "error"

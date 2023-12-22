@@ -59,6 +59,28 @@
 // MARK: - ForecastWeatherCell
 "weekday" = "Weekday";
 
+// MARK: - WindView
+"unitsOfMeasurement" = "m/s";
+
+//MARK: - QuarterView
+"thirdQuarter" = "third Quarter";
+"light" = "Light";
+"moonrise" = "Moonrise";
+"nextFullMoon" = "The next full\nmoon";
+
+// MARK: - ForecastWeatherViewController
+"compass" = "Compass";
+
+// MARK: - ForecastWeatherViewModel
+"odessa" = "Odessa";
+"cloudy" = "Cloudy";
+
+// MARK: - LocationWeatherViewController
+ "searchForCityOrAirport" = "Search for a city or airport";
+ "weatherLogo" = "Weather";
+
+// MARK: - ForecastWeatherCustomCell
+"ukraine" = "Ukraine";
 
 // MARK: - Error
 "error" = "Error";
